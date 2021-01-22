@@ -70,7 +70,7 @@ const routes: Record<string, ParserFunction> = {
 /**
  * @public
  */
-export async function resolveUrn<T extends { url: URL } = { url: URL }>(urn: string): Promise<T | null> {
+export async function parseUrn<T extends { url: URL } = { url: URL }>(urn: string): Promise<T | null> {
   const url = new URL(urn)
 
   for (let expression in routes) {
