@@ -11,9 +11,9 @@ import { parseUrn } from '@dcl/urn-resolver'
 
 const parsed = await parseUrn("urn:decentraland:ethereum:LANDPROXY:0x1")
 => {
-     contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-     ethereum: "ethereum",
-     tokenId: "0x1",
-     url: new URL("urn:decentraland:ethereum:LANDPROXY:0x1")
-   }
+  protocol: "ethereum",
+  contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+  tokenId: "0x1",
+  url: new URL("urn:decentraland:ethereum:LANDPROXY:0x1")
+}
 ```

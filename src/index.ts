@@ -45,8 +45,9 @@ const routes: Record<string, ParserFunction> = {
 
     return {
       url,
-      ethereum: groups.protocol,
+      protocol: groups.protocol,
       contract: groups.ens + ".ens",
+      ens: groups.ens + ".ens",
       tokenId: groups.tokenId,
     }
   },
@@ -60,7 +61,7 @@ const routes: Record<string, ParserFunction> = {
     if (contract)
       return {
         url,
-        ethereum: groups.protocol,
+        protocol: groups.protocol,
         contract: contract,
         tokenId: groups.tokenId,
       }

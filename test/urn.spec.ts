@@ -9,7 +9,7 @@ describe("Basic use cases", function () {
   it("test land", async () => {
     expect(await parseUrn("urn:decentraland:ethereum:LANDPROXY:0x1")).toMatchObject({
       contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-      ethereum: "ethereum",
+      protocol: "ethereum",
       tokenId: "0x1",
     })
   })
@@ -23,7 +23,7 @@ describe("Basic use cases", function () {
   it("test land (address)", async () => {
     expect(await parseUrn("urn:decentraland:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1")).toMatchObject({
       contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-      ethereum: "ethereum",
+      protocol: "ethereum",
       tokenId: "0x1",
     })
   })
