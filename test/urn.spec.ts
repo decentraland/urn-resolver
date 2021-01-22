@@ -27,4 +27,12 @@ describe("Basic use cases", function () {
       tokenId: "0x1",
     })
   })
+
+  it("portable experiences", async () => {
+    expect(await parseUrn("urn:decentraland:off-chain:static-portable-experiences:quest-1")).toMatchObject({
+      assetType: "static-portable-experiences",
+      name: "quest-1",
+      protocol: "off-chain",
+    })
+  })
 })

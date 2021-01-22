@@ -66,6 +66,18 @@ const routes: Record<string, ParserFunction> = {
         tokenId: groups.tokenId,
       }
   },
+
+  // Resolver for static portable experiences (quests deployed to static server, not content server)
+  "decentraland:off-chain:static-portable-experiences:(?<name>[^:]+)": async (url, captures) => {
+    const groups: Record<"name", string> = captures.groups as any
+
+    return {
+      url,
+      protocol: "off-chain",
+      assetType: "static-portable-experiences",
+      name: groups.name,
+    }
+  },
 }
 
 /**
