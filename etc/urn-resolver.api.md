@@ -5,7 +5,7 @@
 ```ts
 
 // @public (undocumented)
-export function resolveUrn<T extends {
+export function parseUrn<T extends {
     url: URL;
 } = {
     url: URL;
