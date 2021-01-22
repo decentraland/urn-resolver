@@ -1,33 +1,32 @@
 {
-  "name": "@well-known-components/base-component",
+  "name": "@dcl/urn-resolver",
   "version": "1.0.0",
-  "description": "base component",
+  "description": "URN resolver for Decentraland assets",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/well-known-components/base-component.git"
+    "url": "git+https://github.com/decentraland/urn-resolver.git"
   },
   "keywords": [],
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/well-known-components/base-component/issues"
+    "url": "https://github.com/decentraland/urn-resolver/issues"
   },
   "prettier": {
     "printWidth": 120,
     "semi": false
   },
-  "homepage": "https://github.com/well-known-components/base-component#readme",
+  "homepage": "https://github.com/decentraland/urn-resolver#readme",
   "devDependencies": {
     "@microsoft/api-extractor": "^7.12.1",
-    "@well-known-components/interfaces": "next",
+    "@types/mocha": "^8.2.0",
+    "expect": "^26.6.2",
+    "mocha": "^8.2.1",
+    "ts-node": "^9.1.1",
     "typescript": "latest"
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "@well-known-components/interfaces": "^1.0.0"
   },
   "files": [
     "dist"
