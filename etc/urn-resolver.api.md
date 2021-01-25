@@ -5,11 +5,94 @@
 ```ts
 
 // @public (undocumented)
-export function parseUrn<T extends {
-    url: URL;
-} = {
-    url: URL;
-}>(urn: string): Promise<T | null>;
+export type BaseBlockchainAsset = {
+    uri: URL;
+    blockchain: "ethereum";
+    network: string;
+    contractAddress: string;
+};
+
+// @public (undocumented)
+export type BlockchainAsset = BaseBlockchainAsset & {
+    type: "blockchain-asset";
+    id: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV1Asset = {
+    uri: URL;
+    blockchain: "ethereum";
+    network: string;
+    contractAddress: string | null;
+    type: "blockchain-collection-v1";
+    collectionsVersion: "v1";
+    id: string;
+    collectionName: string | null;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
+    type: "blockchain-collection-v2";
+    collectionsVersion: "v2";
+    id: string;
+};
+
+// @public (undocumented)
+export type BlockchainLandAsset = BlockchainAsset & {
+    x: number;
+    y: number;
+};
+
+// @public (undocumented)
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset;
+
+// @public (undocumented)
+export function decodeTokenId(value: string | number | BigInt | bigint): {
+    x: bigint;
+    y: bigint;
+};
+
+// Warning: (ae-forgotten-export) The symbol "BN" needs to be exported by the entry point index.d.ts
+//
+// @public (undocumented)
+export function encodeTokenId(x: number, y: number): BN;
+
+// @public (undocumented)
+export type OffChainAsset = {
+    uri: URL;
+    type: "off-chain";
+    registry: string;
+    id: string;
+};
+
+// @public
+export function parseParcelPosition(position: string): {
+    x: number;
+    y: number;
+};
+
+// @public
+export const parseUrn: (urn: string) => Promise<DecentralandAssetIdentifier | null>;
+
+// @public
+export function resolveContentUrl(asset: DecentralandAssetIdentifier, config?: ResolversOptions): Promise<string | null>;
+
+// @public
+export const resolvers: RouteMap<DecentralandAssetIdentifier>;
+
+// @public (undocumented)
+export type ResolversOptions = Partial<{
+    contentServerHost: string;
+    wearablesServerHost: string;
+}>;
+
+// @public
+export function resolveUrlFromUrn(urn: string, options?: ResolversOptions): Promise<string | null>;
+
+// @public (undocumented)
+export type RouteMap<T> = {
+    [P in string]: (original: URL, captures: Record<string, string>) => Promise<T | null | void>;
+};
 
 
 // (No @packageDocumentation comment for this package)

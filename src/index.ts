@@ -1,99 +1,58 @@
-import contracts from "./contracts"
+import { createParser, RouteMap } from "./helpers"
+import {
+  resolveCollectionV1Asset,
+  resolveCollectionV1AssetByCollectionName,
+  resolveCollectionV2Asset,
+  resolveEthereumAsset,
+  resolveLandAsset,
+  resolveOffchainAsset,
+} from "./resolvers"
+import { DecentralandAssetIdentifier } from "./types"
+export * from "./types"
+export { RouteMap } from "./helpers"
+export { decodeTokenId, encodeTokenId, parseParcelPosition } from "./land-utils"
+export { resolveContentUrl, ResolversOptions } from "./content-url-resolver"
+import { resolveContentUrl, ResolversOptions } from "./content-url-resolver"
 
-const lowerCasedContracts: Record<string, Record<string, string>> = {}
-
-const validProtocols = new Set(["ethereum", "ropsten", "kovan", "rinkeby", "goerli", "matic", "mumbai"])
-
-for (let network in contracts) {
-  lowerCasedContracts[network] = Object.create(null)
-  const c = lowerCasedContracts[network]
-  if (network.toLowerCase() != "mainnet") {
-    validProtocols.add(network.toLowerCase())
-  }
-  Object.keys(contracts[network]).forEach((key) => {
-    c[key.toLowerCase()] = contracts[network][key]
-  })
-}
-
-function mapContract(network: string, contractNameOrAddress: string): string | null {
-  if (network == "ethereum") return mapContract("mainnet", contractNameOrAddress)
-
-  if (lowerCasedContracts[network]) {
-    if (contractNameOrAddress in lowerCasedContracts[network]) {
-      return lowerCasedContracts[network][contractNameOrAddress]
-    }
-  } else {
-    console.log("network", network, Object.keys(lowerCasedContracts))
-  }
-
-  return null
-}
-
-function getContract(network: string, contractNameOrAddress: string) {
-  if (contractNameOrAddress.startsWith("0x")) return contractNameOrAddress
-  return mapContract(network.toLowerCase(), contractNameOrAddress.toLowerCase())
-}
-
-type ParserFunction = (original: URL, captures: RegExpExecArray) => Promise<{ url: URL } | undefined>
-
-const routes: Record<string, ParserFunction> = {
-  "decentraland:(?<protocol>[^:]+):(?<ens>[^:]+).eth:(?<tokenId>[^:]+)": async (url, captures) => {
-    const groups: Record<"protocol" | "ens" | "tokenId", string> = captures.groups as any
-
-    if (!validProtocols.has(groups.protocol.toLowerCase())) return
-    // TODO: resolve ens
-
-    return {
-      url,
-      protocol: groups.protocol,
-      contract: groups.ens + ".ens",
-      ens: groups.ens + ".ens",
-      tokenId: groups.tokenId,
-    }
-  },
-  "decentraland:(?<protocol>[^:]+):(?<contract>[^:]+):(?<tokenId>[^:]+)": async (url, captures) => {
-    const groups: Record<"protocol" | "contract" | "tokenId", string> = captures.groups as any
-
-    if (!validProtocols.has(groups.protocol.toLowerCase())) return
-
-    const contract = getContract(groups.protocol, groups.contract)
-
-    if (contract)
-      return {
-        url,
-        protocol: groups.protocol,
-        contract: contract,
-        tokenId: groups.tokenId,
-      }
-  },
-
-  // Resolver for static portable experiences (quests deployed to static server, not content server)
-  "decentraland:off-chain:static-portable-experiences:(?<name>[^:]+)": async (url, captures) => {
-    const groups: Record<"name", string> = captures.groups as any
-
-    return {
-      url,
-      protocol: "off-chain",
-      assetType: "static-portable-experiences",
-      name: groups.name,
-    }
-  },
+/**
+ * Ordered map of resolvers.
+ * @public
+ */
+export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
+  // Resolver for static offchain assets (quests deployed to static servers, not content server)
+  "decentraland:off-chain:{registry}:{name}": resolveOffchainAsset,
+  // collections v1 (by contract)
+  "decentraland:{protocol}:collections:v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
+  // collections v1 (by name)
+  "decentraland:{protocol}:collections:v1:{collectionName}:{name}": resolveCollectionV1AssetByCollectionName,
+  // collections v2 (hex)
+  "decentraland:{protocol}:collections:v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}": resolveCollectionV2Asset,
+  // collections v2 (id)
+  "decentraland:{protocol}:collections:v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}": resolveCollectionV2Asset,
+  // resolve LAND by position
+  "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
+  // resolve smart contract by address
+  "decentraland:{protocol}:{contract(0x[a-fA-F0-9]+)}:{tokenId}": resolveEthereumAsset,
+  // resolve smart contract by name
+  "decentraland:{protocol}:{contract([a-zA-Z][a-zA-Z_0-9]*)}:{tokenId}": resolveEthereumAsset,
 }
 
 /**
+ * Function that parses an URN and returns a DecentralandAssetIdentifier record or null.
  * @public
  */
-export async function parseUrn<T extends { url: URL } = { url: URL }>(urn: string): Promise<T | null> {
-  const url = new URL(urn)
+export const parseUrn: (urn: string) => Promise<DecentralandAssetIdentifier | null> = createParser(resolvers)
 
-  for (let expression in routes) {
-    const regex = new RegExp(expression)
-    const res = regex.exec(url.pathname)
+/**
+ * Returns a resolved (and mutable) content-url for the immutable URN.
+ * @public
+ */
+export async function resolveUrlFromUrn(urn: string, options?: ResolversOptions): Promise<string | null> {
+  const parsedUrn = await parseUrn(urn)
 
-    if (res) {
-      const match = await routes[expression](url, res)
-      if (match) return match as any
-    }
+  if (parsedUrn) {
+    return resolveContentUrl(parsedUrn, options)
   }
+
   return null
 }
