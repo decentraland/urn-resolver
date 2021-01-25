@@ -9,9 +9,15 @@ function testValidUrnToInclude(urn: string, toInclude: Partial<DecentralandAsset
   })
 }
 
+
+
 describe("Basic use cases", function () {
   it("test unknown", async () => {
     expect(await parseUrn("urn:test")).toEqual(null)
+  })
+
+  it("Print LAND resolution for readme", async () => {
+    console.log(await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151231111"))
   })
 
   it("test land", async () => {

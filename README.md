@@ -9,13 +9,22 @@ npm i @dcl/urn-resolver
 ```typescript
 import { parseUrn } from '@dcl/urn-resolver'
 
-const parsed = await parseUrn("urn:decentraland:ethereum:LANDPROXY:0x1")
-=> DecentralandAssetIdentifier {
-  protocol: "ethereum",
-  network: "mainnet",
-  contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-  id: "0x1",
-  uri: URL { "urn:decentraland:ethereum:LANDPROXY:0x1" }
+const parsed = await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151231111")
+=> {
+  uri: URL {
+    href: 'urn:decentraland:ropsten:LAND:-10,-13?atBlock=151231111',
+    protocol: 'urn:',
+    pathname: 'decentraland:ropsten:LAND:-10,-13',
+    search: '?atBlock=151231111',
+    searchParams: URLSearchParams { 'atBlock' => '151231111' },
+  },
+  blockchain: 'ethereum',
+  type: 'blockchain-asset',
+  network: 'ropsten',
+  contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
+  id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
+  x: -10,
+  y: -13
 }
 ```
 
