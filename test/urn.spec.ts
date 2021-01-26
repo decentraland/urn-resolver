@@ -9,8 +9,6 @@ function testValidUrnToInclude(urn: string, toInclude: Partial<DecentralandAsset
   })
 }
 
-
-
 describe("Basic use cases", function () {
   it("test unknown", async () => {
     expect(await parseUrn("urn:test")).toEqual(null)
@@ -79,7 +77,6 @@ describe("Basic use cases", function () {
       type: "blockchain-collection-v1",
       blockchain: "ethereum",
       network: "mainnet",
-      collectionsVersion: "v1",
       contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
       id: "test_name",
     })
@@ -98,7 +95,6 @@ describe("Basic use cases", function () {
       blockchain: "ethereum",
       type: "blockchain-collection-v2",
       network: "mainnet",
-      collectionsVersion: "v2",
       contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
       id: "0",
     })
@@ -173,5 +169,34 @@ describe("Basic use cases", function () {
     contractAddress: null,
     collectionName: "InExIsTeNtCoLlEcTiOn19283719",
     id: "maddona-modern-life",
+  })
+
+  it("legacy address (base-avatars)", async () => {
+    expect(await parseUrn("dcl://base-avatars/eyes_03")).toMatchObject({
+      id: "eyes_03",
+      namespace: "decentraland",
+      registry: "base-avatars",
+      type: "off-chain",
+    })
+
+    const generatedUrl = (await parseUrn("dcl://base-avatars/eyes_03")).uri
+
+    expect(generatedUrl.toString()).toEqual('urn:decentraland:off-chain:base-avatars:eyes_03')
+  })
+
+  it("legacy address (invalid)", async () => {
+    expect(await parseUrn("dcl://base-avatars/")).toEqual(null)
+    expect(await parseUrn("dcl://base-avatars")).toEqual(null)
+    expect(await parseUrn("dcl://base-avatars/a/b/c")).toEqual(null)
+  })
+
+  it("legacy address (valid)", async () => {
+    expect(await parseUrn("dcl://base-avatars/f_sweater")).toBeTruthy()
+    expect(await parseUrn("dcl://base-avatars/f_jeans")).toBeTruthy()
+    expect(await parseUrn("dcl://base-avatars/bun_shoes")).toBeTruthy()
+    expect(await parseUrn("dcl://base-avatars/standard_hair")).toBeTruthy()
+    expect(await parseUrn("dcl://base-avatars/f_eyes_00")).toBeTruthy()
+    expect(await parseUrn("dcl://base-avatars/f_eyebrows_00")).toBeTruthy()
+    expect(await parseUrn("dcl://base-avatars/f_mouth_00")).toBeTruthy()
   })
 })

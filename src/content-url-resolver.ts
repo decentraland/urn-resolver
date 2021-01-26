@@ -1,5 +1,5 @@
 import { getContract } from "./helpers"
-import { decodeTokenId } from "./land-utils"
+import { LandUtils } from "./land-utils"
 import { DecentralandAssetIdentifier } from "./types"
 
 /**
@@ -46,7 +46,14 @@ resolvers.push(function resolvePortableExperiencesUrl(asset, options) {
 })
 
 resolvers.push(function resolvePortableExperiencesUrl(asset, options) {
-  if (asset.type == "blockchain-collection-v1") {
+  if (asset.type == "off-chain" && asset.registry == "base-avatars") {
+    const host = defaultWearablesServerForNetwork("ethereum", options)
+    return `https://${host}/v2/collections/${asset.registry}/wearables/${asset.id}`
+  }
+})
+
+resolvers.push(function wearablesV1UrlResolver(asset, options) {
+  if (asset.type == "blockchain-collection-v1" && asset.collectionName != "base-avatars") {
     const host = defaultWearablesServerForNetwork(asset.network, options)
     if (asset.collectionName) {
       return `https://${host}/v2/collections/${asset.collectionName}/wearables/${asset.id}`
@@ -60,7 +67,7 @@ resolvers.push(async function landResolver(asset, options) {
     asset.contractAddress.toLowerCase() == (await getContract(asset.network, "LANDProxy"))
   ) {
     const host = defaultContentServerForNetwork(asset.network, options)
-    const { x, y } = decodeTokenId(asset.id)
+    const { x, y } = LandUtils.decodeTokenId(asset.id)
     return `https://${host}/content/entities/scene?pointer=${x},${y}`
   }
 })

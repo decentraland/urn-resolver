@@ -1,9 +1,9 @@
 import expect from "expect"
-import { decodeTokenId, encodeTokenId } from "../src/land-utils"
+import { LandUtils } from "../src/land-utils"
 
 function testValidPositionParsingAndGeneration(tokenId: string, x: number, y: number) {
   it(tokenId + " (" + x + ", " + y + ") decode", async () => {
-    const decodedTokenId = decodeTokenId(tokenId)
+    const decodedTokenId = LandUtils.decodeTokenId(tokenId)
     expect({
       x: BigInt(x),
       y: BigInt(y),
@@ -15,14 +15,18 @@ function testValidPositionParsingAndGeneration(tokenId: string, x: number, y: nu
     expect({
       tokenId: BigInt(tokenId),
     }).toEqual({
-      tokenId: encodeTokenId(x, y),
+      tokenId: LandUtils.encodeTokenId(x, y),
     })
   })
 }
 
 describe("Land token encoding/decoding", function () {
   testValidPositionParsingAndGeneration("0x0", 0, 0)
-  testValidPositionParsingAndGeneration("115792089237316195423570985008687907853269984665640564039457584007913129639935", -1, -1)
+  testValidPositionParsingAndGeneration(
+    "115792089237316195423570985008687907853269984665640564039457584007913129639935",
+    -1,
+    -1
+  )
   testValidPositionParsingAndGeneration("340282366920938463463374607431768211457", 1, 1)
   testValidPositionParsingAndGeneration("680564733841876926926749214863536422912", 2, 0)
   testValidPositionParsingAndGeneration("0x200000000000000000000000000000000", 2, 0)

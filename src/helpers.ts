@@ -76,6 +76,8 @@ export function createParser<T>(handlers: RouteMap<T>): (urn: string) => Promise
   return async (urn: string) => {
     const url = new URL(urn)
 
+    if (url.protocol != "urn:") return null
+
     for (let expression in handlers) {
       const expr = expression.replace(
         /(?:{([a-zA-Z_][a-zA-Z_0-9]*)(\([^}]+\))?})/g,

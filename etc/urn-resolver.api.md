@@ -6,6 +6,7 @@
 
 // @public (undocumented)
 export type BaseBlockchainAsset = {
+    namespace: 'decentraland';
     uri: URL;
     blockchain: "ethereum";
     network: string;
@@ -20,20 +21,20 @@ export type BlockchainAsset = BaseBlockchainAsset & {
 
 // @public (undocumented)
 export type BlockchainCollectionV1Asset = {
+    namespace: 'decentraland';
     uri: URL;
     blockchain: "ethereum";
     network: string;
     contractAddress: string | null;
     type: "blockchain-collection-v1";
-    collectionsVersion: "v1";
     id: string;
     collectionName: string | null;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
+    namespace: 'decentraland';
     type: "blockchain-collection-v2";
-    collectionsVersion: "v2";
     id: string;
 };
 
@@ -47,18 +48,28 @@ export type BlockchainLandAsset = BlockchainAsset & {
 export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset;
 
 // @public (undocumented)
-export function decodeTokenId(value: string | number | BigInt | bigint): {
-    x: bigint;
-    y: bigint;
-};
-
-// Warning: (ae-forgotten-export) The symbol "BN" needs to be exported by the entry point index.d.ts
-//
-// @public (undocumented)
-export function encodeTokenId(x: number, y: number): BN;
+export namespace LandUtils {
+    // (undocumented)
+    export function B(number: string | number | BigInt | bigint): bigint;
+    // (undocumented)
+    export type BN = ReturnType<typeof B>;
+    // (undocumented)
+    export function decodeTokenId(value: string | number | BigInt | bigint): {
+        x: bigint;
+        y: bigint;
+    };
+    // (undocumented)
+    export function encodeTokenId(x: number, y: number): BN;
+    export function parseParcelPosition(position: string): {
+        x: number;
+        y: number;
+    };
+    {};
+}
 
 // @public (undocumented)
 export type OffChainAsset = {
+    namespace: 'decentraland';
     uri: URL;
     type: "off-chain";
     registry: string;
@@ -66,19 +77,10 @@ export type OffChainAsset = {
 };
 
 // @public
-export function parseParcelPosition(position: string): {
-    x: number;
-    y: number;
-};
-
-// @public
-export const parseUrn: (urn: string) => Promise<DecentralandAssetIdentifier | null>;
+export function parseUrn(urn: string): Promise<DecentralandAssetIdentifier | null>;
 
 // @public
 export function resolveContentUrl(asset: DecentralandAssetIdentifier, config?: ResolversOptions): Promise<string | null>;
-
-// @public
-export const resolvers: RouteMap<DecentralandAssetIdentifier>;
 
 // @public (undocumented)
 export type ResolversOptions = Partial<{
@@ -88,11 +90,6 @@ export type ResolversOptions = Partial<{
 
 // @public
 export function resolveUrlFromUrn(urn: string, options?: ResolversOptions): Promise<string | null>;
-
-// @public (undocumented)
-export type RouteMap<T> = {
-    [P in string]: (original: URL, captures: Record<string, string>) => Promise<T | null | void>;
-};
 
 
 // (No @packageDocumentation comment for this package)

@@ -3,6 +3,7 @@
  */
 
 export type BaseBlockchainAsset = {
+  namespace: 'decentraland'
   uri: URL
   /**
    * Ethereum for the time being.
@@ -41,6 +42,7 @@ export type BlockchainLandAsset = BlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionV1Asset =  {
+  namespace: 'decentraland'
   uri: URL
   /**
    * Ethereum for the time being.
@@ -56,7 +58,6 @@ export type BlockchainCollectionV1Asset =  {
   contractAddress: string | null
 
   type: "blockchain-collection-v1"
-  collectionsVersion: "v1"
   /**
    * Identifier of the asset (name)
    */
@@ -68,8 +69,8 @@ export type BlockchainCollectionV1Asset =  {
  * @public
  */
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
+  namespace: 'decentraland'
   type: "blockchain-collection-v2"
-  collectionsVersion: "v2"
   /**
    * Identifier of the asset (assetId)
    */
@@ -80,6 +81,7 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
  * @public
  */
 export type OffChainAsset = {
+  namespace: 'decentraland'
   uri: URL
   type: "off-chain"
   /**
