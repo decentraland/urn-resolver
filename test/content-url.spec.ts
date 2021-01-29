@@ -29,11 +29,11 @@ describe("Content url generation", function () {
   test("urn:decentraland:ropsten:LAND:-10,-13", "https://peer.decentraland.zone/content/entities/scene?pointer=-10,-13")
 
   test(
-    "urn:decentraland:ethereum:collections:v1:community_contest:cw_bell_attendant_hat",
+    "urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat",
     "https://wearable-api.decentraland.org/v2/collections/community_contest/wearables/cw_bell_attendant_hat"
   )
 
-  test("urn:decentraland:ethereum:collections:v1:base-avatars:eyes_03", null)
+  test("urn:decentraland:ethereum:collections-v1:base-avatars:eyes_03", null)
 
   test(
     "urn:decentraland:off-chain:base-avatars:eyes_03",
@@ -46,7 +46,7 @@ describe("Content url generation", function () {
   )
 
   test(
-    "urn:decentraland:ethereum:collections:v1:0x32b7495895264ac9d0b12d32afd435453458b1c6:cw_bell_attendant_hat",
+    "urn:decentraland:ethereum:collections-v1:0x32b7495895264ac9d0b12d32afd435453458b1c6:cw_bell_attendant_hat",
     "https://wearable-api.decentraland.org/v2/collections/community_contest/wearables/cw_bell_attendant_hat"
   )
 })

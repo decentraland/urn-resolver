@@ -1,5 +1,6 @@
 import expect from "expect"
 import { DecentralandAssetIdentifier, parseUrn } from "../src/index"
+import { resolveEthereumAsset } from "../src/resolvers"
 
 let counter = 0
 
@@ -19,7 +20,13 @@ describe("Basic use cases", function () {
   })
 
   it("test land", async () => {
-    expect(await parseUrn("urn:decentraland:ethereum:LANDPROXY:0x1")).toMatchObject({
+    expect(
+      await resolveEthereumAsset(new URL("urn:decentraland:ethereum:LANDPROXY:0x1"), {
+        contract: "LANDPROXY",
+        protocol: "ethereum",
+        tokenId: "0x1",
+      })
+    ).toMatchObject({
       contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
       network: "mainnet",
       blockchain: "ethereum",
@@ -29,34 +36,34 @@ describe("Basic use cases", function () {
   })
 
   it("test land (query string)", async () => {
-    const t = await parseUrn("urn:decentraland:ethereum:LANDPROXY:0x1?test=1#4")
+    const t = await parseUrn("urn:decentraland:ropsten:LAND:0x1?atBlock=151231111#4")
     expect(t).toHaveProperty("uri")
-    expect(t.uri.toString()).toEqual("urn:decentraland:ethereum:LANDPROXY:0x1?test=1#4")
+    expect(t.uri.toString()).toEqual("urn:decentraland:ropsten:LAND:0x1?atBlock=151231111#4")
   })
 
-  it("test land (address)", async () => {
-    expect(await parseUrn("urn:decentraland:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1")).toMatchObject({
-      contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-      type: "blockchain-asset",
-      network: "mainnet",
-      id: "0x1",
-    })
-  })
+  // it("test land (address)", async () => {
+  //   expect(await parseUrn("urn:decentraland:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1")).toMatchObject({
+  //     contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+  //     type: "blockchain-asset",
+  //     network: "mainnet",
+  //     id: "0x1",
+  //   })
+  // })
 
   it("test land (ropsten)", async () => {
-    expect(await parseUrn("urn:decentraland:ropsten:landregistry:0x1")).toMatchObject({
-      contractAddress: "0x255baf4096cb1723c00c4b4390a4b3028ecaa8ba",
+    expect(await parseUrn("urn:decentraland:ropsten:LAND:0x1")).toMatchObject({
+      contractAddress: "0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b",
       blockchain: "ethereum",
       network: "ropsten",
       id: "0x1",
     })
   })
 
-  it("test land (ropsten) upper case", async () => {
-    expect(await parseUrn("urn:decentraland:ROPSTEN:LandRegistry:0x1")).toMatchObject({
-      contractAddress: "0x255baf4096cb1723c00c4b4390a4b3028ecaa8ba",
+  it("test land (mainnet) upper case", async () => {
+    expect(await parseUrn("urn:decentraland:ETHEREUM:LAND:0x1")).toMatchObject({
+      contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
       blockchain: "ethereum",
-      network: "ropsten",
+      network: "mainnet",
       id: "0x1",
     })
   })
@@ -71,7 +78,7 @@ describe("Basic use cases", function () {
 
   it("test collection v1", async () => {
     const r = await parseUrn(
-      "urn:decentraland:ethereum:collections:v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
+      "urn:decentraland:ethereum:collections-v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
     )
     expect(r).toMatchObject({
       type: "blockchain-collection-v1",
@@ -84,13 +91,13 @@ describe("Basic use cases", function () {
 
   it("test collection v2 (invalid id)", async () => {
     const r = await parseUrn(
-      "urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
+      "urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
     )
     expect(r).toBeNull()
   })
 
   it("test collection v2", async () => {
-    const r = await parseUrn("urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0")
+    const r = await parseUrn("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0")
     expect(r).toMatchObject({
       blockchain: "ethereum",
       type: "blockchain-collection-v2",
@@ -99,21 +106,21 @@ describe("Basic use cases", function () {
       id: "0",
     })
   })
-  testValidUrnToInclude("urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0", {
+  testValidUrnToInclude("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0", {
     id: "0",
   })
-  testValidUrnToInclude("urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1", {
+  testValidUrnToInclude("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1", {
     id: "0x1",
   })
-  testValidUrnToInclude("urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x0", {
+  testValidUrnToInclude("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x0", {
     id: "0x0",
   })
   testValidUrnToInclude(
-    "urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:123456789",
+    "urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:123456789",
     {}
   )
   testValidUrnToInclude(
-    "urn:decentraland:ethereum:collections:v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x000011111111111abcdef9087654321",
+    "urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x000011111111111abcdef9087654321",
     {}
   )
 
@@ -150,14 +157,14 @@ describe("Basic use cases", function () {
     y: -137,
   })
 
-  testValidUrnToInclude("urn:decentraland:ethereum:collections:v1:community_contest:cw_bell_attendant_hat", {
+  testValidUrnToInclude("urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat", {
     contractAddress: "0x32b7495895264ac9d0b12d32afd435453458b1c6",
     collectionName: "community_contest",
     id: "cw_bell_attendant_hat",
   })
 
   testValidUrnToInclude(
-    "urn:decentraland:ethereum:collections:v1:0x32b7495895264ac9d0b12d32afd435453458b1c6:cw_bell_attendant_hat",
+    "urn:decentraland:ethereum:collections-v1:0x32b7495895264ac9d0b12d32afd435453458b1c6:cw_bell_attendant_hat",
     {
       contractAddress: "0x32b7495895264ac9d0b12d32afd435453458b1c6",
       collectionName: "community_contest",
@@ -165,7 +172,7 @@ describe("Basic use cases", function () {
     }
   )
 
-  testValidUrnToInclude("urn:decentraland:ethereum:collections:v1:InExIsTeNtCoLlEcTiOn19283719:maddona-modern-life", {
+  testValidUrnToInclude("urn:decentraland:ethereum:collections-v1:InExIsTeNtCoLlEcTiOn19283719:maddona-modern-life", {
     contractAddress: null,
     collectionName: "InExIsTeNtCoLlEcTiOn19283719",
     id: "maddona-modern-life",
@@ -181,7 +188,7 @@ describe("Basic use cases", function () {
 
     const generatedUrl = (await parseUrn("dcl://base-avatars/eyes_03")).uri
 
-    expect(generatedUrl.toString()).toEqual('urn:decentraland:off-chain:base-avatars:eyes_03')
+    expect(generatedUrl.toString()).toEqual("urn:decentraland:off-chain:base-avatars:eyes_03")
   })
 
   it("legacy address (invalid)", async () => {

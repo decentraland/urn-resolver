@@ -17,19 +17,15 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // Resolver for static offchain assets (quests deployed to static servers, not content server)
   "decentraland:off-chain:{registry}:{name}": resolveOffchainAsset,
   // collections v1 (by contract)
-  "decentraland:{protocol}:collections:v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
+  "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
   // collections v1 (by name)
-  "decentraland:{protocol}:collections:v1:{collectionName}:{name}": resolveCollectionV1AssetByCollectionName,
+  "decentraland:{protocol}:collections-v1:{collectionName}:{name}": resolveCollectionV1AssetByCollectionName,
   // collections v2 (hex)
-  "decentraland:{protocol}:collections:v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}": resolveCollectionV2Asset,
+  "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}": resolveCollectionV2Asset,
   // collections v2 (id)
-  "decentraland:{protocol}:collections:v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}": resolveCollectionV2Asset,
+  "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}": resolveCollectionV2Asset,
   // resolve LAND by position
   "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
-  // resolve smart contract by address
-  "decentraland:{protocol}:{contract(0x[a-fA-F0-9]+)}:{tokenId}": resolveEthereumAsset,
-  // resolve smart contract by name
-  "decentraland:{protocol}:{contract([a-zA-Z][a-zA-Z_0-9]*)}:{tokenId}": resolveEthereumAsset,
 }
 
 export const internalResolver = createParser(resolvers)
@@ -76,7 +72,7 @@ export async function resolveLegacyDclUrl(uri: URL) {
     if (uri.host == "base-avatars") {
       return internalResolver(`urn:decentraland:off-chain:base-avatars:${path[0]}`)
     } else {
-      return internalResolver(`urn:decentraland:collections:v1:${uri.host}:${path[0]}`)
+      return internalResolver(`urn:decentraland:collections-v1:${uri.host}:${path[0]}`)
     }
   }
 }
