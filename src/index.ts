@@ -2,9 +2,8 @@ import { internalResolver, resolveLegacyDclUrl } from "./resolvers"
 import { DecentralandAssetIdentifier } from "./types"
 export * from "./types"
 export { LandUtils } from "./land-utils"
-export { resolveContentUrl, ResolversOptions } from "./content-url-resolver"
 import { resolveContentUrl, ResolversOptions } from "./content-url-resolver"
-
+export { resolveContentUrl, ResolversOptions }
 /**
  * Function that parses an URN and returns a DecentralandAssetIdentifier record or null.
  * @public
