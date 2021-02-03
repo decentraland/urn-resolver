@@ -197,6 +197,12 @@ describe("Basic use cases", function () {
     expect(await parseUrn("dcl://base-avatars/a/b/c")).toEqual(null)
   })
 
+  it("sanity checks", async () => {
+    expect(
+      await parseUrn("urn:decentraland:ethereum:collections-v2:0x1b8ba74cc34c2927aac0a8af9c3b1ba2e61352f2:0")
+    ).toBeTruthy()
+  })
+
   it("legacy address (valid)", async () => {
     expect(await parseUrn("dcl://base-avatars/f_sweater")).toBeTruthy()
     expect(await parseUrn("dcl://base-avatars/f_jeans")).toBeTruthy()
