@@ -191,6 +191,19 @@ describe("Basic use cases", function () {
     expect(generatedUrl.toString()).toEqual("urn:decentraland:off-chain:base-avatars:eyes_03")
   })
 
+  it("legacy address (collections v1)", async () => {
+    expect(await parseUrn("dcl://halloween_2019/bride_of_frankie_earring")).toMatchObject({
+      id: "bride_of_frankie_earring",
+      namespace: "decentraland",
+      collectionName: "halloween_2019",
+      type: "blockchain-collection-v1",
+    })
+
+    const generatedUrl = (await parseUrn("dcl://halloween_2019/bride_of_frankie_earring")).uri
+
+    expect(generatedUrl.toString()).toEqual("urn:decentraland:ethereum:collections-v1:halloween_2019:bride_of_frankie_earring")
+  })
+
   it("legacy address (invalid)", async () => {
     expect(await parseUrn("dcl://base-avatars/")).toEqual(null)
     expect(await parseUrn("dcl://base-avatars")).toEqual(null)

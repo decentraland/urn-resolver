@@ -72,7 +72,7 @@ export async function resolveLegacyDclUrl(uri: URL) {
     if (uri.host == "base-avatars") {
       return internalResolver(`urn:decentraland:off-chain:base-avatars:${path[0]}`)
     } else {
-      return internalResolver(`urn:decentraland:collections-v1:${uri.host}:${path[0]}`)
+      return internalResolver(`urn:decentraland:ethereum:collections-v1:${uri.host}:${path[0]}`)
     }
   }
 }
