@@ -8,6 +8,13 @@ export =
     "symbol": "DCLPMDRMVRSMNNC"
   },
   {
+    "id": "0x0b1c6c75d511fae05e7dc696f4cf14129a9c43c9",
+    "isApproved": null,
+    "isCompleted": true,
+    "name": "dcl://ml_liondance",
+    "symbol": "DCLLMLNDNC"
+  },
+  {
     "id": "0x102daabd1e9d294d4436ec4c521dce7b1f15499e",
     "isApproved": null,
     "isCompleted": true,
@@ -78,6 +85,13 @@ export =
     "symbol": "DCLTCHTRBLMRC0MTC"
   },
   {
+    "id": "0x4c290f486bae507719c562b6b524bdb71a2570c9",
+    "isApproved": null,
+    "isCompleted": true,
+    "name": "dcl://atari_launch",
+    "symbol": "DCLTR"
+  },
+  {
     "id": "0x54266bcf2ffa841af934f003d144957d5934f3ab",
     "isApproved": null,
     "isCompleted": true,
@@ -113,11 +127,25 @@ export =
     "symbol": "DCLMLPKNGPR"
   },
   {
+    "id": "0x68e139552c4077ce5c9ab929c7e18ca721ffff00",
+    "isApproved": null,
+    "isCompleted": true,
+    "name": "dcl://rac_basics",
+    "symbol": "DCLRCBSCS"
+  },
+  {
     "id": "0x6a99abebb48819d2abe92c5e4dc4f48dc09a3ee8",
     "isApproved": null,
     "isCompleted": true,
     "name": "dcl://moonshot_2020",
     "symbol": "DCLMNSHT2020"
+  },
+  {
+    "id": "0x6b47e7066c7db71aa04a1d5872496fe05c4c331f",
+    "isApproved": null,
+    "isCompleted": true,
+    "name": "dcl://rtfkt_x_atari",
+    "symbol": "DCLRTFTKTI"
   },
   {
     "id": "0x7038e9d2c6f5f84469a84cf9bc5f4909bb6ac5e0",
@@ -195,6 +223,13 @@ export =
     "isCompleted": true,
     "name": "dcl://cz_mercenary_mtz",
     "symbol": "DCLCZMRCNRYMTZ"
+  },
+  {
+    "id": "0xc82a864a94db3550bc71fcb4ce07228bcec21f1a",
+    "isApproved": null,
+    "isCompleted": true,
+    "name": "dcl://winklevoss_capital",
+    "symbol": "DCLWNKLVSSCPTL"
   },
   {
     "id": "0xd35147be6401dcb20811f2104c33de8e97ed6818",

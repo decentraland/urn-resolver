@@ -67,12 +67,23 @@ export async function resolveLandAsset(
 }
 
 export async function resolveLegacyDclUrl(uri: URL) {
-  const path = uri.pathname.replace(/^\//, "").split("/")
+  let host: string
+  let path: string[]
+  if (uri.pathname.startsWith('//')) {
+    // Web URL object does not recognize dcl:// and therefore pathname has an extra /
+    let res = uri.pathname.replace(/^\/\//, "").split("/")
+    host = res[0]
+    path = res.slice(1)
+  } else {
+    host = uri.host
+    path = uri.pathname.replace(/^\//, "").split("/")
+  }
+
   if (uri.protocol == "dcl:" && path.length == 1) {
-    if (uri.host == "base-avatars") {
+    if (host == "base-avatars") {
       return internalResolver(`urn:decentraland:off-chain:base-avatars:${path[0]}`)
     } else {
-      return internalResolver(`urn:decentraland:ethereum:collections-v1:${uri.host}:${path[0]}`)
+      return internalResolver(`urn:decentraland:ethereum:collections-v1:${host}:${path[0]}`)
     }
   }
 }

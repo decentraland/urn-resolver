@@ -40,3 +40,21 @@ const parsed = await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151
 # DecentralandAssetIdentifier
 
 It is an union type defined in the file [src/types.ts](src/types.ts), in that file you can find all the possible return types for URN resolution in this package.
+
+# Contribute
+
+## Install
+
+You will need to install `jq`. If you are using MacOS you can install it by running: `brew install jq`.
+
+The lib is being [built with node 14.x](.github/workflows/ci.yml).
+
+```bash
+make build
+```
+
+## Test
+
+```bash
+make test
+```
