@@ -114,6 +114,20 @@ describe("Basic use cases", function () {
     })
   })
 
+  it("test collection v1 asset (with name)", async () => {
+    const r = await parseUrn(
+      "urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat"
+    )
+    expect(r).toMatchObject({
+      type: "blockchain-collection-v1-asset",
+      blockchain: "ethereum",
+      network: "mainnet",
+      contractAddress: "0x32b7495895264ac9d0b12d32afd435453458b1c6",
+      collectionName: 'community_contest',
+      id: 'cw_bell_attendant_hat'
+    })
+  })
+
   it("test collection asset v2 (invalid id)", async () => {
     const r = await parseUrn(
       "urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"

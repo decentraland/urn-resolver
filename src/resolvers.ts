@@ -143,7 +143,7 @@ export async function resolveCollectionV1AssetByCollectionName(
     uri,
     blockchain: "ethereum",
     type: "blockchain-collection-v1-asset",
-    network: groups.protocol.toLowerCase(),
+    network: 'mainnet',
     contractAddress: (collection && collection.contractAddress) || null,
     id: groups.name,
     collectionName: (collection && collection.collectionId) || groups.collectionName,
