@@ -7,6 +7,8 @@ import {
   BlockchainCollectionV2Asset,
   BlockchainLandAsset,
   DecentralandAssetIdentifier,
+  BlockchainCollectionV1,
+  BlockchainCollectionV2,
 } from "./types"
 
 /**
@@ -16,14 +18,20 @@ import {
 export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // Resolver for static offchain assets (quests deployed to static servers, not content server)
   "decentraland:off-chain:{registry}:{name}": resolveOffchainAsset,
-  // collections v1 (by contract)
+  // collections v1 asset (by contract)
   "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
-  // collections v1 (by name)
+  // collections v1 asset (by name)
   "decentraland:{protocol}:collections-v1:{collectionName}:{name}": resolveCollectionV1AssetByCollectionName,
-  // collections v2 (hex)
+  // collections v2 asset (hex)
   "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}": resolveCollectionV2Asset,
-  // collections v2 (id)
+  // collections v2 asset (id)
   "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}": resolveCollectionV2Asset,
+  // collections v1 (by contract)
+  "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV1,
+  // collections v1 (by name)
+  "decentraland:{protocol}:collections-v1:{collectionName}": resolveCollectionV1ByCollectionName,
+  // collections v2
+  "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV2,
   // resolve LAND by position
   "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
 }
@@ -134,7 +142,7 @@ export async function resolveCollectionV1AssetByCollectionName(
     namespace: "decentraland",
     uri,
     blockchain: "ethereum",
-    type: "blockchain-collection-v1",
+    type: "blockchain-collection-v1-asset",
     network: groups.protocol.toLowerCase(),
     contractAddress: (collection && collection.contractAddress) || null,
     id: groups.name,
@@ -157,7 +165,7 @@ export async function resolveCollectionV1Asset(
       namespace: "decentraland",
       uri,
       blockchain: "ethereum",
-      type: "blockchain-collection-v1",
+      type: "blockchain-collection-v1-asset",
       network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
       contractAddress: contract,
       id: groups.name,
@@ -179,9 +187,74 @@ export async function resolveCollectionV2Asset(
       namespace: "decentraland",
       uri,
       blockchain: "ethereum",
-      type: "blockchain-collection-v2",
+      type: "blockchain-collection-v2-asset",
       network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
       contractAddress: contract,
       id: groups.id,
+    }
+}
+
+export async function resolveCollectionV1(
+  uri: URL,
+  groups: Record<"protocol" | "contract", string>
+): Promise<BlockchainCollectionV1 | void> {
+  if (!isValidProtocol(groups.protocol)) return
+
+  const contract = await getContract(groups.protocol, groups.contract)
+
+  if (contract) {
+    const collection = await getCollection(contract)
+
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-v1",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      id: contract,
+      collectionName: collection ? collection.collectionId : null
+    }
+  }
+}
+
+export async function resolveCollectionV1ByCollectionName(
+  uri: URL,
+  groups: Record<"protocol" | "collectionName", string>
+): Promise<BlockchainCollectionV1 | void> {
+  // this only works in mainnet
+  if (groups.protocol != "ethereum") return
+
+  const collection = await getCollection(groups.collectionName)
+
+  if (collection) {
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-v1",
+      network: 'mainnet',
+      id: collection.contractAddress,
+      collectionName: groups.collectionName,
+    }
+  }
+}
+
+export async function resolveCollectionV2(
+  uri: URL,
+  groups: Record<"protocol" | "contract", string>
+): Promise<BlockchainCollectionV2 | void> {
+  if (!isValidProtocol(groups.protocol)) return
+
+  const contract = await getContract(groups.protocol, groups.contract)
+
+  if (contract)
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-v2",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      contractAddress: contract,
+      id: contract,
     }
 }

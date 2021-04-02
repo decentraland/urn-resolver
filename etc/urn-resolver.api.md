@@ -26,7 +26,7 @@ export type BlockchainCollectionV1Asset = {
     blockchain: "ethereum";
     network: string;
     contractAddress: string | null;
-    type: "blockchain-collection-v1";
+    type: "blockchain-collection-v1-asset";
     id: string;
     collectionName: string | null;
 };
@@ -34,7 +34,7 @@ export type BlockchainCollectionV1Asset = {
 // @public (undocumented)
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
     namespace: 'decentraland';
-    type: "blockchain-collection-v2";
+    type: "blockchain-collection-v2-asset";
     id: string;
 };
 

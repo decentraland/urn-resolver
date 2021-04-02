@@ -57,7 +57,7 @@ export type BlockchainCollectionV1Asset =  {
    */
   contractAddress: string | null
 
-  type: "blockchain-collection-v1"
+  type: "blockchain-collection-v1-asset"
   /**
    * Identifier of the asset (name)
    */
@@ -68,11 +68,46 @@ export type BlockchainCollectionV1Asset =  {
 /**
  * @public
  */
+ export type BlockchainCollectionV1 =  {
+  namespace: 'decentraland'
+  uri: URL
+  /**
+   * Ethereum for the time being.
+   */
+  blockchain: "ethereum"
+  /**
+   * mainnet | ropsten | matic and others.
+   */
+  network: string
+
+  type: "blockchain-collection-v1"
+  /**
+   * Contract address of the collection
+   */
+  id: string
+  collectionName: string | null
+}
+
+/**
+ * @public
+ */
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: "blockchain-collection-v2-asset"
+  /**
+   * Identifier of the asset (assetId)
+   */
+  id: string
+}
+
+/**
+ * @public
+ */
+ export type BlockchainCollectionV2 = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: "blockchain-collection-v2"
   /**
-   * Identifier of the asset (assetId)
+   * Contract address of the collection
    */
   id: string
 }
@@ -103,3 +138,5 @@ export type DecentralandAssetIdentifier =
   | BlockchainCollectionV1Asset
   | BlockchainCollectionV2Asset
   | BlockchainLandAsset
+  | BlockchainCollectionV1
+  | BlockchainCollectionV2

@@ -78,10 +78,35 @@ describe("Basic use cases", function () {
 
   it("test collection v1", async () => {
     const r = await parseUrn(
-      "urn:decentraland:ethereum:collections-v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
+      "urn:decentraland:ethereum:collections-v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d"
     )
     expect(r).toMatchObject({
       type: "blockchain-collection-v1",
+      blockchain: "ethereum",
+      network: "mainnet",
+      id: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+    })
+  })
+
+  it("test collection v1 (with name)", async () => {
+    const r = await parseUrn(
+      "urn:decentraland:ethereum:collections-v1:community_contest"
+    )
+    expect(r).toMatchObject({
+      type: "blockchain-collection-v1",
+      blockchain: "ethereum",
+      network: "mainnet",
+      id: "0x32b7495895264ac9d0b12d32afd435453458b1c6",
+      collectionName: 'community_contest'
+    })
+  })
+
+  it("test collection asset v1", async () => {
+    const r = await parseUrn(
+      "urn:decentraland:ethereum:collections-v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
+    )
+    expect(r).toMatchObject({
+      type: "blockchain-collection-v1-asset",
       blockchain: "ethereum",
       network: "mainnet",
       contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
@@ -89,23 +114,34 @@ describe("Basic use cases", function () {
     })
   })
 
-  it("test collection v2 (invalid id)", async () => {
+  it("test collection asset v2 (invalid id)", async () => {
     const r = await parseUrn(
       "urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name"
     )
     expect(r).toBeNull()
   })
 
-  it("test collection v2", async () => {
+  it("test collection asset v2", async () => {
     const r = await parseUrn("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0")
     expect(r).toMatchObject({
       blockchain: "ethereum",
-      type: "blockchain-collection-v2",
+      type: "blockchain-collection-v2-asset",
       network: "mainnet",
       contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
       id: "0",
     })
   })
+
+  it("test collection v2", async () => {
+    const r = await parseUrn("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d")
+    expect(r).toMatchObject({
+      blockchain: "ethereum",
+      type: "blockchain-collection-v2",
+      network: "mainnet",
+      id: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+    })
+  })
+
   testValidUrnToInclude("urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0", {
     id: "0",
   })
@@ -196,7 +232,7 @@ describe("Basic use cases", function () {
       id: "bride_of_frankie_earring",
       namespace: "decentraland",
       collectionName: "halloween_2019",
-      type: "blockchain-collection-v1",
+      type: "blockchain-collection-v1-asset",
     })
 
     const generatedUrl = (await parseUrn("dcl://halloween_2019/bride_of_frankie_earring")).uri
@@ -225,4 +261,14 @@ describe("Basic use cases", function () {
     expect(await parseUrn("dcl://base-avatars/f_eyebrows_00")).toBeTruthy()
     expect(await parseUrn("dcl://base-avatars/f_mouth_00")).toBeTruthy()
   })
+
+  testValidUrnToInclude(
+    "urn:decentraland:off-chain:base-avatars:f_sweater",
+    {
+      type: "off-chain",
+      id: "f_sweater",
+      registry: "base-avatars",
+    }
+  )
+
 })

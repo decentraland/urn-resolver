@@ -33,7 +33,6 @@ export async function resolveContentUrl(
       return r
     }
   }
-  console.dir(asset)
   return null
 }
 
@@ -53,7 +52,7 @@ resolvers.push(function resolvePortableExperiencesUrl(asset, options) {
 })
 
 resolvers.push(function wearablesV1UrlResolver(asset, options) {
-  if (asset.type == "blockchain-collection-v1" && asset.collectionName != "base-avatars") {
+  if (asset.type == "blockchain-collection-v1-asset" && asset.collectionName != "base-avatars") {
     const host = defaultWearablesServerForNetwork(asset.network, options)
     if (asset.collectionName) {
       return `https://${host}/v2/collections/${asset.collectionName}/wearables/${asset.id}`
