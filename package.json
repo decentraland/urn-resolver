@@ -23,7 +23,7 @@
   "devDependencies": {
     "@microsoft/api-extractor": "^7.12.1",
     "@types/mocha": "^8.2.0",
-    "expect": "^26.6.2",
+    "expect": "^27.0.1",
     "mocha": "^8.2.1",
     "ts-node": "^9.1.1",
     "typescript": "latest"
