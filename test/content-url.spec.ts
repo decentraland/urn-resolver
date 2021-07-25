@@ -14,6 +14,18 @@ describe("Content url generation", function () {
     "https://static-pe.decentraland.io/quest-1/mappings"
   )
   test(
+    "urn:decentraland:off-chain:unity-renderer-cdn:0.0.0-123123123-badaeafa",
+    "https://cdn.decentraland.org/@dcl/unity-renderer/0.0.0-123123123-badaeafa"
+  )
+  test(
+    "urn:decentraland:off-chain:kernel-cdn:0.0.0-123123123-badaeafa",
+    "https://cdn.decentraland.org/@dcl/kernel/0.0.0-123123123-badaeafa"
+  )
+  test(
+    "urn:decentraland:off-chain:explorer-website-cdn:0.0.0-123123123-badaeafa",
+    "https://cdn.decentraland.org/@dcl/explorer-website/0.0.0-123123123-badaeafa"
+  )
+  test(
     "urn:decentraland:ethereum:LAND:4763953136893138488487244504044754960247",
     "https://peer.decentraland.org/content/entities/scene?pointer=13,-137"
   )

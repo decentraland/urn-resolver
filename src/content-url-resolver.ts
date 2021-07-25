@@ -44,7 +44,25 @@ resolvers.push(function resolvePortableExperiencesUrl(asset, options) {
   }
 })
 
-resolvers.push(function resolvePortableExperiencesUrl(asset, options) {
+resolvers.push(function (asset, options) {
+  if (asset.type == "off-chain" && asset.registry == "unity-renderer-cdn") {
+    return `https://cdn.decentraland.org/@dcl/unity-renderer/${asset.id}`
+  }
+})
+
+resolvers.push(function (asset, options) {
+  if (asset.type == "off-chain" && asset.registry == "kernel-cdn") {
+    return `https://cdn.decentraland.org/@dcl/kernel/${asset.id}`
+  }
+})
+
+resolvers.push(function (asset, options) {
+  if (asset.type == "off-chain" && asset.registry == "explorer-website-cdn") {
+    return `https://cdn.decentraland.org/@dcl/explorer-website/${asset.id}`
+  }
+})
+
+resolvers.push(function (asset, options) {
   if (asset.type == "off-chain" && asset.registry == "base-avatars") {
     const host = defaultWearablesServerForNetwork("ethereum", options)
     return `https://${host}/v2/collections/${asset.registry}/wearables/${asset.id}`
