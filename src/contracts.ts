@@ -79,16 +79,17 @@ export = (
     "ClaimWearableForFree": "0x8dd61d1a67bce13a87e20a76c6f164c388a726d6",
     "Moonshot2020Collection": "0x6a99abebb48819d2abe92c5e4dc4f48dc09a3ee8",
     "DAOAgent": "0x9A6ebE7E2a7722F8200d0ffB63a1F6406A0d7dce",
+    "DAOEstateForwarder": "0x34ed9e73930290cec0cfe601809255ec1313ea18",
     "LANDMiniMeToken": "0x20dfe381ca71ade2582094cf569a8cb020af5ab1",
     "EstateMiniMeToken": "0x8568f23f343694650370fe5e254b55bfb704a6c7",
     "BuyAdapter": "0xf4fbd84193f9aaf9779dedbb415a806933eb1c95",
     "AdapterFeeCollector": "0x0d58aaae9f0c4d020486f534363f3fca7a6aecb6",
     "AdapterConverter": "0x2859581da59bd4e16a866dd06b461b76d8e489a4",
     "DappcraftMoonminerCollection": "0x1e1d4e6262787c8a8783a37fee698bd42aa42bec",
-    "DGSummer2020Collection":"0xbf53c33235cbfc22cef5a61a83484b86342679c5",
-    "PMOuttathisworldCollection":"0x75a3752579dc2d63ca229eebbe3537fbabf85a12",
-    "DgtbleHeadspaceCollection":"0x574f64ac2e7215cba9752b85fc73030f35166bc0",
-    "WonderzoneMeteorchaserCollection":"0x34ed0aa248f60f54dd32fbc9883d6137a491f4f3",
+    "DGSummer2020Collection": "0xbf53c33235cbfc22cef5a61a83484b86342679c5",
+    "PMOuttathisworldCollection": "0x75a3752579dc2d63ca229eebbe3537fbabf85a12",
+    "DgtbleHeadspaceCollection": "0x574f64ac2e7215cba9752b85fc73030f35166bc0",
+    "WonderzoneMeteorchaserCollection": "0x34ed0aa248f60f54dd32fbc9883d6137a491f4f3",
     "BurningStore": "0x0822d44c2e2f96d4cccad80610134861802b2cca",
     "BaseList": "0x21b6EFf834d7cc8c12A5Ec924939aa521F0FE83F",
     "POIAllowListProxy": "0x0ef15a1c7a49429a36cb46d4da8c53119242b54e",
@@ -110,10 +111,10 @@ export = (
     "WonderzoneSteampunk": "0xb96697fa4a3361ba35b774a42c58daccaad1b8e1",
     "DCNiftyblocksmith": "0x102daabd1e9d294d4436ec4c521dce7b1f15499e",
     "Halloween2020Collection": "0xfeb52cbf71b9adac957c6f948a6cf9980ac8c907",
-    "Xmas2020Collection":"0xecf073f91101ce5628669c487aee8f5822a101b1",
-    "MemeDontBuyThis":"0x1a57f6afc902d25792c53b8f19b7e17ef84222d5",
-    "ReleaseTheKraken":"0xffc5043d9a00865d089d5eefa5b3d1625aec6763",
-    "3LAUBasics":"0xe1ecb4e5130f493551c7d6df96ad19e5b431a0a9",
+    "Xmas2020Collection": "0xecf073f91101ce5628669c487aee8f5822a101b1",
+    "MemeDontBuyThis": "0x1a57f6afc902d25792c53b8f19b7e17ef84222d5",
+    "ReleaseTheKraken": "0xffc5043d9a00865d089d5eefa5b3d1625aec6763",
+    "3LAUBasics": "0xe1ecb4e5130f493551c7d6df96ad19e5b431a0a9",
     "XmashUp2020": "0xdd9c7bc159dacb19c9f6b9d7e23948c87aa2397f",
     "MLLiondance": "0x0b1c6c75d511fae05e7dc696f4cf14129a9c43c9",
     "AtariLaunch": "0x4c290f486bae507719c562b6b524bdb71a2570c9",
@@ -122,7 +123,10 @@ export = (
     "RootChainProxy": "0x86E4Dc95c7FBdBf52e33D563BbDB00823894C287",
     "RTFKTXAtari": "0x6b47e7066c7db71aa04a1d5872496fe05c4c331f",
     "RACBasics": "0x68e139552c4077ce5c9ab929c7e18ca721ffff00",
-    "WinklevossCapital": "0xc82a864a94db3550bc71fcb4ce07228bcec21f1a"
+    "WinklevossCapital": "0xc82a864a94db3550bc71fcb4ce07228bcec21f1a",
+    "DGAtariDillonFrancis": "0x51e0b1afe5da0c038fc93a3fc8e11cf7a238b40b",
+    "DAOVotingPower": "0xcf9b305b4cd210079f5648f17ede69e666c0c8d4",
+    "TheGraphMultisig": "0x89FDdaB2F93417182CdCdb0B8B3322B93AB3A192"
   },
   "kovan": {
     "MANAToken": "0x230fc362413d9e862326c2c7084610a5a2fdf78a",
@@ -131,14 +135,15 @@ export = (
     "Marketplace": "0x6f44f195999f06aeb5872db96cdc517f1e839f13"
   },
   "rinkeby": {
-      "MANAToken": "0x28bce5263f5d7f4eb7e8c6d5d78275ca455bac63",
-      "LANDProxy": "0x28bef22df3e2040a4be64a9ca0e8b5ae2b91462d",
-      "LANDRegistry": "0xbeea8bfb0e582be1c3fb464824e61c218ba0c1b1",
-      "EstateRegistry":"0x3f0b58ad7a8b27d0e5573cd1ca7d456e2f6d4884",
-      "Multisig": "0x0de35b8b47b129877e0efca24e294b61d7e7eee3",
-      "MANAMiniMeToken":"0xfb2712a1246f712b889692c7ce55fec25c06bc33",
-      "LANDMiniMeToken": "0x576c4577aAd561EA79acbd49215a0cC1473BfCCA",
-      "EstateMiniMeToken": "0x2b98C125733035cDE09d311F988845808EE270E6"
+    "MANAToken": "0x28bce5263f5d7f4eb7e8c6d5d78275ca455bac63",
+    "LANDProxy": "0x28bef22df3e2040a4be64a9ca0e8b5ae2b91462d",
+    "LANDRegistry": "0xbeea8bfb0e582be1c3fb464824e61c218ba0c1b1",
+    "EstateRegistry": "0x3f0b58ad7a8b27d0e5573cd1ca7d456e2f6d4884",
+    "Multisig": "0x0de35b8b47b129877e0efca24e294b61d7e7eee3",
+    "MANAMiniMeToken": "0xfb2712a1246f712b889692c7ce55fec25c06bc33",
+    "LANDMiniMeToken": "0x576c4577aAd561EA79acbd49215a0cC1473BfCCA",
+    "EstateMiniMeToken": "0x2b98C125733035cDE09d311F988845808EE270E6",
+    "DAOVotingPower": "0xe65835cd7c9311866ae5d260a1eb7b963899ca14"
   },
   "goerli": {
     "MANAToken": "0xe7fDae84ACaba2A5Ba817B6E6D8A2d415DBFEdbe",
@@ -147,13 +152,31 @@ export = (
     "RootChainProxy": "0x2890ba17efe978480615e330ecb65333b880928e"
   },
   "matic": {
+    "MetaTxForwarder": "0x0baBda04f62C549A09EF3313Fe187f29c099FF3C",
     "MANAToken": "0xA1c57f48F0Deb89f569dFbE6E2B7f46D33606fD4",
-    "ChildChainManagerProxy": "0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa"
+    "ChildChainManagerProxy": "0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa",
+    "Multisig": "0x0E659A116e161d8e502F9036bAbDA51334F2667E",
+    "CollectionImplementation": "0x006080C6061C4aF79b39Da0842a3a22A7b3f185e",
+    "Rarities": "0x17113b44fdd661A156cc01b5031E3aCF72c32EB3",
+    "Committee": "0x71d9350Ef44E1e451F00e447C0DfF2d1FB75510a",
+    "CollectionManager ": "0x9D32AaC179153A991e832550d9F96441Ea27763A",
+    "Forwarder": "0xBF6755A83C0dCDBB2933A96EA778E00b717d7004",
+    "CollectionFactory": "0xB549B2442b2BD0a53795BC5cDcBFE0cAF7ACA9f8",
+    "CollectionStore": "0x214ffC0f0103735728dc66b61A22e4F163e275ae",
+    "Marketplace": "0x02080031b45A3c67d338Dd4A2CC309D28756A160"
   },
   "mumbai": {
     "MetaTxForwarder": "0xBF6755A83C0dCDBB2933A96EA778E00b717d7004",
     "MANAToken": "0x882Da5967c435eA5cC6b09150d55E8304B838f45",
-    "ChildChainManagerProxy": "0xb5505a6d998549090530911180f38aC5130101c6"
+    "ChildChainManagerProxy": "0xb5505a6d998549090530911180f38aC5130101c6",
+    "CollectionImplementation": "0x89c4Ad77066d9EE8aD281D5Fd995690D91436644",
+    "Rarities": "0x8eabF06f6cf667915bfF30138be70543bCE2901A",
+    "Committee": "0x4bb5ACe5ceB3Dd51ea35fa01a8f9B5507c234270",
+    "CollectionManager ": "0xe539E0AED3C1971560517D58277f8dd9aC296281",
+    "Forwarder": "0x71e56Ad57eca3fAAe5077b7F9ea731a25785fF92",
+    "CollectionFactory": "0x2A72Ec4241Ac4fBc915ae98aC5a5b01AdE721f4B",
+    "CollectionStore": "0x6ddF1b1924DAD850AdBc1C02026535464Be06B0c",
+    "Marketplace": "0x2a09a000224f5dbe0E17214cA95CDe506DA7CB74"
   }
 }
 ) as Record<string, Record<string, string>>

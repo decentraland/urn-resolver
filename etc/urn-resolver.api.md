@@ -68,11 +68,11 @@ export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | Bloc
 // @public (undocumented)
 export namespace LandUtils {
     // (undocumented)
-    export function B(number: string | number | BigInt | bigint): bigint;
+    export function B(number: string | number | bigint): bigint;
     // (undocumented)
     export type BN = ReturnType<typeof B>;
     // (undocumented)
-    export function decodeTokenId(value: string | number | BigInt | bigint): {
+    export function decodeTokenId(value: string | number | bigint): {
         x: bigint;
         y: bigint;
     };

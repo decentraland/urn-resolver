@@ -5,12 +5,12 @@
 export namespace LandUtils {
   // TODO: use BigNumber.js
 
-  function B(number: string | number | BigInt | bigint) {
+  function B(number: string | number | bigint) {
     return BigInt(number)
   }
   type BN = ReturnType<typeof B>
 
-  function requireBounds(x: string | number | BigInt | bigint, y: string | number | BigInt | bigint) {
+  function requireBounds(x: string | number | bigint, y: string | number | bigint) {
     if (!(B(-1000000) < B(x) && B(x) < B(1000000) && B(-1000000) < B(y) && B(y) < B(1000000)))
       throw new Error(`The coordinates ${x.toString(16)},${y.toString(16)} should be inside bounds`)
   }
@@ -34,7 +34,7 @@ export namespace LandUtils {
   /**
    * @public
    */
-  export function decodeTokenId(value: string | number | BigInt | bigint) {
+  export function decodeTokenId(value: string | number | bigint) {
     return _decodeTokenId(B(value))
   }
 
