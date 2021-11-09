@@ -229,9 +229,9 @@ describe("Basic use cases", function () {
   })
 
   testValidUrnToInclude("urn:decentraland:polygon:collections-thirdparty:aThirdParty:summerCollection:hat", {
-    contractAddress: null,
-    collectionName: "summerCollection",
-    id: "hat",
+    contractAddress: "",
+    collectionId: "summerCollection",
+    itemId: "hat",
     blockchain: "polygon",
     type: "blockchain-collection-third-party"
   })

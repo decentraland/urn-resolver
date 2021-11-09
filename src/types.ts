@@ -118,11 +118,10 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
  export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: "blockchain-collection-third-party"
-  /**
-   * Contract address of the collection
-   */
-  id: string
-  collectionName: string | null
+
+  thirdPartyName: string
+  collectionId: string 
+  itemId: string
 }
 
 /**
