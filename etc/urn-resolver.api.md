@@ -23,8 +23,9 @@ export type BlockchainAsset = BaseBlockchainAsset & {
 export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
     namespace: 'decentraland';
     type: "blockchain-collection-third-party";
-    id: string;
-    collectionName: string | null;
+    thirdPartyName: string;
+    collectionId: string;
+    itemId: string;
 };
 
 // @public (undocumented)
