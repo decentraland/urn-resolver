@@ -274,7 +274,7 @@ export async function resolveThirdPartyCollection(
     uri,
     blockchain: "polygon",
     type: "blockchain-collection-third-party",
-    network: "polygon",
+    network: groups.protocol == "polygon" ? "matic" : groups.protocol.toLowerCase(),
     thirdPartyName: groups.thirdPartyName,
     collectionId: groups.collectionId,
     itemId: groups.itemId,
