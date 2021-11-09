@@ -1,3 +1,4 @@
+import { BlockchainCollectionThirdParty } from "."
 import { createParser, getCollection, getContract, isValidProtocol, RouteMap } from "./helpers"
 import { LandUtils } from "./land-utils"
 import {
@@ -34,6 +35,8 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV2,
   // resolve LAND by position
   "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
+  // resolve third party assets
+  "decentraland:polygon:collections-thirdparty:{third-party-name}:{collection-id}:{item-id}": resolveThirdPartyCollection
 }
 
 export const internalResolver = createParser(resolvers)
@@ -257,4 +260,29 @@ export async function resolveCollectionV2(
       contractAddress: contract,
       id: contract,
     }
+}
+
+export async function resolveThirdPartyCollection(
+  uri: URL,
+  groups: Record<"protocol" | "contract", string>
+): Promise<BlockchainCollectionThirdParty | void> {
+  if (!isValidProtocol(groups.protocol)) return
+
+  const contract = await getContract(groups.protocol, groups.contract)
+
+  if (contract) {
+
+    const collection = await getCollection(contract)
+
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "polygon",
+      type: "blockchain-collection-third-party",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      contractAddress: contract,
+      id: contract,
+      collectionName: collection ? collection.collectionId : null
+    }
+  }
 }

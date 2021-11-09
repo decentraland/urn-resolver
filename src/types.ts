@@ -6,9 +6,9 @@ export type BaseBlockchainAsset = {
   namespace: 'decentraland'
   uri: URL
   /**
-   * Ethereum for the time being.
+   * Ethereum or polygon
    */
-  blockchain: "ethereum"
+  blockchain: "ethereum" | "polygon"
   /**
    * mainnet | ropsten | matic and others.
    */
@@ -115,6 +115,19 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 /**
  * @public
  */
+ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: "blockchain-collection-third-party"
+  /**
+   * Contract address of the collection
+   */
+  id: string
+  collectionName: string | null
+}
+
+/**
+ * @public
+ */
 export type OffChainAsset = {
   namespace: 'decentraland'
   uri: URL
@@ -140,3 +153,4 @@ export type DecentralandAssetIdentifier =
   | BlockchainLandAsset
   | BlockchainCollectionV1
   | BlockchainCollectionV2
+  | BlockchainCollectionThirdParty

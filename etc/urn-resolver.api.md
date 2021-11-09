@@ -8,7 +8,7 @@
 export type BaseBlockchainAsset = {
     namespace: 'decentraland';
     uri: URL;
-    blockchain: "ethereum";
+    blockchain: "ethereum" | "polygon";
     network: string;
     contractAddress: string;
 };
@@ -17,6 +17,14 @@ export type BaseBlockchainAsset = {
 export type BlockchainAsset = BaseBlockchainAsset & {
     type: "blockchain-asset";
     id: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+    namespace: 'decentraland';
+    type: "blockchain-collection-third-party";
+    id: string;
+    collectionName: string | null;
 };
 
 // @public (undocumented)
@@ -63,7 +71,7 @@ export type BlockchainLandAsset = BlockchainAsset & {
 };
 
 // @public (undocumented)
-export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2;
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdParty;
 
 // @public (undocumented)
 export namespace LandUtils {
@@ -82,7 +90,7 @@ export namespace LandUtils {
         x: number;
         y: number;
     };
-    {};
+        {};
 }
 
 // @public (undocumented)
@@ -108,7 +116,6 @@ export type ResolversOptions = Partial<{
 
 // @public
 export function resolveUrlFromUrn(urn: string, options?: ResolversOptions): Promise<string | null>;
-
 
 // (No @packageDocumentation comment for this package)
 

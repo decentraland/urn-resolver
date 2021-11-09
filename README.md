@@ -36,6 +36,7 @@ const parsed = await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151
 - `decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id}`: Resolve an ethereum wearables collection asset by contract address (v2)
 - `decentraland:{protocol}:LAND:{x},{y}`: Resolves the ethereum asset of a LAND position.
 - `decentraland:{protocol}:LAND:{tokenId}`: Resolves the ethereum asset of a LAND by tokenId.
+- `decentraland:polygon:collections-thirdparty:{third-party-name}:{collection-id}:{item-id}`: Resolves the ethereum asset of an item of a third party collection, currently only supported on polygon
 
 # DecentralandAssetIdentifier
 

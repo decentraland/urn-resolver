@@ -228,6 +228,14 @@ describe("Basic use cases", function () {
     id: "maddona-modern-life",
   })
 
+  testValidUrnToInclude("urn:decentraland:polygon:collections-thirdparty:aThirdParty:summerCollection:hat", {
+    contractAddress: null,
+    collectionName: "summerCollection",
+    id: "hat",
+    blockchain: "polygon",
+    type: "blockchain-collection-third-party"
+  })
+
   it("legacy address (base-avatars)", async () => {
     expect(await parseUrn("dcl://base-avatars/eyes_03")).toMatchObject({
       id: "eyes_03",
