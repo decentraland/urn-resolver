@@ -267,14 +267,14 @@ export async function resolveThirdPartyCollection(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
 ): Promise<BlockchainCollectionThirdParty | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (groups.protocol != 'polygon') return
 
   return {
     namespace: "decentraland",
     uri,
     blockchain: "polygon",
     type: "blockchain-collection-third-party",
-    network: groups.protocol == "polygon" ? "matic" : groups.protocol.toLowerCase(),
+    network: "polygon",
     thirdPartyName: groups.thirdPartyName,
     collectionId: groups.collectionId,
     itemId: groups.itemId,
