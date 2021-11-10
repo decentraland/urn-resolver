@@ -228,11 +228,12 @@ describe("Basic use cases", function () {
     id: "maddona-modern-life",
   })
 
-  testValidUrnToInclude("urn:decentraland:polygon:collections-thirdparty:aThirdParty:summerCollection:hat", {
+  testValidUrnToInclude("urn:decentraland:matic:collections-thirdparty:aThirdParty:summerCollection:hat", {
     contractAddress: "",
     collectionId: "summerCollection",
     itemId: "hat",
-    blockchain: "polygon",
+    blockchain: "ethereum",
+    network: "matic",
     type: "blockchain-collection-third-party"
   })
 

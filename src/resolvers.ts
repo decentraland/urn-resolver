@@ -267,17 +267,22 @@ export async function resolveThirdPartyCollection(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
 ): Promise<BlockchainCollectionThirdParty | void> {
-  if (groups.protocol != 'polygon') return
+  if (!isValidProtocol(groups.protocol)) return
 
-  return {
-    namespace: "decentraland",
-    uri,
-    blockchain: "polygon",
-    type: "blockchain-collection-third-party",
-    network: "polygon",
-    thirdPartyName: groups.thirdPartyName,
-    collectionId: groups.collectionId,
-    itemId: groups.itemId,
-    contractAddress: ""
-  }  
+  // TODO: use the correct contract
+  const contract = await getContract(groups.protocol, "ThirdParty")
+
+  // if (contract) {
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-third-party",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId,
+      itemId: groups.itemId,
+      contractAddress: contract ?? ""
+    }  
+  // }
 }

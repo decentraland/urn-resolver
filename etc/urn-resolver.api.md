@@ -8,7 +8,7 @@
 export type BaseBlockchainAsset = {
     namespace: 'decentraland';
     uri: URL;
-    blockchain: "ethereum" | "polygon";
+    blockchain: "ethereum";
     network: string;
     contractAddress: string;
 };

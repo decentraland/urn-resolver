@@ -6,9 +6,9 @@ export type BaseBlockchainAsset = {
   namespace: 'decentraland'
   uri: URL
   /**
-   * Ethereum or polygon
+   * Ethereum for the time being.
    */
-  blockchain: "ethereum" | "polygon"
+  blockchain: "ethereum"
   /**
    * mainnet | ropsten | matic and others.
    */
