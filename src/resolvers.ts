@@ -270,9 +270,9 @@ export async function resolveThirdPartyCollection(
   if (!isValidProtocol(groups.protocol)) return
 
   // TODO: use the correct contract
-  const contract = await getContract(groups.protocol, "ThirdParty")
+  const contract = await getContract(groups.protocol, "TPR")
 
-  // if (contract) {
+  if (contract) {
     return {
       namespace: "decentraland",
       uri,
@@ -282,7 +282,7 @@ export async function resolveThirdPartyCollection(
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
       itemId: groups.itemId,
-      contractAddress: contract ?? ""
+      contractAddress: contract 
     }  
-  // }
+  }
 }
