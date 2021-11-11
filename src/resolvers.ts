@@ -269,7 +269,6 @@ export async function resolveThirdPartyCollection(
 ): Promise<BlockchainCollectionThirdParty | void> {
   if (!isValidProtocol(groups.protocol)) return
 
-  // TODO: use the correct contract
   const contract = await getContract(groups.protocol, "TPR")
 
   if (contract) {
