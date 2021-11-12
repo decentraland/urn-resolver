@@ -233,9 +233,21 @@ describe("Basic use cases", function () {
     collectionId: "summerCollection",
     itemId: "hat",
     blockchain: "ethereum",
+    thirdPartyName: "aThirdParty",
     network: "mumbai",
     type: "blockchain-collection-third-party"
   })
+
+  // TODO: Add this when matic has the contract for TPW too
+  // testValidUrnToInclude("urn:decentraland:matic:collections-thirdparty:aThirdParty:summerCollection:hat", {
+  //   contractAddress: "0xC6349360CF0143Bf54FDC376060532C044883b8C",
+  //   collectionId: "summerCollection",
+  //   itemId: "hat",
+  //   blockchain: "ethereum",
+  //   thirdPartyName: "aThirdParty",
+  //   network: "matic",
+  //   type: "blockchain-collection-third-party"
+  // })
 
   it("legacy address (base-avatars)", async () => {
     expect(await parseUrn("dcl://base-avatars/eyes_03")).toMatchObject({
