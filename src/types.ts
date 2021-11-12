@@ -115,6 +115,18 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 /**
  * @public
  */
+ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: "blockchain-collection-third-party"
+
+  thirdPartyName: string
+  collectionId: string 
+  itemId: string
+}
+
+/**
+ * @public
+ */
 export type OffChainAsset = {
   namespace: 'decentraland'
   uri: URL
@@ -140,3 +152,4 @@ export type DecentralandAssetIdentifier =
   | BlockchainLandAsset
   | BlockchainCollectionV1
   | BlockchainCollectionV2
+  | BlockchainCollectionThirdParty
