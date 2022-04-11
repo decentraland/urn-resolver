@@ -115,14 +115,16 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 /**
  * @public
  */
- export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+ export type BlockchainCollectionThirdPartyItem = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: "blockchain-collection-third-party"
 
   thirdPartyName: string
   collectionId: string 
   itemId: string
-}
+ }
+
+export type BlockchainCollectionThirdParty = Omit<BlockchainCollectionThirdPartyItem, 'itemId'>
 
 /**
  * @public
@@ -153,3 +155,4 @@ export type DecentralandAssetIdentifier =
   | BlockchainCollectionV1
   | BlockchainCollectionV2
   | BlockchainCollectionThirdParty
+  | BlockchainCollectionThirdPartyItem

@@ -10,6 +10,7 @@ import {
   DecentralandAssetIdentifier,
   BlockchainCollectionV1,
   BlockchainCollectionV2,
+  BlockchainCollectionThirdPartyItem,
   BlockchainCollectionThirdParty
 } from "./types"
 
@@ -36,8 +37,10 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV2,
   // resolve LAND by position
   "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
+  // resolve third party collections
+  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}": resolveThirdPartyCollection,
   // resolve third party assets
-  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollection
+  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollectionItem
 }
 
 export const internalResolver = createParser(resolvers)
@@ -263,6 +266,30 @@ export async function resolveCollectionV2(
     }
 }
 
+export async function resolveThirdPartyCollectionItem(
+  uri: URL,
+  groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
+): Promise<BlockchainCollectionThirdPartyItem | void> {
+  if (!isValidProtocol(groups.protocol)) return
+
+  const contract = await getContract(groups.protocol, "TPR")
+
+  if (contract) {
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-third-party",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId,
+      itemId: groups.itemId,
+      contractAddress: contract 
+    }  
+  }
+}
+
+
 export async function resolveThirdPartyCollection(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
@@ -280,7 +307,6 @@ export async function resolveThirdPartyCollection(
       network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
-      itemId: groups.itemId,
       contractAddress: contract 
     }  
   }

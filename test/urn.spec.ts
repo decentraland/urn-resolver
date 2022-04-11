@@ -229,13 +229,22 @@ describe("Basic use cases", function () {
   })
 
   testValidUrnToInclude("urn:decentraland:mumbai:collections-thirdparty:aThirdParty:summerCollection:hat", {
-    contractAddress: "0xC6349360CF0143Bf54FDC376060532C044883b8C",
+    contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
     collectionId: "summerCollection",
     itemId: "hat",
     blockchain: "ethereum",
     thirdPartyName: "aThirdParty",
     network: "mumbai",
     type: "blockchain-collection-third-party"
+  })
+
+  testValidUrnToInclude("urn:decentraland:mumbai:collections-thirdparty:aThirdParty:winterCollection", {
+  contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
+  collectionId: "winterCollection",
+  blockchain: "ethereum",
+  thirdPartyName: "aThirdParty",
+  network: "mumbai",
+  type: "blockchain-collection-third-party"
   })
 
   // TODO: Add this when matic has the contract for TPW too
