@@ -239,12 +239,12 @@ describe("Basic use cases", function () {
   })
 
   testValidUrnToInclude("urn:decentraland:mumbai:collections-thirdparty:aThirdParty:winterCollection", {
-  contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
-  collectionId: "winterCollection",
-  blockchain: "ethereum",
-  thirdPartyName: "aThirdParty",
-  network: "mumbai",
-  type: "blockchain-collection-third-party"
+    contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
+    collectionId: "winterCollection",
+    blockchain: "ethereum",
+    thirdPartyName: "aThirdParty",
+    network: "mumbai",
+    type: "blockchain-collection-third-party"
   })
 
   // TODO: Add this when matic has the contract for TPW too
