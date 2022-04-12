@@ -303,7 +303,7 @@ export async function resolveThirdPartyCollection(
       namespace: "decentraland",
       uri,
       blockchain: "ethereum",
-      type: "blockchain-collection-third-party",
+      type: "blockchain-collection-third-party-collection",
       network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,

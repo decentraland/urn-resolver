@@ -127,7 +127,13 @@ export type BlockchainCollectionThirdPartyItem = BaseBlockchainAsset & {
 /**
  * @public
  */
-export type BlockchainCollectionThirdParty = Omit<BlockchainCollectionThirdPartyItem, 'itemId'>
+export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: "blockchain-collection-third-party-collection"
+
+  thirdPartyName: string
+  collectionId: string 
+}
 
 /**
  * @public

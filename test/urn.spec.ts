@@ -244,7 +244,7 @@ describe("Basic use cases", function () {
     blockchain: "ethereum",
     thirdPartyName: "aThirdParty",
     network: "mumbai",
-    type: "blockchain-collection-third-party"
+    type: "blockchain-collection-third-party-collection"
   })
 
   // TODO: Add this when matic has the contract for TPW too

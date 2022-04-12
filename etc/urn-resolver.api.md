@@ -20,7 +20,12 @@ export type BlockchainAsset = BaseBlockchainAsset & {
 };
 
 // @public (undocumented)
-export type BlockchainCollectionThirdParty = Omit<BlockchainCollectionThirdPartyItem, 'itemId'>;
+export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+    namespace: 'decentraland';
+    type: "blockchain-collection-third-party-collection";
+    thirdPartyName: string;
+    collectionId: string;
+};
 
 // @public (undocumented)
 export type BlockchainCollectionThirdPartyItem = BaseBlockchainAsset & {
