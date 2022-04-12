@@ -22,18 +22,18 @@ export type BlockchainAsset = BaseBlockchainAsset & {
 // @public (undocumented)
 export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
     namespace: 'decentraland';
-    type: "blockchain-collection-third-party-collection";
-    thirdPartyName: string;
-    collectionId: string;
-};
-
-// @public (undocumented)
-export type BlockchainCollectionThirdPartyItem = BaseBlockchainAsset & {
-    namespace: 'decentraland';
     type: "blockchain-collection-third-party";
     thirdPartyName: string;
     collectionId: string;
     itemId: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
+    namespace: 'decentraland';
+    type: "blockchain-collection-third-party-collection";
+    thirdPartyName: string;
+    collectionId: string;
 };
 
 // @public (undocumented)
@@ -80,7 +80,7 @@ export type BlockchainLandAsset = BlockchainAsset & {
 };
 
 // @public (undocumented)
-export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdParty | BlockchainCollectionThirdPartyItem;
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
 
 // @public (undocumented)
 export namespace LandUtils {

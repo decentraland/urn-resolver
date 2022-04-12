@@ -10,8 +10,8 @@ import {
   DecentralandAssetIdentifier,
   BlockchainCollectionV1,
   BlockchainCollectionV2,
-  BlockchainCollectionThirdPartyItem,
-  BlockchainCollectionThirdParty
+  BlockchainCollectionThirdParty,
+  BlockchainCollectionThirdPartyCollection
 } from "./types"
 
 /**
@@ -269,7 +269,7 @@ export async function resolveCollectionV2(
 export async function resolveThirdPartyCollectionItem(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
-): Promise<BlockchainCollectionThirdPartyItem | void> {
+): Promise<BlockchainCollectionThirdParty | void> {
   if (!isValidProtocol(groups.protocol)) return
 
   const contract = await getContract(groups.protocol, "TPR")
@@ -293,7 +293,7 @@ export async function resolveThirdPartyCollectionItem(
 export async function resolveThirdPartyCollection(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
-): Promise<BlockchainCollectionThirdParty | void> {
+): Promise<BlockchainCollectionThirdPartyCollection | void> {
   if (!isValidProtocol(groups.protocol)) return
 
   const contract = await getContract(groups.protocol, "TPR")
