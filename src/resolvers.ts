@@ -38,9 +38,9 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // resolve LAND by position
   "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
   // resolve third party collections
-  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}": resolveThirdPartyCollection,
+  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}": resolveThirdPartyCollectionOnlyCollection,
   // resolve third party assets
-  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollectionItem
+  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollection
 }
 
 export const internalResolver = createParser(resolvers)
@@ -266,7 +266,7 @@ export async function resolveCollectionV2(
     }
 }
 
-export async function resolveThirdPartyCollectionItem(
+export async function resolveThirdPartyCollection(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
 ): Promise<BlockchainCollectionThirdParty | void> {
@@ -290,7 +290,7 @@ export async function resolveThirdPartyCollectionItem(
 }
 
 
-export async function resolveThirdPartyCollection(
+export async function resolveThirdPartyCollectionOnlyCollection(
   uri: URL,
   groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
 ): Promise<BlockchainCollectionThirdPartyCollection | void> {
