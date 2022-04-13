@@ -37,6 +37,8 @@ const parsed = await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151
 - `decentraland:{protocol}:LAND:{x},{y}`: Resolves the ethereum asset of a LAND position.
 - `decentraland:{protocol}:LAND:{tokenId}`: Resolves the ethereum asset of a LAND by tokenId.
 - `decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}`: Resolves the ethereum asset of an item of a third party collection, currently only supported on polygon
+- `decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}`: Resolves the ethereum asset of a third party collection, currently only supported on polygon
+- `decentraland:{protocol}:collections-thirdparty:{thirdPartyName}`: Resolves the ethereum asset of all collections from a third party, currently only supported on polygon
 
 # DecentralandAssetIdentifier
 
