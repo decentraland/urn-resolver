@@ -115,13 +115,34 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 /**
  * @public
  */
- export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
+export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: "blockchain-collection-third-party"
 
   thirdPartyName: string
   collectionId: string 
   itemId: string
+}
+
+/**
+ * @public
+ */
+export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: "blockchain-collection-third-party-collection"
+
+  thirdPartyName: string
+  collectionId: string 
+}
+
+/**
+ * @public
+ */
+export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: "blockchain-collection-third-party-name"
+
+  thirdPartyName: string
 }
 
 /**
@@ -152,4 +173,6 @@ export type DecentralandAssetIdentifier =
   | BlockchainLandAsset
   | BlockchainCollectionV1
   | BlockchainCollectionV2
+  | BlockchainCollectionThirdPartyName
+  | BlockchainCollectionThirdPartyCollection
   | BlockchainCollectionThirdParty

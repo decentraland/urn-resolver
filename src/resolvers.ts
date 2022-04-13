@@ -10,7 +10,9 @@ import {
   DecentralandAssetIdentifier,
   BlockchainCollectionV1,
   BlockchainCollectionV2,
-  BlockchainCollectionThirdParty
+  BlockchainCollectionThirdParty,
+  BlockchainCollectionThirdPartyCollection,
+  BlockchainCollectionThirdPartyName
 } from "./types"
 
 /**
@@ -36,6 +38,10 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV2,
   // resolve LAND by position
   "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
+  // resolve third party names
+  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}": resolveThirdPartyCollectionName,
+  // resolve third party collections
+  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}": resolveThirdPartyCollectionOnlyCollection,
   // resolve third party assets
   "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollection
 }
@@ -281,6 +287,48 @@ export async function resolveThirdPartyCollection(
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
       itemId: groups.itemId,
+      contractAddress: contract 
+    }  
+  }
+}
+
+export async function resolveThirdPartyCollectionName(
+  uri: URL,
+  groups: Record<"protocol" | "thirdPartyName" , string>): Promise<BlockchainCollectionThirdPartyName | void> { 
+  if (!isValidProtocol(groups.protocol)) return
+
+  const contract = await getContract(groups.protocol, "TPR")
+
+  if (contract) {
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-third-party-name",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      thirdPartyName: groups.thirdPartyName,
+      contractAddress: contract 
+    }  
+  }
+}
+
+export async function resolveThirdPartyCollectionOnlyCollection(
+  uri: URL,
+  groups: Record<"protocol" | "thirdPartyName" | "collectionId", string>
+): Promise<BlockchainCollectionThirdPartyCollection | void> {
+  if (!isValidProtocol(groups.protocol)) return
+
+  const contract = await getContract(groups.protocol, "TPR")
+
+  if (contract) {
+    return {
+      namespace: "decentraland",
+      uri,
+      blockchain: "ethereum",
+      type: "blockchain-collection-third-party-collection",
+      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId,
       contractAddress: contract 
     }  
   }
