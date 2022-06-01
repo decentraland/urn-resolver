@@ -33,11 +33,14 @@ export = (
     "AdapterConverter": "0x2782eb28Dcb1eF4E7632273cd4e347e130Ce4646",
     "POIAllowlist": "0x5DC4a5C214f2161F0D5595a6dDd9352409aE3Ab4",
     "NAMEDenylist": "0x20c6f1e86eba703a14414a0cbc1b55c89dba7a0f",
-    "CollectionsV2Factory": "0x16d8bac5b67a6b782a9081377bec413bc5bb56a6"
+    "CollectionsV2Factory": "0x16d8bac5b67a6b782a9081377bec413bc5bb56a6",
+    "VestingImpl": "0xc243b243a2033348730420ea55239767802a19d0",
+    "VestingFactory": "0xcbfa36f59246ae43cb827a77f6ca955b93dd6042",
+    "BatchVesting": "0xedbea1174b892f88a836f61de395f5f155d4d2a9"
   },
   "mainnet": {
     "MANAToken": "0x0f5d2fb29fb7d3cfee444a200298f468908cc942",
-    "LANDRegistry": "0xa57e126b341b18c262ad25b86bb4f65b5e2ade45",
+    "LANDRegistry": "0x554bb6488ba955377359bed16b84ed0822679cdc",
     "LANDProxy": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
     "TerraformReserve": "0xcca95e580bbbd04851ebfb85f77fd46c9b91f11c",
     "ReturnVesting": "0x79c1fdaba012b9a094c495a86ce5c6199cf86368",
@@ -126,7 +129,10 @@ export = (
     "WinklevossCapital": "0xc82a864a94db3550bc71fcb4ce07228bcec21f1a",
     "DGAtariDillonFrancis": "0x51e0b1afe5da0c038fc93a3fc8e11cf7a238b40b",
     "DAOVotingPower": "0xcf9b305b4cd210079f5648f17ede69e666c0c8d4",
-    "TheGraphMultisig": "0x89FDdaB2F93417182CdCdb0B8B3322B93AB3A192"
+    "TheGraphMultisig": "0x89FDdaB2F93417182CdCdb0B8B3322B93AB3A192",
+    "VestingImpl": "0x42f32e19365d8045661a006408cc6d1064039fbf",
+    "VestingFactory": "0xe357273545c152f07afe2c38257b7b653fd3f6d0",
+    "BatchVesting": "0xc57185366bcda81cde363380e2099758712038d0"
   },
   "kovan": {
     "MANAToken": "0x230fc362413d9e862326c2c7084610a5a2fdf78a",
@@ -143,7 +149,9 @@ export = (
     "MANAMiniMeToken": "0xfb2712a1246f712b889692c7ce55fec25c06bc33",
     "LANDMiniMeToken": "0x576c4577aAd561EA79acbd49215a0cC1473BfCCA",
     "EstateMiniMeToken": "0x2b98C125733035cDE09d311F988845808EE270E6",
-    "DAOVotingPower": "0xe65835cd7c9311866ae5d260a1eb7b963899ca14"
+    "DAOVotingPower": "0xe65835cd7c9311866ae5d260a1eb7b963899ca14",
+    "VestingImpl": "0x8493bb6ae17e12c062b0eb1fe780cc0b2df16bb2",
+    "VestingFactory": "0x64c9f713a743458ab22ec49d88dd00621f528786"
   },
   "goerli": {
     "MANAToken": "0xe7fDae84ACaba2A5Ba817B6E6D8A2d415DBFEdbe",
@@ -159,11 +167,13 @@ export = (
     "CommitteeMultisig": "0xB08E3e7cc815213304d884C88cA476ebC50EaAB2",
     "CollectionImplementation": "0x006080C6061C4aF79b39Da0842a3a22A7b3f185e",
     "Rarities": "0x17113b44fdd661A156cc01b5031E3aCF72c32EB3",
+    "RaritiesWithOracle": "0xA9158E22F89Bb3F69c5600338895Cb5FB81e5090",
     "OldCommittee": "0x71d9350Ef44E1e451F00e447C0DfF2d1FB75510a",
     "Committee": "0xaeec95a8aa671a6d3fec56594827d7804964fa70",
     "CollectionManager ": "0x9D32AaC179153A991e832550d9F96441Ea27763A",
     "Forwarder": "0xBF6755A83C0dCDBB2933A96EA778E00b717d7004",
     "CollectionFactory": "0xB549B2442b2BD0a53795BC5cDcBFE0cAF7ACA9f8",
+    "CollectionFactoryV3": "0x3195e88aE10704b359764CB38e429D24f1c2f781",
     "CollectionStore": "0x214ffC0f0103735728dc66b61A22e4F163e275ae",
     "Marketplace": "0x02080031b45A3c67d338Dd4A2CC309D28756A160",
     "TPRAdmin": "0xF44063d872C88eEBab2EFC0318194e75a5218C1E",
@@ -173,7 +183,8 @@ export = (
     "RoyaltiesManager": "0x90958D4531258ca11D18396d4174a007edBc2b42",
     "MarketplaceV2": "0x480a0f4e360E8964e68858Dd231c2922f1df45Ef",
     "ERC721Bid": "0xb96697FA4A3361Ba35B774a42c58dACcaAd1B8E1",
-    "FoundationEOACreator1": "0x6ADf75e49bAC21abab9AdB9266d2cC6d90AbD31a"
+    "FoundationEOACreator1": "0x6ADf75e49bAC21abab9AdB9266d2cC6d90AbD31a",
+    "UpgradeableBeacon":"0xDDb3781Fff645325C8896AA1F067bAa381607ecc"
   },
   "mumbai": {
     "dAppsAdmin": "0xb919da06d5f81777B13Fc5CBd48635E19500Fbf5",
@@ -188,17 +199,19 @@ export = (
     "CollectionManager ": "0xe539E0AED3C1971560517D58277f8dd9aC296281",
     "Forwarder": "0x71e56Ad57eca3fAAe5077b7F9ea731a25785fF92",
     "CollectionFactory": "0x2A72Ec4241Ac4fBc915ae98aC5a5b01AdE721f4B",
+    "CollectionFactoryV3": "0xDDb3781Fff645325C8896AA1F067bAa381607ecc",
     "CollectionStore": "0x6ddF1b1924DAD850AdBc1C02026535464Be06B0c",
     "Marketplace": "0x2a09a000224f5dbe0E17214cA95CDe506DA7CB74",
     "TPRAdmin": "0xa1Ee2a8bDAEF0AB178D1088Cb3Ae0537c8eB4B8e",
     "TPRProxy": "0xEDf516F2D42A47F9cE0B145Fe0dbB76975379889",
     "TPR": "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
-    "ChainlinkOracle": "0x508d4AC10F057beACb7Cef6f112e79075045C3C9",
-    "DummyDataFeed": "0x5fd3ed3aA8d3cE750eAF6D7ba53d0356F8b2200B",
+    "ChainlinkOracle": "0x3195e88aE10704b359764CB38e429D24f1c2f781",
+    "DummyDataFeed": "0x25b6B4bac4aDB582a0ABd475439dA6730777Fbf7",
     "ThirdPartyTiers": "0xdC899B9c1Fa80292606C3cfbA88bbBf0935c2e48",
     "RoyaltiesManager": "0x68838E6068a3a925a78546E475dE73C75e4F2651",
     "MarketplaceV2": "0x5A467398dfa9d5C663a656423A2D055f538198A4",
-    "ERC721Bid": "0x78Dd92c8941dBC7BE54E2a9390D58aD28AD97afD"
+    "ERC721Bid": "0x78Dd92c8941dBC7BE54E2a9390D58aD28AD97afD",
+    "UpgradeableBeacon":"0x0c8ad1f6aadf89d2eb19f01a100a6143108fe2b0"
   }
 }
 ) as Record<string, Record<string, string>>

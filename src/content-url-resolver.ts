@@ -51,6 +51,12 @@ resolvers.push(function (asset, options) {
 })
 
 resolvers.push(function (asset, options) {
+  if (asset.type == "off-chain" && asset.registry == "dcl-cdn") {
+    return `https://cdn.decentraland.org/${asset.id}`
+  }
+})
+
+resolvers.push(function (asset, options) {
   if (asset.type == "off-chain" && asset.registry == "kernel-cdn") {
     return `https://cdn.decentraland.org/@dcl/kernel/${asset.id}`
   }

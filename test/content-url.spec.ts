@@ -22,6 +22,10 @@ describe("Content url generation", function () {
     "https://cdn.decentraland.org/@dcl/kernel/0.0.0-123123123-badaeafa"
   )
   test(
+    "urn:decentraland:off-chain:dcl-cdn:@dcl/kernel/0.0.0-123123123-badaeafa",
+    "https://cdn.decentraland.org/@dcl/kernel/0.0.0-123123123-badaeafa"
+  )
+  test(
     "urn:decentraland:off-chain:explorer-website-cdn:0.0.0-123123123-badaeafa",
     "https://cdn.decentraland.org/@dcl/explorer-website/0.0.0-123123123-badaeafa"
   )
