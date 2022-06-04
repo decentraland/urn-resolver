@@ -3,7 +3,7 @@
  */
 
 export type BaseBlockchainAsset = {
-  namespace: 'decentraland'
+  namespace: "decentraland"
   uri: URL
   /**
    * Ethereum for the time being.
@@ -41,8 +41,8 @@ export type BlockchainLandAsset = BlockchainAsset & {
 /**
  * @public
  */
-export type BlockchainCollectionV1Asset =  {
-  namespace: 'decentraland'
+export type BlockchainCollectionV1Asset = {
+  namespace: "decentraland"
   uri: URL
   /**
    * Ethereum for the time being.
@@ -68,8 +68,8 @@ export type BlockchainCollectionV1Asset =  {
 /**
  * @public
  */
- export type BlockchainCollectionV1 =  {
-  namespace: 'decentraland'
+export type BlockchainCollectionV1 = {
+  namespace: "decentraland"
   uri: URL
   /**
    * Ethereum for the time being.
@@ -92,7 +92,7 @@ export type BlockchainCollectionV1Asset =  {
  * @public
  */
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
-  namespace: 'decentraland'
+  namespace: "decentraland"
   type: "blockchain-collection-v2-asset"
   /**
    * Identifier of the asset (assetId)
@@ -103,8 +103,8 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 /**
  * @public
  */
- export type BlockchainCollectionV2 = BaseBlockchainAsset & {
-  namespace: 'decentraland'
+export type BlockchainCollectionV2 = BaseBlockchainAsset & {
+  namespace: "decentraland"
   type: "blockchain-collection-v2"
   /**
    * Contract address of the collection
@@ -116,11 +116,11 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
-  namespace: 'decentraland'
+  namespace: "decentraland"
   type: "blockchain-collection-third-party"
 
   thirdPartyName: string
-  collectionId: string 
+  collectionId: string
   itemId: string
 }
 
@@ -128,18 +128,18 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
-  namespace: 'decentraland'
+  namespace: "decentraland"
   type: "blockchain-collection-third-party-collection"
 
   thirdPartyName: string
-  collectionId: string 
+  collectionId: string
 }
 
 /**
  * @public
  */
 export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
-  namespace: 'decentraland'
+  namespace: "decentraland"
   type: "blockchain-collection-third-party-name"
 
   thirdPartyName: string
@@ -149,7 +149,7 @@ export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
  * @public
  */
 export type OffChainAsset = {
-  namespace: 'decentraland'
+  namespace: "decentraland"
   uri: URL
   type: "off-chain"
   /**
@@ -165,9 +165,27 @@ export type OffChainAsset = {
 /**
  * @public
  */
+export type EntityV3Asset = {
+  namespace: "decentraland"
+  uri: URL
+  type: "entity-v3"
+  /**
+   * IPFS CID of the entity
+   */
+  cid: string
+  /**
+   * Base url of the content server where we can locate the contents of this entity
+   */
+  baseUrl?: string
+}
+
+/**
+ * @public
+ */
 export type DecentralandAssetIdentifier =
   | BlockchainAsset
   | OffChainAsset
+  | EntityV3Asset
   | BlockchainCollectionV1Asset
   | BlockchainCollectionV2Asset
   | BlockchainLandAsset

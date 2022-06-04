@@ -51,6 +51,15 @@ resolvers.push(function (asset, options) {
 })
 
 resolvers.push(function (asset, options) {
+  if (asset.type == "entity-v3") {
+    let ipfsBaseUrl =
+      asset.baseUrl || `https://${defaultContentServerForNetwork("mainnet", options)}/content/contents/`
+    if (!ipfsBaseUrl.endsWith('/')) ipfsBaseUrl = ipfsBaseUrl + '/'
+    return new URL(ipfsBaseUrl + asset.cid).toString()
+  }
+})
+
+resolvers.push(function (asset, options) {
   if (asset.type == "off-chain" && asset.registry == "dcl-cdn") {
     return `https://cdn.decentraland.org/${asset.id}`
   }

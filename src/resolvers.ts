@@ -12,7 +12,8 @@ import {
   BlockchainCollectionV2,
   BlockchainCollectionThirdParty,
   BlockchainCollectionThirdPartyCollection,
-  BlockchainCollectionThirdPartyName
+  BlockchainCollectionThirdPartyName,
+  EntityV3Asset
 } from "./types"
 
 /**
@@ -22,6 +23,8 @@ import {
 export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // Resolver for static offchain assets (quests deployed to static servers, not content server)
   "decentraland:off-chain:{registry}:{name}": resolveOffchainAsset,
+  // Resolver for deployed entities. Deployed entities are used to specify portable experience identifiers that may be deployed anywhere in the web.
+  "decentraland:entity-v3:{cid}": resolveEntityV3,
   // collections v1 asset (by contract)
   "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
   // collections v1 asset (by name)
@@ -136,6 +139,25 @@ export async function resolveOffchainAsset(
     type: "off-chain",
     registry: groups.registry,
     id: groups.name,
+  }
+}
+
+export async function resolveEntityV3(
+  uri: URL,
+  groups: Record<"cid", string>
+): Promise<EntityV3Asset | void> {
+  let baseUrl: string | undefined
+
+  if (uri.searchParams.has('baseUrl')){
+    baseUrl = uri.searchParams.get('baseUrl')!
+  }
+
+  return {
+    namespace: "decentraland",
+    uri,
+    type: "entity-v3",
+    cid: groups.cid,
+    baseUrl
   }
 }
 
