@@ -6,7 +6,7 @@
 
 // @public (undocumented)
 export type BaseBlockchainAsset = {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     uri: URL;
     blockchain: "ethereum";
     network: string;
@@ -21,7 +21,7 @@ export type BlockchainAsset = BaseBlockchainAsset & {
 
 // @public (undocumented)
 export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     type: "blockchain-collection-third-party";
     thirdPartyName: string;
     collectionId: string;
@@ -30,7 +30,7 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
 
 // @public (undocumented)
 export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     type: "blockchain-collection-third-party-collection";
     thirdPartyName: string;
     collectionId: string;
@@ -38,14 +38,14 @@ export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
 
 // @public (undocumented)
 export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     type: "blockchain-collection-third-party-name";
     thirdPartyName: string;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV1 = {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     uri: URL;
     blockchain: "ethereum";
     network: string;
@@ -56,7 +56,7 @@ export type BlockchainCollectionV1 = {
 
 // @public (undocumented)
 export type BlockchainCollectionV1Asset = {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     uri: URL;
     blockchain: "ethereum";
     network: string;
@@ -68,14 +68,14 @@ export type BlockchainCollectionV1Asset = {
 
 // @public (undocumented)
 export type BlockchainCollectionV2 = BaseBlockchainAsset & {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     type: "blockchain-collection-v2";
     id: string;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     type: "blockchain-collection-v2-asset";
     id: string;
 };
@@ -87,7 +87,16 @@ export type BlockchainLandAsset = BlockchainAsset & {
 };
 
 // @public (undocumented)
-export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
+
+// @public (undocumented)
+export type EntityV3Asset = {
+    namespace: "decentraland";
+    uri: URL;
+    type: "entity-v3";
+    cid: string;
+    baseUrl?: string;
+};
 
 // @public (undocumented)
 export namespace LandUtils {
@@ -111,7 +120,7 @@ export namespace LandUtils {
 
 // @public (undocumented)
 export type OffChainAsset = {
-    namespace: 'decentraland';
+    namespace: "decentraland";
     uri: URL;
     type: "off-chain";
     registry: string;
