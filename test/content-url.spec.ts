@@ -22,15 +22,15 @@ describe("Content url generation", function () {
     "https://cdn.decentraland.org/@dcl/kernel/0.0.0-123123123-badaeafa"
   )
   test(
-    "urn:decentraland:entity-v3:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?baseUrl=https://ipfs.com/ipfs",
+    "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?baseUrl=https://ipfs.com/ipfs",
     "https://ipfs.com/ipfs/bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki"
   )
   test(
-    "urn:decentraland:entity-v3:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?baseUrl=https://ipfs.com/ipfs/",
+    "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?baseUrl=https://ipfs.com/ipfs/",
     "https://ipfs.com/ipfs/bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki"
   )
   test(
-    "urn:decentraland:entity-v3:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki",
+    "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki",
     "https://peer.decentraland.org/content/contents/bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki"
   )
   test(

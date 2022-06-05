@@ -51,7 +51,7 @@ resolvers.push(function (asset, options) {
 })
 
 resolvers.push(function (asset, options) {
-  if (asset.type == "entity-v3") {
+  if (asset.type == "entity") {
     let ipfsBaseUrl =
       asset.baseUrl || `https://${defaultContentServerForNetwork("mainnet", options)}/content/contents/`
     if (!ipfsBaseUrl.endsWith('/')) ipfsBaseUrl = ipfsBaseUrl + '/'

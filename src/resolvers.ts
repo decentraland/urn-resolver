@@ -24,7 +24,7 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // Resolver for static offchain assets (quests deployed to static servers, not content server)
   "decentraland:off-chain:{registry}:{name}": resolveOffchainAsset,
   // Resolver for deployed entities. Deployed entities are used to specify portable experience identifiers that may be deployed anywhere in the web.
-  "decentraland:entity-v3:{cid}": resolveEntityV3,
+  "decentraland:entity:{cid}": resolveEntityV3,
   // collections v1 asset (by contract)
   "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
   // collections v1 asset (by name)
@@ -155,7 +155,7 @@ export async function resolveEntityV3(
   return {
     namespace: "decentraland",
     uri,
-    type: "entity-v3",
+    type: "entity",
     cid: groups.cid,
     baseUrl
   }

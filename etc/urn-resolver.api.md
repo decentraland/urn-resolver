@@ -93,7 +93,7 @@ export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | Enti
 export type EntityV3Asset = {
     namespace: "decentraland";
     uri: URL;
-    type: "entity-v3";
+    type: "entity";
     cid: string;
     baseUrl?: string;
 };

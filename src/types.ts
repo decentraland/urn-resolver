@@ -168,7 +168,7 @@ export type OffChainAsset = {
 export type EntityV3Asset = {
   namespace: "decentraland"
   uri: URL
-  type: "entity-v3"
+  type: "entity"
   /**
    * IPFS CID of the entity
    */
