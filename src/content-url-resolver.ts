@@ -94,7 +94,8 @@ resolvers.push(function wearablesV1UrlResolver(asset, options) {
 })
 
 resolvers.push(async function landResolver(asset, options) {
-  if (asset.type == "blockchain-asset" && asset.contractAddress.toLowerCase() == (await getContract(asset.network, "LANDProxy"))?.toLowerCase()) {
+  if (asset.type == "blockchain-asset" &&
+      asset.contractAddress.toLowerCase() == (await getContract(asset.network, "LANDProxy"))?.toLowerCase()) {
     const host = defaultContentServerForNetwork(asset.network, options)
     const {x, y} = LandUtils.decodeTokenId(asset.id)
     return `https://${host}/content/entities/scene?pointer=${x},${y}`
