@@ -46,15 +46,15 @@ describe("Content url generation", function () {
     "https://peer.decentraland.org/content/entities/scene?pointer=13,-137"
   )
   test(
-    "urn:decentraland:ropsten:LAND:4763953136893138488487244504044754960247",
+    "urn:decentraland:goerli:LAND:4763953136893138488487244504044754960247",
     "https://peer.decentraland.zone/content/entities/scene?pointer=13,-137"
   )
   test(
-    "urn:decentraland:ropsten:LAND:4763953136893138488487244504044754960247",
+    "urn:decentraland:goerli:LAND:4763953136893138488487244504044754960247",
     "https://localhost:7666/content/entities/scene?pointer=13,-137",
     { contentServerHost: "localhost:7666" }
   )
-  test("urn:decentraland:ropsten:LAND:-10,-13", "https://peer.decentraland.zone/content/entities/scene?pointer=-10,-13")
+  test("urn:decentraland:goerli:LAND:-10,-13", "https://peer.decentraland.zone/content/entities/scene?pointer=-10,-13")
 
   test(
     "urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat",

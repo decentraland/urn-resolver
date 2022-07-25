@@ -94,19 +94,18 @@ resolvers.push(function wearablesV1UrlResolver(asset, options) {
 })
 
 resolvers.push(async function landResolver(asset, options) {
-  if (
-    asset.type == "blockchain-asset" &&
-    asset.contractAddress.toLowerCase() == (await getContract(asset.network, "LANDProxy"))
-  ) {
-    const host = defaultContentServerForNetwork(asset.network, options)
-    const { x, y } = LandUtils.decodeTokenId(asset.id)
-    return `https://${host}/content/entities/scene?pointer=${x},${y}`
+  if (asset.type == "blockchain-asset") {
+    if (asset.contractAddress.toLowerCase() == (await getContract(asset.network, "LANDProxy"))?.toLowerCase()) {
+      const host = defaultContentServerForNetwork(asset.network, options)
+      const {x, y} = LandUtils.decodeTokenId(asset.id)
+      return `https://${host}/content/entities/scene?pointer=${x},${y}`
+    }
   }
 })
 
 function defaultContentServerForNetwork(network: string, options: ResolversOptions) {
   if (options.contentServerHost) return options.contentServerHost
-  if (network == "ropsten") {
+  if (network == "goerli") {
     return `peer.decentraland.zone`
   }
   return `peer.decentraland.org`
@@ -114,7 +113,7 @@ function defaultContentServerForNetwork(network: string, options: ResolversOptio
 
 function defaultWearablesServerForNetwork(network: string, options: ResolversOptions) {
   if (options.wearablesServerHost) return options.wearablesServerHost
-  if (network == "ropsten") {
+  if (network == "goerli") {
     return `wearable-api.decentraland.zone`
   }
   return `wearable-api.decentraland.org`
