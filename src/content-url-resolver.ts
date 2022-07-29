@@ -107,6 +107,9 @@ resolvers.push(async function landResolver(asset, options) {
 function defaultContentServerForNetwork(network: string, options: ResolversOptions) {
   if (options.contentServerHost) return options.contentServerHost
   if (network == "goerli") {
+    return `peer-ap1.decentraland.zone`
+  }
+  if (network == "ropsten") {
     return `peer.decentraland.zone`
   }
   return `peer.decentraland.org`
