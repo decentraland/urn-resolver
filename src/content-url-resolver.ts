@@ -120,5 +120,8 @@ function defaultWearablesServerForNetwork(network: string, options: ResolversOpt
   if (network == "goerli") {
     return `wearable-api.decentraland.zone`
   }
+  if (network == "ropsten") {
+    return `wearable-api.decentraland.zone`
+  }
   return `wearable-api.decentraland.org`
 }
