@@ -1,5 +1,5 @@
 import expect from "expect"
-import { LandUtils } from "../src/land-utils"
+import { LandUtils } from "../src"
 
 function testValidPositionParsingAndGeneration(tokenId: string, x: number, y: number) {
   it(tokenId + " (" + x + ", " + y + ") decode", async () => {

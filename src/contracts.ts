@@ -157,7 +157,24 @@ export = (
     "MANAToken": "0xe7fDae84ACaba2A5Ba817B6E6D8A2d415DBFEdbe",
     "ERC20Predicate": "0xdD6596F2029e6233DEFfaCa316e6A95217d4Dc34",
     "RootChainManagerProxy": "0xbbd7cbfa79faee899eaf900f13c9065bf03b1a74",
-    "RootChainProxy": "0x2890ba17efe978480615e330ecb65333b880928e"
+    "RootChainProxy": "0x2890ba17efe978480615e330ecb65333b880928e",
+    "LANDRegistry": "0x0cfF059845c6Abee7De396d00091016ad72FD324",
+    "LANDProxy": "0x25b6B4bac4aDB582a0ABd475439dA6730777Fbf7",
+    "EstateRegistry": "0x5309aE874FC4eB21adCd63f8b6C3f766Cc3B1849",
+    "EstateProxy": "0xC9A46712E6913c24d15b46fF12221a79c4e251DC",
+    "RentalsProxyAdmin": "0x6ad9fb3f07a6013e6db2327e27ad0a38e858d88d",
+    "RentalsProxy": "0xbb2a03bf5f525734cb0536be4be61ba788d7ee01",
+    "RentalsImplementation": "0xe70db6319e9cee3f604909bdade58d1f5c1cf702",
+    "MarketplaceProxy": "0x5d01fbD3E22892be40F69bdAE7Ad921C8cdA2085",
+    "MarketplaceImplementation": "0x09B389B3523870798f46555fef26B4476A973E6E",
+    "MarketplaceLegacyNFT": "0x0fFc7E6D72eE2F287B877533454210621b1B7822",
+    "DCLRegistrar": "0x6b8da2752827cf926215b43bb8E46Fd7b9dDac35",
+    "DCLController": "0x6fF05B6271BBEd8F16a46e6073d27aD94224E0Ac",
+    "ERC721Bid": "0xd7dC1C183B8fFaED6b7f30fFC616Ff81B66812e5",
+    "ExclusiveMasksCollection": "0x1f0880E0b4514DC58e68B9BE91693bFA8C067ac1",
+    "NAMEDenylist": "0x71c84760df0537f7db286274817462dc2e6c1366",
+    "Catalyst": "0x380e46851c47b73b6aa9bea50cf3b50e2cf637cf",
+    "POIAllowlist": "0xb8c7a7afd42675ab61f0a3732f8d0491825a933b"
   },
   "matic": {
     "MetaTxForwarder": "0x0baBda04f62C549A09EF3313Fe187f29c099FF3C",
@@ -179,12 +196,12 @@ export = (
     "TPRAdmin": "0xF44063d872C88eEBab2EFC0318194e75a5218C1E",
     "TPRProxy": "0x1C436C1EFb4608dFfDC8bace99d2B03c314f3348",
     "TPR": "0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e",
-    "ChainlinkOracle": "0xe18B1361d41afC44658216F3Dc27e48c2336e3c2",
+    "ChainlinkOracle": "0x1a91dd8d4eeddc2fac31f36818604b7093dc95e0",
     "RoyaltiesManager": "0x90958D4531258ca11D18396d4174a007edBc2b42",
     "MarketplaceV2": "0x480a0f4e360E8964e68858Dd231c2922f1df45Ef",
     "ERC721Bid": "0xb96697FA4A3361Ba35B774a42c58dACcaAd1B8E1",
     "FoundationEOACreator1": "0x6ADf75e49bAC21abab9AdB9266d2cC6d90AbD31a",
-    "UpgradeableBeacon":"0xDDb3781Fff645325C8896AA1F067bAa381607ecc"
+    "UpgradeableBeacon": "0xDDb3781Fff645325C8896AA1F067bAa381607ecc"
   },
   "mumbai": {
     "dAppsAdmin": "0xb919da06d5f81777B13Fc5CBd48635E19500Fbf5",
@@ -205,13 +222,13 @@ export = (
     "TPRAdmin": "0xa1Ee2a8bDAEF0AB178D1088Cb3Ae0537c8eB4B8e",
     "TPRProxy": "0xEDf516F2D42A47F9cE0B145Fe0dbB76975379889",
     "TPR": "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
-    "ChainlinkOracle": "0x3195e88aE10704b359764CB38e429D24f1c2f781",
-    "DummyDataFeed": "0x25b6B4bac4aDB582a0ABd475439dA6730777Fbf7",
+    "ChainlinkOracle": "0x05b0a8195aa4c21944d68f71a263f836670e3605",
+    "DummyDataFeed": "0x5521ade5494225e0936c74f97e474107d73c406e",
     "ThirdPartyTiers": "0xdC899B9c1Fa80292606C3cfbA88bbBf0935c2e48",
     "RoyaltiesManager": "0x68838E6068a3a925a78546E475dE73C75e4F2651",
     "MarketplaceV2": "0x5A467398dfa9d5C663a656423A2D055f538198A4",
     "ERC721Bid": "0x78Dd92c8941dBC7BE54E2a9390D58aD28AD97afD",
-    "UpgradeableBeacon":"0x0c8ad1f6aadf89d2eb19f01a100a6143108fe2b0"
+    "UpgradeableBeacon": "0x0c8ad1f6aadf89d2eb19f01a100a6143108fe2b0"
   }
 }
 ) as Record<string, Record<string, string>>
