@@ -107,9 +107,6 @@ resolvers.push(async function landResolver(asset, options) {
 function defaultContentServerForNetwork(network: string, options: ResolversOptions) {
   if (options.contentServerHost) return options.contentServerHost
   if (network == "goerli") {
-    return `peer-ap1.decentraland.zone`
-  }
-  if (network == "ropsten") {
     return `peer.decentraland.zone`
   }
   return `peer.decentraland.org`
@@ -118,9 +115,6 @@ function defaultContentServerForNetwork(network: string, options: ResolversOptio
 function defaultWearablesServerForNetwork(network: string, options: ResolversOptions) {
   if (options.wearablesServerHost) return options.wearablesServerHost
   if (network == "goerli") {
-    return `wearable-api.decentraland.zone`
-  }
-  if (network == "ropsten") {
     return `wearable-api.decentraland.zone`
   }
   return `wearable-api.decentraland.org`
