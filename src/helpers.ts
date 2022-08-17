@@ -9,7 +9,7 @@ const collections: Collection[] = []
 
 const lowerCasedContracts: Record<string, Record<string, string>> = {}
 
-const validProtocols = new Set(["ethereum", "ropsten", "kovan", "rinkeby", "goerli", "matic", "mumbai"])
+const validProtocols = new Set(["ethereum", "kovan", "rinkeby", "goerli", "matic", "mumbai"])
 
 for (let network in contracts) {
   lowerCasedContracts[network] = Object.create(null)
