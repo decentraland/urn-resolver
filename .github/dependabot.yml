@@ -6,6 +6,11 @@ updates:
     interval: daily
     time: "10:00"
   open-pull-requests-limit: 10
+  allow:
+    - dependency-name: "@dcl/*"
+    - dependency-name: "@catalyst/*"
+    - dependency-name: "@well-known-components/*"
+    - dependency-name: "dcl-*"
   commit-message:
     prefix: "chore: "
   ignore:
