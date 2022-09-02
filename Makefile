@@ -23,10 +23,6 @@ update-contracts:
 		--data '{ "query": "{collections {id,name,symbol,isApproved,isCompleted}}"}' \
 		-s https://api.thegraph.com/subgraphs/name/decentraland/collections | jq '.data.collections' >> src/collections-v1.ts
 
-
-
-
-
 build: update-contracts
 	@echo 'Compiling TypeScript...'
 	@./node_modules/.bin/tsc -p tsconfig.json

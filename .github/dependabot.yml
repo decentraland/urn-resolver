@@ -11,6 +11,8 @@ updates:
     - dependency-name: "@catalyst/*"
     - dependency-name: "@well-known-components/*"
     - dependency-name: "dcl-*"
+  commit-message:
+    prefix: "chore: "
   ignore:
   - dependency-name: "@microsoft/api-extractor"
     versions:

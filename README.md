@@ -9,18 +9,18 @@ npm i @dcl/urn-resolver
 ```typescript
 import { parseUrn } from '@dcl/urn-resolver'
 
-const parsed = await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151231111")
+const parsed = await parseUrn("urn:decentraland:goerli:LAND:-10,-13?atBlock=151231111")
 => {
   uri: URL {
-    href: 'urn:decentraland:ropsten:LAND:-10,-13?atBlock=151231111',
+    href: 'urn:decentraland:goerli:LAND:-10,-13?atBlock=151231111',
     protocol: 'urn:',
-    pathname: 'decentraland:ropsten:LAND:-10,-13',
+    pathname: 'decentraland:goerli:LAND:-10,-13',
     search: '?atBlock=151231111',
     searchParams: URLSearchParams { 'atBlock' => '151231111' },
   },
   blockchain: 'ethereum',
   type: 'blockchain-asset',
-  network: 'ropsten',
+  network: 'goerli',
   contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
   id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
   x: -10,
@@ -37,6 +37,8 @@ const parsed = await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151
 - `decentraland:{protocol}:LAND:{x},{y}`: Resolves the ethereum asset of a LAND position.
 - `decentraland:{protocol}:LAND:{tokenId}`: Resolves the ethereum asset of a LAND by tokenId.
 - `decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}`: Resolves the ethereum asset of an item of a third party collection, currently only supported on polygon
+- `decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}`: Resolves the ethereum asset of a third party collection, currently only supported on polygon
+- `decentraland:{protocol}:collections-thirdparty:{thirdPartyName}`: Resolves the ethereum asset of all collections from a third party, currently only supported on polygon
 
 # DecentralandAssetIdentifier
 

@@ -1,5 +1,5 @@
 import expect from "expect"
-import { DecentralandAssetIdentifier, parseUrn } from "../src/index"
+import { DecentralandAssetIdentifier, parseUrn } from "../src"
 import { resolveEthereumAsset } from "../src/resolvers"
 
 let counter = 0
@@ -16,7 +16,7 @@ describe("Basic use cases", function () {
   })
 
   it("Print LAND resolution for readme", async () => {
-    console.log(await parseUrn("urn:decentraland:ropsten:LAND:-10,-13?atBlock=151231111"))
+    console.log(await parseUrn("urn:decentraland:goerli:LAND:-10,-13?atBlock=151231111"))
   })
 
   it("test land", async () => {
@@ -36,9 +36,9 @@ describe("Basic use cases", function () {
   })
 
   it("test land (query string)", async () => {
-    const t = await parseUrn("urn:decentraland:ropsten:LAND:0x1?atBlock=151231111#4")
+    const t = await parseUrn("urn:decentraland:goerli:LAND:0x1?atBlock=151231111#4")
     expect(t).toHaveProperty("uri")
-    expect(t.uri.toString()).toEqual("urn:decentraland:ropsten:LAND:0x1?atBlock=151231111#4")
+    expect(t.uri.toString()).toEqual("urn:decentraland:goerli:LAND:0x1?atBlock=151231111#4")
   })
 
   // it("test land (address)", async () => {
@@ -50,11 +50,11 @@ describe("Basic use cases", function () {
   //   })
   // })
 
-  it("test land (ropsten)", async () => {
-    expect(await parseUrn("urn:decentraland:ropsten:LAND:0x1")).toMatchObject({
-      contractAddress: "0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b",
+  it("test land (goerli)", async () => {
+    expect(await parseUrn("urn:decentraland:goerli:LAND:0x1")).toMatchObject({
+      contractAddress: "0x25b6B4bac4aDB582a0ABd475439dA6730777Fbf7",
       blockchain: "ethereum",
-      network: "ropsten",
+      network: "goerli",
       id: "0x1",
     })
   })
@@ -229,13 +229,30 @@ describe("Basic use cases", function () {
   })
 
   testValidUrnToInclude("urn:decentraland:mumbai:collections-thirdparty:aThirdParty:summerCollection:hat", {
-    contractAddress: "0xC6349360CF0143Bf54FDC376060532C044883b8C",
+    contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
     collectionId: "summerCollection",
     itemId: "hat",
     blockchain: "ethereum",
     thirdPartyName: "aThirdParty",
     network: "mumbai",
     type: "blockchain-collection-third-party"
+  })
+
+  testValidUrnToInclude("urn:decentraland:mumbai:collections-thirdparty:aThirdParty:winterCollection", {
+    contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
+    collectionId: "winterCollection",
+    blockchain: "ethereum",
+    thirdPartyName: "aThirdParty",
+    network: "mumbai",
+    type: "blockchain-collection-third-party-collection"
+  })
+
+  testValidUrnToInclude("urn:decentraland:mumbai:collections-thirdparty:aThirdParty", {
+    contractAddress: "0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2",
+    blockchain: "ethereum",
+    thirdPartyName: "aThirdParty",
+    network: "mumbai",
+    type: "blockchain-collection-third-party-name"
   })
 
   // TODO: Add this when matic has the contract for TPW too
