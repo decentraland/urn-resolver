@@ -78,6 +78,12 @@ resolvers.push(function (asset, options) {
 })
 
 resolvers.push(function (asset, options) {
+  if (asset.type == "off-chain" && asset.registry == "explorer-cdn") {
+    return `https://cdn.decentraland.org/@dcl/explorer/${asset.id}`
+  }
+})
+
+resolvers.push(function (asset, options) {
   if (asset.type == "off-chain" && asset.registry == "base-avatars") {
     const host = defaultWearablesServerForNetwork("ethereum", options)
     return `https://${host}/v2/collections/${asset.registry}/wearables/${asset.id}`
