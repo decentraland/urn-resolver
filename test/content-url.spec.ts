@@ -1,8 +1,10 @@
 import expect from "expect"
+import { RFC2141 } from "urn-lib"
 import { ResolversOptions, resolveUrlFromUrn } from "../src"
 
 function test(urn: string, contentUrl: string | null, options?: ResolversOptions) {
   it(urn, async () => {
+    expect(RFC2141.parse(urn)).toBeTruthy()
     expect(await resolveUrlFromUrn(urn, options)).toEqual(contentUrl)
   })
 }
@@ -20,6 +22,19 @@ describe("Content url generation", function () {
   test(
     "urn:decentraland:off-chain:kernel-cdn:0.0.0-123123123-badaeafa",
     "https://cdn.decentraland.org/@dcl/kernel/0.0.0-123123123-badaeafa"
+  )
+  test(
+    "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?baseUrl=https://ipfs.com/ipfs",
+    "https://ipfs.com/ipfs/bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki"
+  )
+  // ADR-207
+  test(
+    "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?=dcl&baseUrl=https://ipfs.com/ipfs",
+    "https://ipfs.com/ipfs/bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki"
+  )
+  test(
+    "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?=&baseUrl=https://ipfs.com/ipfs",
+    "https://ipfs.com/ipfs/bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki"
   )
   test(
     "urn:decentraland:entity:bafkreickvfk6aungjshpuuwyhkopd4hlzsyqewhx4jru3gpp46whek7dki?baseUrl=https://ipfs.com/ipfs",

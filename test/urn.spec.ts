@@ -1,4 +1,5 @@
 import expect from "expect"
+import {RFC2141} from "urn-lib"
 import { DecentralandAssetIdentifier, parseUrn } from "../src"
 import { resolveEthereumAsset } from "../src/resolvers"
 
@@ -7,6 +8,7 @@ let counter = 0
 function testValidUrnToInclude(urn: string, toInclude: Partial<DecentralandAssetIdentifier>) {
   it(urn + " (" + ++counter + ")", async () => {
     expect(await parseUrn(urn)).toMatchObject(toInclude)
+    expect(RFC2141.parse(urn)).toBeTruthy()
   })
 }
 
