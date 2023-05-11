@@ -48,7 +48,7 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // resolve third party assets
   "decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollection,
   // resolve 721 assets
-  "erc721:{network}:{contract(0x[a-fA-F0-9]+)}:{tokenId}": resolveErc721Asset,
+  "decentraland:{network}:erc721:{contract(0x[a-fA-F0-9]+)}:{tokenId}": resolveErc721Asset,
 }
 
 export const internalResolver = createParser(resolvers)

@@ -37,35 +37,6 @@ describe("Basic use cases", function () {
     })
   })
 
-  it("test erc721", async () => {
-    expect(
-      await resolveEthereumAsset(new URL("urn:erc721:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1"), {
-        contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-        network: "ethereum",
-        tokenId: "0x1",
-      })
-    ).toMatchObject({
-      contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-      network: "mainnet",
-      blockchain: "ethereum",
-      type: "blockchain-asset",
-      id: "0x1",
-    })
-    expect(
-      await resolveEthereumAsset(new URL("urn:erc721:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"), {
-        contract: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-        network: "ethereum",
-        tokenId: "111111111111111111",
-      })
-    ).toMatchObject({
-      contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-      network: "mainnet",
-      blockchain: "ethereum",
-      type: "blockchain-asset",
-      id: "111111111111111111",
-    })
-  })
-
   it("test land (query string)", async () => {
     const t = await parseUrn("urn:decentraland:goerli:LAND:0x1?atBlock=151231111#4")
     expect(t).toHaveProperty("uri")
@@ -346,7 +317,7 @@ describe("Basic use cases", function () {
   })
 
   it("721 parsing", async () => {
-    expect(await parseUrn("urn:erc721:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+    expect(await parseUrn("urn:decentraland:ethereum:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
       {
         "blockchain": "ethereum",
         "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
@@ -354,10 +325,10 @@ describe("Basic use cases", function () {
         "namespace": "decentraland",
         "network": "mainnet",
         "type": "blockchain-asset",
-        "uri": new URL("urn:erc721:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+        "uri": new URL("urn:decentraland:ethereum:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
       }
     )
-    expect(await parseUrn("urn:erc721:goerli:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+    expect(await parseUrn("urn:decentraland:goerli:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
       {
         "blockchain": "ethereum",
         "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
@@ -365,10 +336,10 @@ describe("Basic use cases", function () {
         "namespace": "decentraland",
         "network": "goerli",
         "type": "blockchain-asset",
-        "uri": new URL("urn:erc721:goerli:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+        "uri": new URL("urn:decentraland:goerli:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
       }
     )
-    expect(await parseUrn("urn:erc721:matic:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+    expect(await parseUrn("urn:decentraland:matic:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
       {
         "blockchain": "ethereum",
         "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
@@ -376,7 +347,7 @@ describe("Basic use cases", function () {
         "namespace": "decentraland",
         "network": "matic",
         "type": "blockchain-asset",
-        "uri": new URL("urn:erc721:matic:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+        "uri": new URL("urn:decentraland:matic:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
       }
     )
   })
