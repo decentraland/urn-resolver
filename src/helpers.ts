@@ -9,13 +9,13 @@ const collections: Collection[] = []
 
 const lowerCasedContracts: Record<string, Record<string, string>> = {}
 
-const validProtocols = new Set(["ethereum", "kovan", "rinkeby", "goerli", "matic", "mumbai"])
+const validNetworks = new Set(["ethereum", "kovan", "rinkeby", "goerli", "matic", "mumbai"])
 
 for (let network in contracts) {
   lowerCasedContracts[network] = Object.create(null)
   const c = lowerCasedContracts[network]
   if (network.toLowerCase() != "mainnet") {
-    validProtocols.add(network.toLowerCase())
+    validNetworks.add(network.toLowerCase())
   }
   Object.keys(contracts[network]).forEach((key) => {
     c[key.toLowerCase()] = contracts[network][key]
@@ -58,8 +58,8 @@ export async function getContract(network: string, contractNameOrAddress: string
   return mapContract(network.toLowerCase(), contractNameOrAddress.toLowerCase())
 }
 
-export function isValidProtocol(protocol: string): boolean {
-  return validProtocols.has(protocol.toLowerCase())
+export function isValidNetwork(protocol: string): boolean {
+  return validNetworks.has(protocol.toLowerCase())
 }
 
 export type ParserFunction = (original: URL, captures: RegExpExecArray) => Promise<{ url: URL } | undefined>

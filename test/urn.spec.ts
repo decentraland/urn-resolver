@@ -1,5 +1,5 @@
 import expect from "expect"
-import {RFC2141} from "urn-lib"
+import { RFC2141 } from "urn-lib"
 import { DecentralandAssetIdentifier, parseUrn } from "../src"
 import { resolveEthereumAsset } from "../src/resolvers"
 
@@ -25,7 +25,7 @@ describe("Basic use cases", function () {
     expect(
       await resolveEthereumAsset(new URL("urn:decentraland:ethereum:LANDPROXY:0x1"), {
         contract: "LANDPROXY",
-        protocol: "ethereum",
+        network: "ethereum",
         tokenId: "0x1",
       })
     ).toMatchObject({
@@ -314,6 +314,42 @@ describe("Basic use cases", function () {
     expect(await parseUrn("dcl://base-avatars/f_eyes_00")).toBeTruthy()
     expect(await parseUrn("dcl://base-avatars/f_eyebrows_00")).toBeTruthy()
     expect(await parseUrn("dcl://base-avatars/f_mouth_00")).toBeTruthy()
+  })
+
+  it("721 parsing", async () => {
+    expect(await parseUrn("urn:decentraland:ethereum:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+      {
+        "blockchain": "ethereum",
+        "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+        "id": "111111111111111111",
+        "namespace": "decentraland",
+        "network": "mainnet",
+        "type": "blockchain-asset",
+        "uri": new URL("urn:decentraland:ethereum:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+      }
+    )
+    expect(await parseUrn("urn:decentraland:goerli:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+      {
+        "blockchain": "ethereum",
+        "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+        "id": "111111111111111111",
+        "namespace": "decentraland",
+        "network": "goerli",
+        "type": "blockchain-asset",
+        "uri": new URL("urn:decentraland:goerli:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+      }
+    )
+    expect(await parseUrn("urn:decentraland:matic:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+      {
+        "blockchain": "ethereum",
+        "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+        "id": "111111111111111111",
+        "namespace": "decentraland",
+        "network": "matic",
+        "type": "blockchain-asset",
+        "uri": new URL("urn:decentraland:matic:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+      }
+    )
   })
 
   testValidUrnToInclude(

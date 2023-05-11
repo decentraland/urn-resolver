@@ -1,5 +1,5 @@
 
-import { createParser, getCollection, getContract, isValidProtocol, RouteMap } from "./helpers"
+import { createParser, getCollection, getContract, isValidNetwork, RouteMap } from "./helpers"
 import { LandUtils } from "./land-utils"
 import {
   BlockchainAsset,
@@ -26,38 +26,40 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // Resolver for deployed entities. Deployed entities are used to specify portable experience identifiers that may be deployed anywhere in the web.
   "decentraland:entity:{cid}": resolveEntityV3,
   // collections v1 asset (by contract)
-  "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
+  "decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}": resolveCollectionV1Asset,
   // collections v1 asset (by name)
-  "decentraland:{protocol}:collections-v1:{collectionName}:{name}": resolveCollectionV1AssetByCollectionName,
+  "decentraland:{network}:collections-v1:{collectionName}:{name}": resolveCollectionV1AssetByCollectionName,
   // collections v2 asset (hex)
-  "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}": resolveCollectionV2Asset,
+  "decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}": resolveCollectionV2Asset,
   // collections v2 asset (id)
-  "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}": resolveCollectionV2Asset,
+  "decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}": resolveCollectionV2Asset,
   // collections v1 (by contract)
-  "decentraland:{protocol}:collections-v1:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV1,
+  "decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV1,
   // collections v1 (by name)
-  "decentraland:{protocol}:collections-v1:{collectionName}": resolveCollectionV1ByCollectionName,
+  "decentraland:{network}:collections-v1:{collectionName}": resolveCollectionV1ByCollectionName,
   // collections v2
-  "decentraland:{protocol}:collections-v2:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV2,
+  "decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}": resolveCollectionV2,
   // resolve LAND by position
-  "decentraland:{protocol}:LAND:{position}": resolveLandAsset,
+  "decentraland:{network}:LAND:{position}": resolveLandAsset,
   // resolve third party names
-  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}": resolveThirdPartyCollectionName,
+  "decentraland:{network}:collections-thirdparty:{thirdPartyName}": resolveThirdPartyCollectionName,
   // resolve third party collections
-  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}": resolveThirdPartyCollectionOnlyCollection,
+  "decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}": resolveThirdPartyCollectionOnlyCollection,
   // resolve third party assets
-  "decentraland:{protocol}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollection
+  "decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}": resolveThirdPartyCollection,
+  // resolve 721 assets
+  "decentraland:{network}:erc721:{contract(0x[a-fA-F0-9]+)}:{tokenId}": resolveErc721Asset,
 }
 
 export const internalResolver = createParser(resolvers)
 
 export async function resolveLandAsset(
   uri: URL,
-  groups: Record<"protocol" | "position", string>
+  groups: Record<"network" | "position", string>
 ): Promise<BlockchainLandAsset | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, "LandProxy")
+  const contract = await getContract(groups.network, "LandProxy")
 
   let { x, y } = LandUtils.parseParcelPosition(groups.position)
 
@@ -74,7 +76,7 @@ export async function resolveLandAsset(
   if (contract) {
     const r = await resolveEthereumAsset(uri, {
       contract,
-      protocol: groups.protocol.toLowerCase(),
+      network: groups.network.toLowerCase(),
       tokenId: "0x" + tokenId.toString(16),
     })
 
@@ -85,6 +87,24 @@ export async function resolveLandAsset(
         y,
       }
   }
+}
+
+export async function resolveErc721Asset(
+  uri: URL,
+  groups: Record<"network" | "contract" | "tokenId", string>
+): Promise<BlockchainAsset | void> {
+  if (!isValidNetwork(groups.network)) return
+
+  const r = await resolveEthereumAsset(uri, {
+    contract: groups.contract,
+    network: groups.network.toLowerCase(),
+    tokenId: groups.tokenId,
+  })
+
+  if (r)
+    return {
+      ...r,
+    }
 }
 
 export async function resolveLegacyDclUrl(uri: URL) {
@@ -111,11 +131,11 @@ export async function resolveLegacyDclUrl(uri: URL) {
 
 export async function resolveEthereumAsset(
   uri: URL,
-  groups: Record<"protocol" | "contract" | "tokenId", string>
+  groups: Record<"network" | "contract" | "tokenId", string>
 ): Promise<BlockchainAsset | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, groups.contract)
+  const contract = await getContract(groups.network, groups.contract)
 
   if (contract)
     return {
@@ -123,7 +143,7 @@ export async function resolveEthereumAsset(
       uri,
       blockchain: "ethereum",
       type: "blockchain-asset",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       contractAddress: contract,
       id: groups.tokenId,
     }
@@ -148,7 +168,7 @@ export async function resolveEntityV3(
 ): Promise<EntityV3Asset | void> {
   let baseUrl: string | undefined
 
-  if (uri.searchParams.has('baseUrl')){
+  if (uri.searchParams.has('baseUrl')) {
     baseUrl = uri.searchParams.get('baseUrl')!
   }
 
@@ -163,10 +183,10 @@ export async function resolveEntityV3(
 
 export async function resolveCollectionV1AssetByCollectionName(
   uri: URL,
-  groups: Record<"protocol" | "collectionName" | "name", string>
+  groups: Record<"network" | "collectionName" | "name", string>
 ): Promise<BlockchainCollectionV1Asset | void> {
   // this only works in mainnet
-  if (groups.protocol != "ethereum") return
+  if (groups.network != "ethereum") return
 
   const collection = await getCollection(groups.collectionName)
 
@@ -184,11 +204,11 @@ export async function resolveCollectionV1AssetByCollectionName(
 
 export async function resolveCollectionV1Asset(
   uri: URL,
-  groups: Record<"protocol" | "contract" | "name", string>
+  groups: Record<"network" | "contract" | "name", string>
 ): Promise<BlockchainCollectionV1Asset | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, groups.contract)
+  const contract = await getContract(groups.network, groups.contract)
 
   if (contract) {
     const collection = await getCollection(contract)
@@ -198,7 +218,7 @@ export async function resolveCollectionV1Asset(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-v1-asset",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       contractAddress: contract,
       id: groups.name,
       collectionName: collection ? collection.collectionId : null,
@@ -208,11 +228,11 @@ export async function resolveCollectionV1Asset(
 
 export async function resolveCollectionV2Asset(
   uri: URL,
-  groups: Record<"protocol" | "contract" | "id", string>
+  groups: Record<"network" | "contract" | "id", string>
 ): Promise<BlockchainCollectionV2Asset | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, groups.contract)
+  const contract = await getContract(groups.network, groups.contract)
 
   if (contract)
     return {
@@ -220,7 +240,7 @@ export async function resolveCollectionV2Asset(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-v2-asset",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       contractAddress: contract,
       id: groups.id,
     }
@@ -228,11 +248,11 @@ export async function resolveCollectionV2Asset(
 
 export async function resolveCollectionV1(
   uri: URL,
-  groups: Record<"protocol" | "contract", string>
+  groups: Record<"network" | "contract", string>
 ): Promise<BlockchainCollectionV1 | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, groups.contract)
+  const contract = await getContract(groups.network, groups.contract)
 
   if (contract) {
     const collection = await getCollection(contract)
@@ -242,7 +262,7 @@ export async function resolveCollectionV1(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-v1",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       id: contract,
       collectionName: collection ? collection.collectionId : null
     }
@@ -251,10 +271,10 @@ export async function resolveCollectionV1(
 
 export async function resolveCollectionV1ByCollectionName(
   uri: URL,
-  groups: Record<"protocol" | "collectionName", string>
+  groups: Record<"network" | "collectionName", string>
 ): Promise<BlockchainCollectionV1 | void> {
   // this only works in mainnet
-  if (groups.protocol != "ethereum") return
+  if (groups.network != "ethereum") return
 
   const collection = await getCollection(groups.collectionName)
 
@@ -273,11 +293,11 @@ export async function resolveCollectionV1ByCollectionName(
 
 export async function resolveCollectionV2(
   uri: URL,
-  groups: Record<"protocol" | "contract", string>
+  groups: Record<"network" | "contract", string>
 ): Promise<BlockchainCollectionV2 | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, groups.contract)
+  const contract = await getContract(groups.network, groups.contract)
 
   if (contract)
     return {
@@ -285,7 +305,7 @@ export async function resolveCollectionV2(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-v2",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       contractAddress: contract,
       id: contract,
     }
@@ -293,11 +313,11 @@ export async function resolveCollectionV2(
 
 export async function resolveThirdPartyCollection(
   uri: URL,
-  groups: Record<"protocol" | "thirdPartyName" | "collectionId" | "itemId", string>
+  groups: Record<"network" | "thirdPartyName" | "collectionId" | "itemId", string>
 ): Promise<BlockchainCollectionThirdParty | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, "TPR")
+  const contract = await getContract(groups.network, "TPR")
 
   if (contract) {
     return {
@@ -305,21 +325,21 @@ export async function resolveThirdPartyCollection(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-third-party",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
       itemId: groups.itemId,
-      contractAddress: contract 
-    }  
+      contractAddress: contract
+    }
   }
 }
 
 export async function resolveThirdPartyCollectionName(
   uri: URL,
-  groups: Record<"protocol" | "thirdPartyName" , string>): Promise<BlockchainCollectionThirdPartyName | void> { 
-  if (!isValidProtocol(groups.protocol)) return
+  groups: Record<"network" | "thirdPartyName", string>): Promise<BlockchainCollectionThirdPartyName | void> {
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, "TPR")
+  const contract = await getContract(groups.network, "TPR")
 
   if (contract) {
     return {
@@ -327,20 +347,20 @@ export async function resolveThirdPartyCollectionName(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-third-party-name",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       thirdPartyName: groups.thirdPartyName,
-      contractAddress: contract 
-    }  
+      contractAddress: contract
+    }
   }
 }
 
 export async function resolveThirdPartyCollectionOnlyCollection(
   uri: URL,
-  groups: Record<"protocol" | "thirdPartyName" | "collectionId", string>
+  groups: Record<"network" | "thirdPartyName" | "collectionId", string>
 ): Promise<BlockchainCollectionThirdPartyCollection | void> {
-  if (!isValidProtocol(groups.protocol)) return
+  if (!isValidNetwork(groups.network)) return
 
-  const contract = await getContract(groups.protocol, "TPR")
+  const contract = await getContract(groups.network, "TPR")
 
   if (contract) {
     return {
@@ -348,10 +368,10 @@ export async function resolveThirdPartyCollectionOnlyCollection(
       uri,
       blockchain: "ethereum",
       type: "blockchain-collection-third-party-collection",
-      network: groups.protocol == "ethereum" ? "mainnet" : groups.protocol.toLowerCase(),
+      network: groups.network == "ethereum" ? "mainnet" : groups.network.toLowerCase(),
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
-      contractAddress: contract 
-    }  
+      contractAddress: contract
+    }
   }
 }
