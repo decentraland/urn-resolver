@@ -18,7 +18,7 @@ describe("Basic use cases", function () {
   })
 
   it("Print LAND resolution for readme", async () => {
-    console.log(await parseUrn("urn:decentraland:goerli:LAND:-10,-13?atBlock=151231111"))
+    console.log(await parseUrn("urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111"))
   })
 
   it("test land", async () => {
@@ -38,9 +38,9 @@ describe("Basic use cases", function () {
   })
 
   it("test land (query string)", async () => {
-    const t = await parseUrn("urn:decentraland:goerli:LAND:0x1?atBlock=151231111#4")
+    const t = await parseUrn("urn:decentraland:sepolia:LAND:0x1?atBlock=151231111#4")
     expect(t).toHaveProperty("uri")
-    expect(t.uri.toString()).toEqual("urn:decentraland:goerli:LAND:0x1?atBlock=151231111#4")
+    expect(t.uri.toString()).toEqual("urn:decentraland:sepolia:LAND:0x1?atBlock=151231111#4")
   })
 
   // it("test land (address)", async () => {
@@ -52,11 +52,11 @@ describe("Basic use cases", function () {
   //   })
   // })
 
-  it("test land (goerli)", async () => {
-    expect(await parseUrn("urn:decentraland:goerli:LAND:0x1")).toMatchObject({
-      contractAddress: "0x25b6B4bac4aDB582a0ABd475439dA6730777Fbf7",
+  it("test land (sepolia)", async () => {
+    expect(await parseUrn("urn:decentraland:sepolia:LAND:0x1")).toMatchObject({
+      contractAddress: "0x42f4ba48791e2de32f5fbf553441c2672864bb33",
       blockchain: "ethereum",
-      network: "goerli",
+      network: "sepolia",
       id: "0x1",
     })
   })
@@ -328,15 +328,15 @@ describe("Basic use cases", function () {
         "uri": new URL("urn:decentraland:ethereum:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
       }
     )
-    expect(await parseUrn("urn:decentraland:goerli:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
+    expect(await parseUrn("urn:decentraland:sepolia:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
       {
         "blockchain": "ethereum",
         "contractAddress": "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
         "id": "111111111111111111",
         "namespace": "decentraland",
-        "network": "goerli",
+        "network": "sepolia",
         "type": "blockchain-asset",
-        "uri": new URL("urn:decentraland:goerli:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
+        "uri": new URL("urn:decentraland:sepolia:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111"),
       }
     )
     expect(await parseUrn("urn:decentraland:matic:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111")).toEqual(
