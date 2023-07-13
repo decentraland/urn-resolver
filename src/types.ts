@@ -10,7 +10,7 @@ export type BaseBlockchainAsset = {
    */
   blockchain: "ethereum"
   /**
-   * mainnet | goerli | matic and others.
+   * mainnet | sepolia | matic and others.
    */
   network: string
   /**
@@ -49,7 +49,7 @@ export type BlockchainCollectionV1Asset = {
    */
   blockchain: "ethereum"
   /**
-   * mainnet | goerli | matic and others.
+   * mainnet | sepolia | matic and others.
    */
   network: string
   /**
@@ -76,7 +76,7 @@ export type BlockchainCollectionV1 = {
    */
   blockchain: "ethereum"
   /**
-   * mainnet | goerli | matic and others.
+   * mainnet | sepolia | matic and others.
    */
   network: string
 

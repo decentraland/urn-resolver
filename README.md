@@ -9,18 +9,18 @@ npm i @dcl/urn-resolver
 ```typescript
 import { parseUrn } from '@dcl/urn-resolver'
 
-const parsed = await parseUrn("urn:decentraland:goerli:LAND:-10,-13?atBlock=151231111")
+const parsed = await parseUrn("urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111")
 => {
   uri: URL {
-    href: 'urn:decentraland:goerli:LAND:-10,-13?atBlock=151231111',
+    href: 'urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111',
     protocol: 'urn:',
-    pathname: 'decentraland:goerli:LAND:-10,-13',
+    pathname: 'decentraland:sepolia:LAND:-10,-13',
     search: '?atBlock=151231111',
     searchParams: URLSearchParams { 'atBlock' => '151231111' },
   },
   blockchain: 'ethereum',
   type: 'blockchain-asset',
-  network: 'goerli',
+  network: 'sepolia',
   contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
   id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
   x: -10,
