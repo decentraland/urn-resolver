@@ -152,6 +152,54 @@ describe('Basic use cases', function () {
     })
   })
 
+  it('test collection v2 item with tokenId', async () => {
+    const r = await parseUrn(
+      'urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0:123'
+    )
+    expect(r).toMatchObject({
+      blockchain: 'ethereum',
+      type: 'blockchain-collection-v2-item',
+      network: 'mainnet',
+      contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+      id: '0',
+      tokenId: '123'
+    })
+  })
+
+  it('test collection v1 item with tokenId', async () => {
+    const r = await parseUrn(
+      'urn:decentraland:ethereum:collections-v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name:456'
+    )
+    expect(r).toMatchObject({
+      type: 'blockchain-collection-v1-item',
+      blockchain: 'ethereum',
+      network: 'mainnet',
+      contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+      id: 'test_name',
+      tokenId: '456'
+    })
+  })
+
+  it('test collection v1 item with collection name and tokenId', async () => {
+    const r = await parseUrn('urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat:789')
+    expect(r).toMatchObject({
+      type: 'blockchain-collection-v1-item',
+      blockchain: 'ethereum',
+      network: 'mainnet',
+      contractAddress: '0x32b7495895264ac9d0b12d32afd435453458b1c6',
+      collectionName: 'community_contest',
+      id: 'cw_bell_attendant_hat',
+      tokenId: '789'
+    })
+  })
+
+  it('test collection v2 asset (invalid tokenId)', async () => {
+    const r = await parseUrn(
+      'urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name:abc'
+    )
+    expect(r).toBeNull()
+  })
+
   testValidUrnToInclude('urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0', {
     id: '0'
   })
