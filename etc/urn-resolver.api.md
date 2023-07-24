@@ -67,6 +67,16 @@ export type BlockchainCollectionV1Asset = {
 };
 
 // @public (undocumented)
+export type BlockchainCollectionV1AssetId = BlockchainCollectionV1Asset & {
+    tokenId: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV1Id = BlockchainCollectionV1 & {
+    tokenId: string;
+};
+
+// @public (undocumented)
 export type BlockchainCollectionV2 = BaseBlockchainAsset & {
     namespace: 'decentraland';
     type: 'blockchain-collection-v2';
@@ -78,6 +88,16 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
     namespace: 'decentraland';
     type: 'blockchain-collection-v2-asset';
     id: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV2AssetId = BlockchainCollectionV2Asset & {
+    tokenId: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV2Id = BlockchainCollectionV2 & {
+    tokenId: string;
 };
 
 // @public (undocumented)

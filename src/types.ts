@@ -68,6 +68,13 @@ export type BlockchainCollectionV1Asset = {
 /**
  * @public
  */
+export type BlockchainCollectionV1AssetId = BlockchainCollectionV1Asset & {
+  tokenId: string
+}
+
+/**
+ * @public
+ */
 export type BlockchainCollectionV1 = {
   namespace: 'decentraland'
   uri: URL
@@ -91,6 +98,13 @@ export type BlockchainCollectionV1 = {
 /**
  * @public
  */
+export type BlockchainCollectionV1Id = BlockchainCollectionV1 & {
+  tokenId: string
+}
+
+/**
+ * @public
+ */
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-v2-asset'
@@ -103,6 +117,13 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 /**
  * @public
  */
+export type BlockchainCollectionV2AssetId = BlockchainCollectionV2Asset & {
+  tokenId: string
+}
+
+/**
+ * @public
+ */
 export type BlockchainCollectionV2 = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-v2'
@@ -110,6 +131,13 @@ export type BlockchainCollectionV2 = BaseBlockchainAsset & {
    * Contract address of the collection
    */
   id: string
+}
+
+/**
+ * @public
+ */
+export type BlockchainCollectionV2Id = BlockchainCollectionV2 & {
+  tokenId: string
 }
 
 /**
