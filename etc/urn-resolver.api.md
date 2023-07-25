@@ -107,7 +107,7 @@ export type BlockchainLandAsset = BlockchainAsset & {
 };
 
 // @public (undocumented)
-export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV1AssetId | BlockchainCollectionV2Asset | BlockchainCollectionV2AssetId | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV1Id | BlockchainCollectionV2 | BlockchainCollectionV2Id | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
 
 // @public (undocumented)
 export type EntityV3Asset = {
