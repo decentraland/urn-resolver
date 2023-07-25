@@ -215,10 +215,14 @@ export type DecentralandAssetIdentifier =
   | OffChainAsset
   | EntityV3Asset
   | BlockchainCollectionV1Asset
+  | BlockchainCollectionV1AssetId
   | BlockchainCollectionV2Asset
+  | BlockchainCollectionV2AssetId
   | BlockchainLandAsset
   | BlockchainCollectionV1
+  | BlockchainCollectionV1Id
   | BlockchainCollectionV2
+  | BlockchainCollectionV2Id
   | BlockchainCollectionThirdPartyName
   | BlockchainCollectionThirdPartyCollection
   | BlockchainCollectionThirdParty
