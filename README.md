@@ -32,8 +32,11 @@ const parsed = await parseUrn("urn:decentraland:sepolia:LAND:-10,-13?atBlock=151
 
 - `decentraland:off-chain:{registry}:{name}`: Resolve static offchain assets (i.e. base wearables, not in any blockchain)
 - `decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}`: Resolve an ethereum wearables collection asset by contract address (v1)
+- `decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}:{tokenId}`: Resolve an ethereum wearables collection asset by contract address (v1)
 - `decentraland:{network}:collections-v1:{collection-name}:{name}`: Resolve an ethereum wearables collection asset by collection name (wearables API) (v1)
+- `decentraland:{network}:collections-v1:{collection-name}:{name}:{tokenId}`: Resolve an ethereum wearables collection asset by collection name (wearables API) (v1)
 - `decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id}`: Resolve an ethereum wearables collection asset by contract address (v2)
+- `decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id}:{tokenId}`: Resolve an ethereum wearables collection asset by contract address (v2)
 - `decentraland:{network}:LAND:{x},{y}`: Resolves the ethereum asset of a LAND position.
 - `decentraland:{network}:LAND:{tokenId}`: Resolves the ethereum asset of a LAND by tokenId.
 - `decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}`: Resolves the ethereum asset of an item of a third party collection, currently only supported on polygon

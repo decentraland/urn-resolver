@@ -12,7 +12,11 @@ import {
   BlockchainCollectionThirdParty,
   BlockchainCollectionThirdPartyCollection,
   BlockchainCollectionThirdPartyName,
-  EntityV3Asset
+  EntityV3Asset,
+  BlockchainCollectionV1AssetWithTokenId,
+  BlockchainCollectionV2AssetTokenId,
+  BlockchainCollectionV1TokenId,
+  BlockchainCollectionV2Id
 } from './types'
 
 /**
@@ -215,7 +219,7 @@ export async function resolveCollectionV1AssetByCollectionName(
 export async function resolveCollectionV1AssetByCollectionNameTokenId(
   uri: URL,
   groups: Record<'network' | 'collectionName' | 'name' | 'tokenId', string>
-): Promise<BlockchainCollectionV1AssetId | void> {
+): Promise<BlockchainCollectionV1AssetWithTokenId | void> {
   // this only works in mainnet
   if (groups.network != 'ethereum') return
 
@@ -261,7 +265,7 @@ export async function resolveCollectionV1Asset(
 export async function resolveCollectionV1AssetTokenId(
   uri: URL,
   groups: Record<'network' | 'contract' | 'name' | 'tokenId', string>
-): Promise<BlockchainCollectionV1AssetId | void> {
+): Promise<BlockchainCollectionV1AssetWithTokenId | void> {
   if (!isValidNetwork(groups.network)) return
 
   const contract = await getContract(groups.network, groups.contract)
@@ -306,7 +310,7 @@ export async function resolveCollectionV2Asset(
 export async function resolveCollectionV2AssetTokenId(
   uri: URL,
   groups: Record<'network' | 'contract' | 'id' | 'tokenId', string>
-): Promise<BlockchainCollectionV2AssetId | void> {
+): Promise<BlockchainCollectionV2AssetTokenId | void> {
   if (!isValidNetwork(groups.network)) return
 
   const contract = await getContract(groups.network, groups.contract)
@@ -350,7 +354,7 @@ export async function resolveCollectionV1(
 export async function resolveCollectionV1TokenId(
   uri: URL,
   groups: Record<'network' | 'contract' | 'tokenId', string>
-): Promise<BlockchainCollectionV1Id | void> {
+): Promise<BlockchainCollectionV1TokenId | void> {
   if (!isValidNetwork(groups.network)) return
 
   const contract = await getContract(groups.network, groups.contract)
@@ -396,7 +400,7 @@ export async function resolveCollectionV1ByCollectionName(
 export async function resolveCollectionV1ByCollectionNameTokenId(
   uri: URL,
   groups: Record<'network' | 'collectionName' | 'tokenId', string>
-): Promise<BlockchainCollectionV1Id | void> {
+): Promise<BlockchainCollectionV1TokenId | void> {
   // this only works in mainnet
   if (groups.network != 'ethereum') return
 
