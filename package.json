@@ -4,7 +4,10 @@
   "description": "URN resolver for Decentraland assets",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "build": "make build",
+    "test": "make test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decentraland/urn-resolver.git"
