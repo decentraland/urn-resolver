@@ -123,7 +123,7 @@ export async function resolveLegacyDclUrl(uri: URL) {
     host = uri.host
     path = uri.pathname.replace(/^\//, '').split('/')
   }
-  // What's w the legacy urns?
+
   const tokenIdPattern = /^[0-9]+$/
 
   if (uri.protocol == 'dcl:' && path.length == 1) {
