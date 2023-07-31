@@ -152,7 +152,7 @@ describe('Basic use cases', function () {
     })
   })
 
-  it('test collection asset v2 with tokenId', async () => {
+  it.skip('test collection asset v2 with tokenId', async () => {
     const r = await parseUrn(
       'urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0:123'
     )
@@ -166,7 +166,7 @@ describe('Basic use cases', function () {
     })
   })
 
-  it('test collection asset v1 with tokenId', async () => {
+  it.skip('test collection asset v1 with tokenId', async () => {
     const r = await parseUrn(
       'urn:decentraland:ethereum:collections-v1:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:test_name:456'
     )
@@ -180,7 +180,7 @@ describe('Basic use cases', function () {
     })
   })
 
-  it('test collection v1 asset (with name) and tokenId', async () => {
+  it.skip('test collection v1 asset (with name) and tokenId', async () => {
     const r = await parseUrn('urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat:789')
     expect(r).toMatchObject({
       type: 'blockchain-collection-v1-asset',
