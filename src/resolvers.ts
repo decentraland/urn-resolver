@@ -28,20 +28,42 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   'decentraland:off-chain:{registry}:{name}': resolveOffchainAsset,
   // Resolver for deployed entities. Deployed entities are used to specify portable experience identifiers that may be deployed anywhere in the web.
   'decentraland:entity:{cid}': resolveEntityV3,
+
   // collections v1 asset (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}': resolveCollectionV1Asset,
+  // collections v1 asset (by contract) tokenId
+  'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}:{tokenId([0-9]+)}': resolveCollectionV1AssetTokenId,
+
   // collections v1 asset (by name)
   'decentraland:{network}:collections-v1:{collectionName}:{name}': resolveCollectionV1AssetByCollectionName,
+  // collections v1 asset (by name) tokenId
+  'decentraland:{network}:collections-v1:{collectionName}:{name}:{tokenId([0-9]+)}': resolveCollectionV1AssetByCollectionNameTokenId,
+
   // collections v2 asset (hex)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}': resolveCollectionV2Asset,
+  // collections v2 asset (hex) tokenId
+  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV2AssetTokenId,
+
   // collections v2 asset (id)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}': resolveCollectionV2Asset,
+  // collections v2 asset (id) tokenId
+  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV2AssetTokenId,
+
   // collections v1 (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}': resolveCollectionV1,
-  // collections v1 (by name)
+  // collections v1 (by contract) tokenId
+  'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV1TokenId,
+
+  // collections v1 (by name) itemId
   'decentraland:{network}:collections-v1:{collectionName}': resolveCollectionV1ByCollectionName,
+  // collections v1 (by name) itemId tokenId
+  'decentraland:{network}:collections-v1:{collectionName}:{tokenId([0-9]+)}': resolveCollectionV1ByCollectionNameTokenId,
+
   // collections v2
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}': resolveCollectionV2,
+  // collections v2 tokenId
+  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV2TokenId,
+
   // resolve LAND by position
   'decentraland:{network}:LAND:{position}': resolveLandAsset,
   // resolve third party names
@@ -127,16 +149,16 @@ export async function resolveLegacyDclUrl(uri: URL) {
   const tokenIdPattern = /^[0-9]+$/
 
   if (uri.protocol == 'dcl:' && path.length == 1) {
-    const tokenId = path.length > 1 ? path[path.length - 1] : null
+    let tokenId = path.length > 1 ? path[path.length - 1] : null
 
     if (tokenId && tokenIdPattern.test(tokenId)) {
       if (host == 'base-avatars') {
-        // What's w the off-chain base-avatars urns?
         return internalResolver(`urn:decentraland:off-chain:base-avatars:${path[0]}`)
       } else {
         return internalResolver(`urn:decentraland:ethereum:collections-v1:${host}:${path[0]}:${tokenId}`)
       }
-    } else {
+    }
+    else {
       if (host == 'base-avatars') {
         return internalResolver(`urn:decentraland:off-chain:base-avatars:${path[0]}`)
       } else {
