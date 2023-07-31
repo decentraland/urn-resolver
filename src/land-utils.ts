@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-namespace */
 /**
  * @public
  */
@@ -19,9 +19,9 @@ export namespace LandUtils {
   // LAND Getters
   //
 
-  const clearLow = B("0xffffffffffffffffffffffffffffffff00000000000000000000000000000000")
-  const clearHigh = B("0x00000000000000000000000000000000ffffffffffffffffffffffffffffffff")
-  const factor = B("0x100000000000000000000000000000000")
+  const clearLow = B('0xffffffffffffffffffffffffffffffff00000000000000000000000000000000')
+  const clearHigh = B('0x00000000000000000000000000000000ffffffffffffffffffffffffffffffff')
+  const factor = B('0x100000000000000000000000000000000')
 
   /**
    * @public
@@ -41,7 +41,7 @@ export namespace LandUtils {
   function _unsafeDecodeTokenId(value: BN) {
     return {
       x: expandNegative128BitCast((value & clearLow) >> B(128)),
-      y: expandNegative128BitCast(value & clearHigh),
+      y: expandNegative128BitCast(value & clearHigh)
     }
   }
 
@@ -52,7 +52,7 @@ export namespace LandUtils {
   }
 
   function expandNegative128BitCast(value: BN) {
-    if ((value & B("0x80000000000000000000000000000000" /* 1 << 127 */)) != B(0)) {
+    if ((value & B('0x80000000000000000000000000000000' /* 1 << 127 */)) != B(0)) {
       return B(-((clearLow - value) & clearHigh))
     }
     return B(value)

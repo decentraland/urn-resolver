@@ -1,5 +1,5 @@
-import contracts from "./contracts"
-import rawCollectionsV1 from "./collections-v1"
+import contracts from './contracts'
+import rawCollectionsV1 from './collections-v1'
 
 export type Collection = { collectionId: string; contractAddress: string }
 /**
@@ -9,12 +9,12 @@ const collections: Collection[] = []
 
 const lowerCasedContracts: Record<string, Record<string, string>> = {}
 
-const validNetworks = new Set(["ethereum", "kovan", "rinkeby", "goerli", "sepolia", "matic", "mumbai"])
+const validNetworks = new Set(['ethereum', 'kovan', 'rinkeby', 'goerli', 'sepolia', 'matic', 'mumbai'])
 
-for (let network in contracts) {
+for (const network in contracts) {
   lowerCasedContracts[network] = Object.create(null)
   const c = lowerCasedContracts[network]
-  if (network.toLowerCase() != "mainnet") {
+  if (network.toLowerCase() != 'mainnet') {
     validNetworks.add(network.toLowerCase())
   }
   Object.keys(contracts[network]).forEach((key) => {
@@ -25,14 +25,14 @@ for (let network in contracts) {
 rawCollectionsV1.forEach((collection) => {
   collections.push({
     contractAddress: collection.id,
-    collectionId: collection.name.replace(/^dcl:\/\//, ""),
+    collectionId: collection.name.replace(/^dcl:\/\//, '')
   })
 })
 
 export async function getCollection(addressOrName: string): Promise<Collection | null> {
-  let sanitizedAddress = addressOrName.toLowerCase()
+  const sanitizedAddress = addressOrName.toLowerCase()
 
-  for (let collection of collections) {
+  for (const collection of collections) {
     if (collection.contractAddress == sanitizedAddress || collection.collectionId == addressOrName) return collection
   }
 
@@ -40,21 +40,21 @@ export async function getCollection(addressOrName: string): Promise<Collection |
 }
 
 function mapContract(network: string, contractNameOrAddress: string): string | null {
-  if (network == "ethereum") return mapContract("mainnet", contractNameOrAddress)
+  if (network == 'ethereum') return mapContract('mainnet', contractNameOrAddress)
 
   if (lowerCasedContracts[network]) {
     if (contractNameOrAddress in lowerCasedContracts[network]) {
       return lowerCasedContracts[network][contractNameOrAddress]
     }
   } else {
-    console.log("network", network, Object.keys(lowerCasedContracts))
+    console.log('network', network, Object.keys(lowerCasedContracts))
   }
 
   return null
 }
 
 export async function getContract(network: string, contractNameOrAddress: string) {
-  if (contractNameOrAddress.startsWith("0x")) return contractNameOrAddress
+  if (contractNameOrAddress.startsWith('0x')) return contractNameOrAddress
   return mapContract(network.toLowerCase(), contractNameOrAddress.toLowerCase())
 }
 
@@ -76,24 +76,24 @@ export function createParser<T>(handlers: RouteMap<T>): (urn: string) => Promise
   return async (urn: string) => {
     const url = new URL(urn)
 
-    if (url.protocol != "urn:") return null
+    if (url.protocol != 'urn:') return null
 
-    for (let expression in handlers) {
+    for (const expression in handlers) {
       const expr = expression.replace(
         /(?:{([a-zA-Z_][a-zA-Z_0-9]*)(\([^}]+\))?})/g,
         function (substring, name, _matcher) {
-          const matcher = _matcher || "[^:]+"
+          const matcher = _matcher || '[^:]+'
           return `(?<${name}>${matcher})`
         }
       )
 
-      const regex = new RegExp("^" + expr + "$")
+      const regex = new RegExp('^' + expr + '$')
       const res = regex.exec(url.pathname)
 
       if (res) {
         const groups: Record<string, string> = Object.create(null)
         if (res.groups) {
-          for (let key in res.groups) {
+          for (const key in res.groups) {
             groups[key] = decodeURIComponent(res.groups[key])
           }
         }

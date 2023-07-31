@@ -4,7 +4,12 @@
   "description": "URN resolver for Decentraland assets",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "build": "make build",
+    "test": "make test",
+    "lint:check": "eslint '**/*.{js,ts}'",
+    "lint:fix": "eslint '**/*.{js,ts}' --fix"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decentraland/urn-resolver.git"
@@ -17,10 +22,14 @@
   },
   "prettier": {
     "printWidth": 120,
-    "semi": false
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "tabWidth": 2
   },
   "homepage": "https://github.com/decentraland/urn-resolver#readme",
   "devDependencies": {
+    "@dcl/eslint-config": "^1.1.8",
     "@microsoft/api-extractor": "^7.18.4",
     "@types/mocha": "^9.1.1",
     "expect": "^29.0.1",
@@ -31,5 +40,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {}
 }
