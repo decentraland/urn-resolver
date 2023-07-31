@@ -7,7 +7,7 @@
   "scripts": {
     "build": "make build",
     "test": "make test",
-    "lint:check": "echo bypass"
+    "lint:check": "echo 'no lint configured'"
   },
   "repository": {
     "type": "git",
