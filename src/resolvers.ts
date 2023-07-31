@@ -28,23 +28,26 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   'decentraland:off-chain:{registry}:{name}': resolveOffchainAsset,
   // Resolver for deployed entities. Deployed entities are used to specify portable experience identifiers that may be deployed anywhere in the web.
   'decentraland:entity:{cid}': resolveEntityV3,
-
   // collections v1 asset (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}': resolveCollectionV1Asset,
   // collections v1 asset (by contract) tokenId
-  'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}:{tokenId([0-9]+)}': resolveCollectionV1AssetTokenId,
+  'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}:{tokenId([0-9]+)}':
+    resolveCollectionV1AssetTokenId,
   // collections v1 asset (by name)
   'decentraland:{network}:collections-v1:{collectionName}:{name}': resolveCollectionV1AssetByCollectionName,
   // collections v1 asset (by name) tokenId
-  'decentraland:{network}:collections-v1:{collectionName}:{name}:{tokenId([0-9]+)}': resolveCollectionV1AssetByCollectionNameTokenId,
+  'decentraland:{network}:collections-v1:{collectionName}:{name}:{tokenId([0-9]+)}':
+    resolveCollectionV1AssetByCollectionNameTokenId,
   // collections v2 asset (hex)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}': resolveCollectionV2Asset,
   // collections v2 asset (hex) tokenId
-  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV2AssetTokenId,
+  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}':
+    resolveCollectionV2AssetTokenId,
   // collections v2 asset (id)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}': resolveCollectionV2Asset,
   // collections v2 asset (id) tokenId
-  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV2AssetTokenId,
+  'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}:{tokenId([0-9]+)}':
+    resolveCollectionV2AssetTokenId,
   // collections v1 (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}': resolveCollectionV1,
   // collections v1 (by contract) tokenId
@@ -52,7 +55,8 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // collections v1 (by name) itemId
   'decentraland:{network}:collections-v1:{collectionName}': resolveCollectionV1ByCollectionName,
   // collections v1 (by name) itemId tokenId
-  'decentraland:{network}:collections-v1:{collectionName}:{tokenId([0-9]+)}': resolveCollectionV1ByCollectionNameTokenId,
+  'decentraland:{network}:collections-v1:{collectionName}:{tokenId([0-9]+)}':
+    resolveCollectionV1ByCollectionNameTokenId,
   // collections v2
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}': resolveCollectionV2,
   // collections v2 tokenId
