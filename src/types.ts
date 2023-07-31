@@ -3,12 +3,12 @@
  */
 
 export type BaseBlockchainAsset = {
-  namespace: "decentraland"
+  namespace: 'decentraland'
   uri: URL
   /**
    * Ethereum for the time being.
    */
-  blockchain: "ethereum"
+  blockchain: 'ethereum'
   /**
    * mainnet | sepolia | matic and others.
    */
@@ -23,7 +23,7 @@ export type BaseBlockchainAsset = {
  * @public
  */
 export type BlockchainAsset = BaseBlockchainAsset & {
-  type: "blockchain-asset"
+  type: 'blockchain-asset'
   /**
    * Identifier of the asset. i.e. TokenID for ERC721 contracts
    */
@@ -42,12 +42,12 @@ export type BlockchainLandAsset = BlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionV1Asset = {
-  namespace: "decentraland"
+  namespace: 'decentraland'
   uri: URL
   /**
    * Ethereum for the time being.
    */
-  blockchain: "ethereum"
+  blockchain: 'ethereum'
   /**
    * mainnet | sepolia | matic and others.
    */
@@ -57,7 +57,7 @@ export type BlockchainCollectionV1Asset = {
    */
   contractAddress: string | null
 
-  type: "blockchain-collection-v1-asset"
+  type: 'blockchain-collection-v1-asset'
   /**
    * Identifier of the asset (name)
    */
@@ -69,18 +69,18 @@ export type BlockchainCollectionV1Asset = {
  * @public
  */
 export type BlockchainCollectionV1 = {
-  namespace: "decentraland"
+  namespace: 'decentraland'
   uri: URL
   /**
    * Ethereum for the time being.
    */
-  blockchain: "ethereum"
+  blockchain: 'ethereum'
   /**
    * mainnet | sepolia | matic and others.
    */
   network: string
 
-  type: "blockchain-collection-v1"
+  type: 'blockchain-collection-v1'
   /**
    * Contract address of the collection
    */
@@ -92,8 +92,8 @@ export type BlockchainCollectionV1 = {
  * @public
  */
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
-  namespace: "decentraland"
-  type: "blockchain-collection-v2-asset"
+  namespace: 'decentraland'
+  type: 'blockchain-collection-v2-asset'
   /**
    * Identifier of the asset (assetId)
    */
@@ -104,8 +104,8 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionV2 = BaseBlockchainAsset & {
-  namespace: "decentraland"
-  type: "blockchain-collection-v2"
+  namespace: 'decentraland'
+  type: 'blockchain-collection-v2'
   /**
    * Contract address of the collection
    */
@@ -116,8 +116,8 @@ export type BlockchainCollectionV2 = BaseBlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
-  namespace: "decentraland"
-  type: "blockchain-collection-third-party"
+  namespace: 'decentraland'
+  type: 'blockchain-collection-third-party'
 
   thirdPartyName: string
   collectionId: string
@@ -128,8 +128,8 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
-  namespace: "decentraland"
-  type: "blockchain-collection-third-party-collection"
+  namespace: 'decentraland'
+  type: 'blockchain-collection-third-party-collection'
 
   thirdPartyName: string
   collectionId: string
@@ -139,8 +139,8 @@ export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
  * @public
  */
 export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
-  namespace: "decentraland"
-  type: "blockchain-collection-third-party-name"
+  namespace: 'decentraland'
+  type: 'blockchain-collection-third-party-name'
 
   thirdPartyName: string
 }
@@ -149,9 +149,9 @@ export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
  * @public
  */
 export type OffChainAsset = {
-  namespace: "decentraland"
+  namespace: 'decentraland'
   uri: URL
-  type: "off-chain"
+  type: 'off-chain'
   /**
    * Name of the registry that hosts the asset.
    */
@@ -166,9 +166,9 @@ export type OffChainAsset = {
  * @public
  */
 export type EntityV3Asset = {
-  namespace: "decentraland"
+  namespace: 'decentraland'
   uri: URL
-  type: "entity"
+  type: 'entity'
   /**
    * IPFS CID of the entity
    */

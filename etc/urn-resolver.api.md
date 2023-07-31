@@ -6,23 +6,23 @@
 
 // @public (undocumented)
 export type BaseBlockchainAsset = {
-    namespace: "decentraland";
+    namespace: 'decentraland';
     uri: URL;
-    blockchain: "ethereum";
+    blockchain: 'ethereum';
     network: string;
     contractAddress: string;
 };
 
 // @public (undocumented)
 export type BlockchainAsset = BaseBlockchainAsset & {
-    type: "blockchain-asset";
+    type: 'blockchain-asset';
     id: string;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
-    namespace: "decentraland";
-    type: "blockchain-collection-third-party";
+    namespace: 'decentraland';
+    type: 'blockchain-collection-third-party';
     thirdPartyName: string;
     collectionId: string;
     itemId: string;
@@ -30,53 +30,53 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
 
 // @public (undocumented)
 export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
-    namespace: "decentraland";
-    type: "blockchain-collection-third-party-collection";
+    namespace: 'decentraland';
+    type: 'blockchain-collection-third-party-collection';
     thirdPartyName: string;
     collectionId: string;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
-    namespace: "decentraland";
-    type: "blockchain-collection-third-party-name";
+    namespace: 'decentraland';
+    type: 'blockchain-collection-third-party-name';
     thirdPartyName: string;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV1 = {
-    namespace: "decentraland";
+    namespace: 'decentraland';
     uri: URL;
-    blockchain: "ethereum";
+    blockchain: 'ethereum';
     network: string;
-    type: "blockchain-collection-v1";
+    type: 'blockchain-collection-v1';
     id: string;
     collectionName: string | null;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV1Asset = {
-    namespace: "decentraland";
+    namespace: 'decentraland';
     uri: URL;
-    blockchain: "ethereum";
+    blockchain: 'ethereum';
     network: string;
     contractAddress: string | null;
-    type: "blockchain-collection-v1-asset";
+    type: 'blockchain-collection-v1-asset';
     id: string;
     collectionName: string | null;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV2 = BaseBlockchainAsset & {
-    namespace: "decentraland";
-    type: "blockchain-collection-v2";
+    namespace: 'decentraland';
+    type: 'blockchain-collection-v2';
     id: string;
 };
 
 // @public (undocumented)
 export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
-    namespace: "decentraland";
-    type: "blockchain-collection-v2-asset";
+    namespace: 'decentraland';
+    type: 'blockchain-collection-v2-asset';
     id: string;
 };
 
@@ -91,9 +91,9 @@ export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | Enti
 
 // @public (undocumented)
 export type EntityV3Asset = {
-    namespace: "decentraland";
+    namespace: 'decentraland';
     uri: URL;
-    type: "entity";
+    type: 'entity';
     cid: string;
     baseUrl?: string;
 };
@@ -120,9 +120,9 @@ export namespace LandUtils {
 
 // @public (undocumented)
 export type OffChainAsset = {
-    namespace: "decentraland";
+    namespace: 'decentraland';
     uri: URL;
-    type: "off-chain";
+    type: 'off-chain';
     registry: string;
     id: string;
 };
