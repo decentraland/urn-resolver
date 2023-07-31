@@ -149,7 +149,7 @@ export async function resolveLegacyDclUrl(uri: URL) {
   const tokenIdPattern = /^[0-9]+$/
 
   if (uri.protocol == 'dcl:' && path.length == 1) {
-    let tokenId = path.length > 1 ? path[path.length - 1] : null
+    const tokenId = path.length > 1 ? path[path.length - 1] : null
 
     if (tokenId && tokenIdPattern.test(tokenId)) {
       if (host == 'base-avatars') {
