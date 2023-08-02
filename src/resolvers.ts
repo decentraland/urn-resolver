@@ -37,7 +37,7 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
     resolveCollectionV2Asset,
   // collections v1 (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV1,
-  // collections v1 (by name) itemId
+  // collections v1 (by name)
   'decentraland:{network}:collections-v1:{collectionName}:{tokenId([0-9]+)}': resolveCollectionV1ByCollectionName,
   // collections v2
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}': resolveCollectionV2,
