@@ -52,7 +52,6 @@ export type BlockchainCollectionV1 = {
     type: 'blockchain-collection-v1';
     id: string;
     collectionName: string | null;
-    tokenId: string;
 };
 
 // @public (undocumented)
@@ -65,6 +64,15 @@ export type BlockchainCollectionV1Asset = {
     type: 'blockchain-collection-v1-asset';
     id: string;
     collectionName: string | null;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV1AssetWithTokenId = BlockchainCollectionV1Asset & {
+    tokenId: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV1TokenId = BlockchainCollectionV1 & {
     tokenId: string;
 };
 
@@ -73,7 +81,6 @@ export type BlockchainCollectionV2 = BaseBlockchainAsset & {
     namespace: 'decentraland';
     type: 'blockchain-collection-v2';
     id: string;
-    tokenId: string;
 };
 
 // @public (undocumented)
@@ -81,6 +88,15 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
     namespace: 'decentraland';
     type: 'blockchain-collection-v2-asset';
     id: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV2AssetTokenId = BlockchainCollectionV2Asset & {
+    tokenId: string;
+};
+
+// @public (undocumented)
+export type BlockchainCollectionV2Id = BlockchainCollectionV2 & {
     tokenId: string;
 };
 
@@ -91,7 +107,7 @@ export type BlockchainLandAsset = BlockchainAsset & {
 };
 
 // @public (undocumented)
-export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV1AssetWithTokenId | BlockchainCollectionV2Asset | BlockchainCollectionV2AssetTokenId | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV1TokenId | BlockchainCollectionV2 | BlockchainCollectionV2Id | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
 
 // @public (undocumented)
 export type EntityV3Asset = {

@@ -63,7 +63,12 @@ export type BlockchainCollectionV1Asset = {
    */
   id: string
   collectionName: string | null
+}
 
+/**
+ * @public
+ */
+export type BlockchainCollectionV1AssetWithTokenId = BlockchainCollectionV1Asset & {
   tokenId: string
 }
 
@@ -88,7 +93,12 @@ export type BlockchainCollectionV1 = {
    */
   id: string
   collectionName: string | null
+}
 
+/**
+ * @public
+ */
+export type BlockchainCollectionV1TokenId = BlockchainCollectionV1 & {
   tokenId: string
 }
 
@@ -102,7 +112,12 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
    * Identifier of the asset (assetId)
    */
   id: string
+}
 
+/**
+ * @public
+ */
+export type BlockchainCollectionV2AssetTokenId = BlockchainCollectionV2Asset & {
   tokenId: string
 }
 
@@ -116,7 +131,12 @@ export type BlockchainCollectionV2 = BaseBlockchainAsset & {
    * Contract address of the collection
    */
   id: string
+}
 
+/**
+ * @public
+ */
+export type BlockchainCollectionV2Id = BlockchainCollectionV2 & {
   tokenId: string
 }
 
@@ -195,10 +215,14 @@ export type DecentralandAssetIdentifier =
   | OffChainAsset
   | EntityV3Asset
   | BlockchainCollectionV1Asset
+  | BlockchainCollectionV1AssetWithTokenId
   | BlockchainCollectionV2Asset
+  | BlockchainCollectionV2AssetTokenId
   | BlockchainLandAsset
   | BlockchainCollectionV1
+  | BlockchainCollectionV1TokenId
   | BlockchainCollectionV2
+  | BlockchainCollectionV2Id
   | BlockchainCollectionThirdPartyName
   | BlockchainCollectionThirdPartyCollection
   | BlockchainCollectionThirdParty
