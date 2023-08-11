@@ -67,6 +67,12 @@ export type BlockchainCollectionV1Asset = {
 };
 
 // @public (undocumented)
+export type BlockchainCollectionV1Item = Omit<BlockchainCollectionV1Asset, 'type'> & {
+    type: 'blockchain-collection-v1-item';
+    tokenId: string;
+};
+
+// @public (undocumented)
 export type BlockchainCollectionV2 = BaseBlockchainAsset & {
     namespace: 'decentraland';
     type: 'blockchain-collection-v2';
@@ -81,13 +87,19 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
 };
 
 // @public (undocumented)
+export type BlockchainCollectionV2Item = Omit<BlockchainCollectionV2Asset, 'type'> & {
+    type: 'blockchain-collection-v2-item';
+    tokenId: string;
+};
+
+// @public (undocumented)
 export type BlockchainLandAsset = BlockchainAsset & {
     x: number;
     y: number;
 };
 
 // @public (undocumented)
-export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV2Asset | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
+export type DecentralandAssetIdentifier = BlockchainAsset | OffChainAsset | EntityV3Asset | BlockchainCollectionV1Asset | BlockchainCollectionV1Item | BlockchainCollectionV2Asset | BlockchainCollectionV2Item | BlockchainLandAsset | BlockchainCollectionV1 | BlockchainCollectionV2 | BlockchainCollectionThirdPartyName | BlockchainCollectionThirdPartyCollection | BlockchainCollectionThirdParty;
 
 // @public (undocumented)
 export type EntityV3Asset = {

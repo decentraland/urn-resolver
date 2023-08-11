@@ -29,7 +29,7 @@ export async function resolveContentUrl(
   if (!asset) return null
   for (const resolver of resolvers) {
     const r = await resolver(asset, config || {})
-    if (typeof r == 'string' && r.length > 0) {
+    if (typeof r === 'string' && r.length > 0) {
       return r
     }
   }
@@ -39,73 +39,89 @@ export async function resolveContentUrl(
 // ---------------------------------------------------------------------
 
 resolvers.push(function resolvePortableExperiencesUrl(asset, _options) {
-  if (asset.type == 'off-chain' && asset.registry == 'static-portable-experiences') {
-    return `https://static-pe.decentraland.io/${asset.id}/mappings`
-  }
+  return asset.type === 'off-chain' && asset.registry === 'static-portable-experiences'
+    ? `https://static-pe.decentraland.io/${asset.id}/mappings`
+    : undefined
 })
 
 resolvers.push(function (asset, _options) {
-  if (asset.type == 'off-chain' && asset.registry == 'unity-renderer-cdn') {
-    return `https://cdn.decentraland.org/@dcl/unity-renderer/${asset.id}`
-  }
+  return asset.type === 'off-chain' && asset.registry === 'unity-renderer-cdn'
+    ? `https://cdn.decentraland.org/@dcl/unity-renderer/${asset.id}`
+    : undefined
 })
 
 resolvers.push(function (asset, options) {
-  if (asset.type == 'entity') {
+  let result: string | undefined = undefined
+
+  if (asset.type === 'entity') {
     let ipfsBaseUrl = asset.baseUrl || `https://${defaultContentServerForNetwork('mainnet', options)}/content/contents/`
     if (!ipfsBaseUrl.endsWith('/')) ipfsBaseUrl = ipfsBaseUrl + '/'
-    return new URL(ipfsBaseUrl + asset.cid).toString()
+    result = new URL(ipfsBaseUrl + asset.cid).toString()
   }
+
+  return result
 })
 
 resolvers.push(function (asset, _options) {
-  if (asset.type == 'off-chain' && asset.registry == 'dcl-cdn') {
-    return `https://cdn.decentraland.org/${asset.id}`
-  }
+  return asset.type === 'off-chain' && asset.registry === 'dcl-cdn'
+    ? `https://cdn.decentraland.org/${asset.id}`
+    : undefined
 })
 
 resolvers.push(function (asset, _options) {
-  if (asset.type == 'off-chain' && asset.registry == 'kernel-cdn') {
-    return `https://cdn.decentraland.org/@dcl/kernel/${asset.id}`
-  }
+  return asset.type === 'off-chain' && asset.registry === 'kernel-cdn'
+    ? `https://cdn.decentraland.org/@dcl/kernel/${asset.id}`
+    : undefined
 })
 
 resolvers.push(function (asset, _options) {
-  if (asset.type == 'off-chain' && asset.registry == 'explorer-website-cdn') {
-    return `https://cdn.decentraland.org/@dcl/explorer-website/${asset.id}`
-  }
+  return asset.type === 'off-chain' && asset.registry === 'explorer-website-cdn'
+    ? `https://cdn.decentraland.org/@dcl/explorer-website/${asset.id}`
+    : undefined
 })
 
 resolvers.push(function (asset, options) {
-  if (asset.type == 'off-chain' && asset.registry == 'base-avatars') {
+  let result: string | undefined = undefined
+
+  if (asset.type === 'off-chain' && asset.registry === 'base-avatars') {
     const host = defaultWearablesServerForNetwork('ethereum', options)
-    return `https://${host}/v2/collections/${asset.registry}/wearables/${asset.id}`
+    result = `https://${host}/v2/collections/${asset.registry}/wearables/${asset.id}`
   }
+
+  return result
 })
 
 resolvers.push(function wearablesV1UrlResolver(asset, options) {
-  if (asset.type == 'blockchain-collection-v1-asset' && asset.collectionName != 'base-avatars') {
+  let result: string | undefined = undefined
+
+  if (asset.type === 'blockchain-collection-v1-asset' && asset.collectionName !== 'base-avatars') {
     const host = defaultWearablesServerForNetwork(asset.network, options)
     if (asset.collectionName) {
-      return `https://${host}/v2/collections/${asset.collectionName}/wearables/${asset.id}`
+      result = `https://${host}/v2/collections/${asset.collectionName}/wearables/${asset.id}`
     }
   }
+
+  return result
 })
 
 resolvers.push(async function landResolver(asset, options) {
+  let result: string | undefined = undefined
+
   if (
-    asset.type == 'blockchain-asset' &&
-    asset.contractAddress.toLowerCase() == (await getContract(asset.network, 'LANDProxy'))?.toLowerCase()
+    asset.type === 'blockchain-asset' &&
+    asset.contractAddress.toLowerCase() === (await getContract(asset.network, 'LANDProxy'))?.toLowerCase()
   ) {
     const host = defaultContentServerForNetwork(asset.network, options)
     const { x, y } = LandUtils.decodeTokenId(asset.id)
-    return `https://${host}/content/entities/scene?pointer=${x},${y}`
+    result = `https://${host}/content/entities/scene?pointer=${x},${y}`
   }
+
+  return result
 })
 
 function defaultContentServerForNetwork(network: string, options: ResolversOptions) {
   if (options.contentServerHost) return options.contentServerHost
-  if (network == 'goerli' || network == 'sepolia') {
+  if (network === 'goerli' || network === 'sepolia') {
     return `peer.decentraland.zone`
   }
   return `peer.decentraland.org`
@@ -113,7 +129,7 @@ function defaultContentServerForNetwork(network: string, options: ResolversOptio
 
 function defaultWearablesServerForNetwork(network: string, options: ResolversOptions) {
   if (options.wearablesServerHost) return options.wearablesServerHost
-  if (network == 'goerli' || network == 'sepolia') {
+  if (network === 'goerli' || network === 'sepolia') {
     return `wearable-api.decentraland.zone`
   }
   return `wearable-api.decentraland.org`
