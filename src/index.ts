@@ -11,8 +11,8 @@ export { resolveContentUrl, ResolversOptions }
 export async function parseUrn(urn: string): Promise<DecentralandAssetIdentifier | null> {
   const url = new URL(urn)
 
-  if (url.protocol == 'urn:') return internalResolver(urn)
-  if (url.protocol == 'dcl:') return (await resolveLegacyDclUrl(url)) || null
+  if (url.protocol === 'urn:') return internalResolver(urn)
+  if (url.protocol === 'dcl:') return (await resolveLegacyDclUrl(url)) || null
 
   return null
 }

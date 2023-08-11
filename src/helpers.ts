@@ -14,7 +14,7 @@ const validNetworks = new Set(['ethereum', 'kovan', 'rinkeby', 'goerli', 'sepoli
 for (const network in contracts) {
   lowerCasedContracts[network] = Object.create(null)
   const c = lowerCasedContracts[network]
-  if (network.toLowerCase() != 'mainnet') {
+  if (network.toLowerCase() !== 'mainnet') {
     validNetworks.add(network.toLowerCase())
   }
   Object.keys(contracts[network]).forEach((key) => {
@@ -33,14 +33,14 @@ export async function getCollection(addressOrName: string): Promise<Collection |
   const sanitizedAddress = addressOrName.toLowerCase()
 
   for (const collection of collections) {
-    if (collection.contractAddress == sanitizedAddress || collection.collectionId == addressOrName) return collection
+    if (collection.contractAddress === sanitizedAddress || collection.collectionId === addressOrName) return collection
   }
 
   return null
 }
 
 function mapContract(network: string, contractNameOrAddress: string): string | null {
-  if (network == 'ethereum') return mapContract('mainnet', contractNameOrAddress)
+  if (network === 'ethereum') return mapContract('mainnet', contractNameOrAddress)
 
   if (lowerCasedContracts[network]) {
     if (contractNameOrAddress in lowerCasedContracts[network]) {
@@ -76,7 +76,7 @@ export function createParser<T>(handlers: RouteMap<T>): (urn: string) => Promise
   return async (urn: string) => {
     const url = new URL(urn)
 
-    if (url.protocol != 'urn:') return null
+    if (url.protocol !== 'urn:') return null
 
     for (const expression in handlers) {
       const expr = expression.replace(

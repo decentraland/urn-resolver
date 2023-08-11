@@ -52,7 +52,7 @@ export namespace LandUtils {
   }
 
   function expandNegative128BitCast(value: BN) {
-    if ((value & B('0x80000000000000000000000000000000' /* 1 << 127 */)) != B(0)) {
+    if ((value & B('0x80000000000000000000000000000000' /* 1 << 127 */)) !== B(0)) {
       return B(-((clearLow - value) & clearHigh))
     }
     return B(value)
