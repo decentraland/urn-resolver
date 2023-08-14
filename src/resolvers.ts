@@ -29,23 +29,22 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // collections v1 asset (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}': resolveCollectionV1Asset,
   // collections v1 item (by asset name and token id)
-  'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}:{tokenId([0-9]+)}':
-    resolveCollectionV1AssetTokenId,
+  'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}:{name}:{tokenId([0-9]+)}': resolveCollectionV1Item,
   // collections v1 asset (by name)
   'decentraland:{network}:collections-v1:{collectionName}:{name}': resolveCollectionV1AssetByCollectionName,
   // collections v1 item (by asset name and token id)
   'decentraland:{network}:collections-v1:{collectionName}:{name}:{tokenId([0-9]+)}':
-    resolveCollectionV1AssetByCollectionNameTokenId,
+    resolveCollectionV1ItemByCollectionName,
   // collections v2 asset (hex)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}': resolveCollectionV2Asset,
   // collections v2 item (by collection hex and token id)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id(0x[a-fA-F0-9]+)}:{tokenId([0-9]+)}':
-    resolveCollectionV2AssetTokenId,
+    resolveCollectionV2Item,
   // collections v2 asset (id)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}': resolveCollectionV2Asset,
   // collections v2 item (by collection asset and token id)
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}:{id([0-9]+)}:{tokenId([0-9]+)}':
-    resolveCollectionV2AssetTokenId,
+    resolveCollectionV2Item,
   // collections v1 (by contract)
   'decentraland:{network}:collections-v1:{contract(0x[a-fA-F0-9]+)}': resolveCollectionV1,
   // collections v1 (by name)
@@ -234,7 +233,7 @@ export async function resolveCollectionV1AssetByCollectionName(
   }
 }
 
-export async function resolveCollectionV1AssetByCollectionNameTokenId(
+export async function resolveCollectionV1ItemByCollectionName(
   uri: URL,
   groups: Record<'network' | 'collectionName' | 'name' | 'tokenId', string>
 ): Promise<BlockchainCollectionV1Item | undefined> {
@@ -283,7 +282,7 @@ export async function resolveCollectionV1Asset(
   return result
 }
 
-export async function resolveCollectionV1AssetTokenId(
+export async function resolveCollectionV1Item(
   uri: URL,
   groups: Record<'network' | 'contract' | 'name' | 'tokenId', string>
 ): Promise<BlockchainCollectionV1Item | undefined> {
@@ -335,7 +334,7 @@ export async function resolveCollectionV2Asset(
   return result
 }
 
-export async function resolveCollectionV2AssetTokenId(
+export async function resolveCollectionV2Item(
   uri: URL,
   groups: Record<'network' | 'contract' | 'id' | 'tokenId', string>
 ): Promise<BlockchainCollectionV2Item | undefined> {

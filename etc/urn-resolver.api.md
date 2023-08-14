@@ -110,6 +110,15 @@ export type EntityV3Asset = {
     baseUrl?: string;
 };
 
+// @public
+export function getTokenIdAndAssetUrn(completeUrn: string): {
+    assetUrn: string;
+    tokenId: string;
+};
+
+// @public
+export function isExtendedUrn(asset: DecentralandAssetIdentifier): boolean;
+
 // @public (undocumented)
 export namespace LandUtils {
     // (undocumented)
