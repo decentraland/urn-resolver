@@ -70,6 +70,9 @@ export type BlockchainCollectionV1Asset = {
  */
 export type BlockchainCollectionV1Item = Omit<BlockchainCollectionV1Asset, 'type'> & {
   type: 'blockchain-collection-v1-item'
+  /**
+   * Asset identifier for ERC721 contracts
+   */
   tokenId: string
 }
 
@@ -113,6 +116,9 @@ export type BlockchainCollectionV2Asset = BaseBlockchainAsset & {
  */
 export type BlockchainCollectionV2Item = Omit<BlockchainCollectionV2Asset, 'type'> & {
   type: 'blockchain-collection-v2-item'
+  /**
+   * Asset identifier for ERC721 contracts
+   */
   tokenId: string
 }
 

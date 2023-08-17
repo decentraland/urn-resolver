@@ -4,6 +4,8 @@ export * from './types'
 export { LandUtils } from './land-utils'
 import { resolveContentUrl, ResolversOptions } from './content-url-resolver'
 export { resolveContentUrl, ResolversOptions }
+export { isExtendedUrn, getTokenIdAndAssetUrn } from './collection-items-utils'
+
 /**
  * Function that parses an URN and returns a DecentralandAssetIdentifier record or null.
  * @public
