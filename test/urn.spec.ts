@@ -394,6 +394,31 @@ describe('Basic use cases', function () {
       type: 'blockchain-asset',
       uri: new URL('urn:decentraland:matic:erc721:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:111111111111111111')
     })
+
+    expect(
+      await parseUrn('urn:decentraland:matic:collections-v2:0xdd3fb51e6167c36a2bed5fe41c950b92780de69b:0:9')
+    ).toEqual({
+      blockchain: 'ethereum',
+      contractAddress: '0xdd3fb51e6167c36a2bed5fe41c950b92780de69b',
+      id: '0',
+      tokenId: '9',
+      namespace: 'decentraland',
+      network: 'matic',
+      type: 'blockchain-collection-v2-item',
+      uri: new URL('urn:decentraland:matic:collections-v2:0xdd3fb51e6167c36a2bed5fe41c950b92780de69b:0:9')
+    })
+
+    expect(
+      await parseUrn('urn:decentraland:matic:collections-v2:0xdd3fb51e6167c36a2bed5fe41c950b92780de69b:0')
+    ).toEqual({
+      blockchain: 'ethereum',
+      contractAddress: '0xdd3fb51e6167c36a2bed5fe41c950b92780de69b',
+      id: '0',
+      namespace: 'decentraland',
+      network: 'matic',
+      type: 'blockchain-collection-v2-asset',
+      uri: new URL('urn:decentraland:matic:collections-v2:0xdd3fb51e6167c36a2bed5fe41c950b92780de69b:0')
+    })
   })
 
   testValidUrnToInclude('urn:decentraland:off-chain:base-avatars:f_sweater', {

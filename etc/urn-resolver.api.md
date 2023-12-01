@@ -113,7 +113,7 @@ export type EntityV3Asset = {
 // @public
 export function getTokenIdAndAssetUrn(completeUrn: string): {
     assetUrn: string;
-    tokenId: string;
+    tokenId: string | undefined;
 };
 
 // @public

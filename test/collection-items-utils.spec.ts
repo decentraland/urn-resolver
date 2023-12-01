@@ -60,4 +60,20 @@ describe('getTokenIdAndAssetUrn should', () => {
     expect(assetUrn).toBe(expectedUrn)
     expect(tokenId).toBe(expectedTokenId)
   })
+
+  it('correctly return the urn from the token id when splitting an Collection V1 Item URN', () => {
+    const expectedUrn = 'urn:decentraland:ethereum:collections-v1:rtfkt_x_atari:p_rtfkt_x_atari_feet'
+    const { assetUrn, tokenId } = getTokenIdAndAssetUrn(`${expectedUrn}`)
+
+    expect(assetUrn).toBe(expectedUrn)
+    expect(tokenId).toBe(undefined)
+  })
+
+  it('correctly return the urn from the token id when splitting an Collection V2 Item URN', () => {
+    const expectedUrn = 'urn:decentraland:mumbai:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0'
+    const { assetUrn, tokenId } = getTokenIdAndAssetUrn(`${expectedUrn}`)
+
+    expect(assetUrn).toBe(expectedUrn)
+    expect(tokenId).toBe(undefined)
+  })
 })
