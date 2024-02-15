@@ -286,5 +286,12 @@ export =
     "symbol": "DCLRLSTHKRKN",
     "isApproved": null,
     "isCompleted": true
+  },
+  {
+    "id": "0x51e0b1afe5da0c038fc93a3fc8e11cf7a238b40b",
+    "name": "dcl://dg_atari_dillon_francis",
+    "symbol": "DCLDGTRDLLNFRCS",
+    "isApproved": null,
+    "isCompleted": true
   }
 ]
