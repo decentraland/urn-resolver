@@ -149,6 +149,10 @@ export async function resolveLegacyDclUrl(uri: URL): Promise<DecentralandAssetId
       return internalResolver(`urn:decentraland:off-chain:base-avatars:${path[0]}`)
     }
 
+    if (host === 'base-emotes') {
+      return internalResolver(`urn:decentraland:off-chain:base-emotes:${path[0]}`)
+    }
+
     if (tokenId && tokenIdPattern.test(tokenId)) {
       return internalResolver(`urn:decentraland:ethereum:collections-v1:${host}:${path[0]}:${tokenId}`)
     } else {
