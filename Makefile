@@ -21,7 +21,7 @@ update-contracts:
 		-X POST \
 		-H "Content-Type: application/json" \
 		--data '{ "query": "{collections {id,name,symbol,isApproved,isCompleted}}"}' \
-		-s https://api.thegraph.com/subgraphs/name/decentraland/collections | jq '.data.collections' >> src/collections-v1.ts
+		-s https://subgraph.decentraland.org/collections-ethereum-mainnet | jq '.data.collections' >> src/collections-v1.ts
 
 build: update-contracts
 	@echo 'Compiling TypeScript...'
