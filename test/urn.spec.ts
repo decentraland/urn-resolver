@@ -299,6 +299,33 @@ describe('Basic use cases', function () {
     type: 'blockchain-collection-third-party-name'
   })
 
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+    collectionId: 'summerCollection',
+    itemId: 'hat',
+    blockchain: 'ethereum',
+    thirdPartyName: 'aThirdParty',
+    network: 'amoy',
+    type: 'blockchain-collection-third-party'
+  })
+
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:winterCollection', {
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+    collectionId: 'winterCollection',
+    blockchain: 'ethereum',
+    thirdPartyName: 'aThirdParty',
+    network: 'amoy',
+    type: 'blockchain-collection-third-party-collection'
+  })
+
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty', {
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+    blockchain: 'ethereum',
+    thirdPartyName: 'aThirdParty',
+    network: 'amoy',
+    type: 'blockchain-collection-third-party-name'
+  })
+
   // TODO: Add this when matic has the contract for TPW too
   // testValidUrnToInclude("urn:decentraland:matic:collections-thirdparty:aThirdParty:summerCollection:hat", {
   //   contractAddress: "0xC6349360CF0143Bf54FDC376060532C044883b8C",
