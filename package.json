@@ -11,7 +11,7 @@
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
     "lint:check": "eslint '**/*.{js,ts}'",
     "lint:fix": "eslint '**/*.{js,ts}' --fix"
-  },
+  },  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decentraland/urn-resolver.git"
