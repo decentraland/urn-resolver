@@ -9,7 +9,6 @@
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -p tsconfig.json --watch",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
-    "test-old": "export TS_NODE_PROJECT='./test/tsconfig.json'; node --require ts-node/register --async-stack-traces --experimental-modules node_modules/.bin/_mocha --timeout 10000 --reporter spec",
     "lint:check": "eslint '**/*.{js,ts}'",
     "lint:fix": "eslint '**/*.{js,ts}' --fix"
   },
@@ -32,10 +31,8 @@
   },
   "homepage": "https://github.com/decentraland/urn-resolver#readme",
   "devDependencies": {
-    "@dcl/eslint-config": "^2.0.0",
-    "@microsoft/api-extractor": "^7.18.4",
+    "@dcl/eslint-config": "^2.1.0",
     "@types/jest": "^29.5.12",
-    "@types/mocha": "^10.0.1",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.5",
     "ts-node": "^10.9.2",
