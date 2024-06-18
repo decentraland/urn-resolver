@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "make build",
-    "test": "make test",
+    "prebuild": "make update-contracts",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "test": "export TS_NODE_PROJECT='./test/tsconfig.json'; node --require ts-node/register --async-stack-traces --experimental-modules node_modules/.bin/_mocha --timeout 10000 --reporter spec",
     "lint:check": "eslint '**/*.{js,ts}'",
     "lint:fix": "eslint '**/*.{js,ts}' --fix"
   },
