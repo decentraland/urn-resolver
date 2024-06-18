@@ -1,4 +1,3 @@
-import expect from 'expect'
 import { LandUtils } from '../src'
 
 function testValidPositionParsingAndGeneration(tokenId: string, x: number, y: number) {

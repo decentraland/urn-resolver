@@ -1,4 +1,3 @@
-import expect from 'expect'
 import { RFC2141 } from 'urn-lib'
 import { DecentralandAssetIdentifier, parseUrn } from '../src'
 import { resolveEthereumAsset } from '../src/resolvers'

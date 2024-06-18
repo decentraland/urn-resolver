@@ -23,16 +23,4 @@ update-contracts:
 		--data '{ "query": "{collections {id,name,symbol,isApproved,isCompleted}}"}' \
 		-s https://subgraph.decentraland.org/collections-ethereum-mainnet | jq '.data.collections' >> src/collections-v1.ts
 
-build: update-contracts
-	@echo 'Compiling TypeScript...'
-	@./node_modules/.bin/tsc -p tsconfig.json
-	@rm -rf node_modules/@microsoft/api-extractor/node_modules/typescript || true
-	@echo 'Analyzing generated types...'
-	@./node_modules/.bin/api-extractor run $(LOCAL_ARG) --typescript-compiler-folder ./node_modules/typescript
-
-test:
-	export TS_NODE_PROJECT='./test/tsconfig.json'; node $(INSPECT) --require ts-node/register --async-stack-traces --experimental-modules node_modules/.bin/_mocha --timeout 10000 --reporter spec
-
-ci: | build test
-
 .PHONY: build test
