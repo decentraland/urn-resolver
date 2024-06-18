@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "make update-contracts",
+    "prebuild": "./update-contracts.sh",
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -p tsconfig.json --watch",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
