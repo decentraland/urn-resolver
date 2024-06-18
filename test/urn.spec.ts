@@ -17,7 +17,16 @@ describe('Basic use cases', function () {
   })
 
   it('Print LAND resolution for readme', async () => {
-    console.log(await parseUrn('urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111'))
+    expect(await parseUrn('urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111')).toMatchObject({
+      blockchain: 'ethereum',
+      contractAddress: '0x42f4ba48791e2de32f5fbf553441c2672864bb33',
+      id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
+      namespace: 'decentraland',
+      network: 'sepolia',
+      type: 'blockchain-asset',
+      x: -10,
+      y: -13
+    })
   })
 
   it('test land', async () => {

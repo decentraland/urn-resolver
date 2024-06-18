@@ -68,7 +68,10 @@ describe('Content url generation', function () {
     'https://localhost:7666/content/entities/scene?pointer=13,-137',
     { contentServerHost: 'localhost:7666' }
   )
-  testFor('urn:decentraland:sepolia:LAND:-10,-13', 'https://peer.decentraland.zone/content/entities/scene?pointer=-10,-13')
+  testFor(
+    'urn:decentraland:sepolia:LAND:-10,-13',
+    'https://peer.decentraland.zone/content/entities/scene?pointer=-10,-13'
+  )
 
   testFor(
     'urn:decentraland:ethereum:collections-v1:community_contest:cw_bell_attendant_hat',
