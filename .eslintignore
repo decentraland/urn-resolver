@@ -1,8 +1,6 @@
 coverage/
 dist/
 node_modules/
-**/dist
-**/node_modules
 tmpbin
 jest.config.js
 src/contracts.ts
