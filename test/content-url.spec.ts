@@ -1,4 +1,3 @@
-import expect from 'expect'
 import { RFC2141 } from 'urn-lib'
 import { ResolversOptions, resolveUrlFromUrn } from '../src'
 

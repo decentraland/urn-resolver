@@ -1,4 +1,3 @@
-import expect from 'expect'
 import { getTokenIdAndAssetUrn, isExtendedUrn, parseUrn } from '../src'
 
 describe('isExtendedUrn should', () => {
