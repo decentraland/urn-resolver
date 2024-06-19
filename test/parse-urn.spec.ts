@@ -1,6 +1,19 @@
 import { RFC2141 } from 'urn-lib'
-import { DecentralandAssetIdentifier, parseUrn } from '../src'
+import {
+  BlockchainCollectionLinkedWearableAsset,
+  BlockchainCollectionLinkedWearablesCollection,
+  BlockchainCollectionLinkedWearablesItem,
+  BlockchainCollectionLinkedWearablesName,
+  BlockchainCollectionThirdParty,
+  BlockchainCollectionThirdPartyCollection,
+  BlockchainCollectionThirdPartyName,
+  DecentralandAssetIdentifier,
+  parseUrn,
+  ResolversOptions,
+  resolveUrlFromUrn
+} from '../src'
 import { resolveEthereumAsset } from '../src/resolvers'
+import expect from 'expect'
 
 let counter = 0
 
@@ -11,78 +24,82 @@ function testValidUrnToInclude(urn: string, toInclude: Partial<DecentralandAsset
   })
 }
 
-describe('Basic use cases', function () {
+describe('Tests for parseUrn function', function () {
   it('test unknown', async () => {
     expect(await parseUrn('urn:test')).toEqual(null)
   })
 
-  it('Print LAND resolution for readme', async () => {
-    expect(await parseUrn('urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111')).toMatchObject({
-      blockchain: 'ethereum',
-      contractAddress: '0x42f4ba48791e2de32f5fbf553441c2672864bb33',
-      id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
-      namespace: 'decentraland',
-      network: 'sepolia',
-      type: 'blockchain-asset',
-      x: -10,
-      y: -13
-    })
-  })
-
-  it('test land', async () => {
-    expect(
-      await resolveEthereumAsset(new URL('urn:decentraland:ethereum:LANDPROXY:0x1'), {
-        contract: 'LANDPROXY',
-        network: 'ethereum',
-        tokenId: '0x1'
+  describe('land urns', () => {
+    it('Print LAND resolution for readme', async () => {
+      expect(await parseUrn('urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111')).toMatchObject({
+        blockchain: 'ethereum',
+        contractAddress: '0x42f4ba48791e2de32f5fbf553441c2672864bb33',
+        id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
+        namespace: 'decentraland',
+        network: 'sepolia',
+        type: 'blockchain-asset',
+        x: -10,
+        y: -13
       })
-    ).toMatchObject({
-      contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
-      network: 'mainnet',
-      blockchain: 'ethereum',
-      type: 'blockchain-asset',
-      id: '0x1'
+    })
+
+    it('test land', async () => {
+      expect(
+        await resolveEthereumAsset(new URL('urn:decentraland:ethereum:LANDPROXY:0x1'), {
+          contract: 'LANDPROXY',
+          network: 'ethereum',
+          tokenId: '0x1'
+        })
+      ).toMatchObject({
+        contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        network: 'mainnet',
+        blockchain: 'ethereum',
+        type: 'blockchain-asset',
+        id: '0x1'
+      })
+    })
+
+    it('test land (query string)', async () => {
+      const t = await parseUrn('urn:decentraland:sepolia:LAND:0x1?atBlock=151231111#4')
+      expect(t).toHaveProperty('uri')
+      expect(t.uri.toString()).toEqual('urn:decentraland:sepolia:LAND:0x1?atBlock=151231111#4')
+    })
+
+    // it("test land (address)", async () => {
+    //   expect(await parseUrn("urn:decentraland:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1")).toMatchObject({
+    //     contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
+    //     type: "blockchain-asset",
+    //     network: "mainnet",
+    //     id: "0x1",
+    //   })
+    // })
+
+    it('test land (sepolia)', async () => {
+      expect(await parseUrn('urn:decentraland:sepolia:LAND:0x1')).toMatchObject({
+        contractAddress: '0x42f4ba48791e2de32f5fbf553441c2672864bb33',
+        blockchain: 'ethereum',
+        network: 'sepolia',
+        id: '0x1'
+      })
+    })
+
+    it('test land (mainnet) upper case', async () => {
+      expect(await parseUrn('urn:decentraland:ETHEREUM:LAND:0x1')).toMatchObject({
+        contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        blockchain: 'ethereum',
+        network: 'mainnet',
+        id: '0x1'
+      })
     })
   })
 
-  it('test land (query string)', async () => {
-    const t = await parseUrn('urn:decentraland:sepolia:LAND:0x1?atBlock=151231111#4')
-    expect(t).toHaveProperty('uri')
-    expect(t.uri.toString()).toEqual('urn:decentraland:sepolia:LAND:0x1?atBlock=151231111#4')
-  })
-
-  // it("test land (address)", async () => {
-  //   expect(await parseUrn("urn:decentraland:ethereum:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x1")).toMatchObject({
-  //     contractAddress: "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d",
-  //     type: "blockchain-asset",
-  //     network: "mainnet",
-  //     id: "0x1",
-  //   })
-  // })
-
-  it('test land (sepolia)', async () => {
-    expect(await parseUrn('urn:decentraland:sepolia:LAND:0x1')).toMatchObject({
-      contractAddress: '0x42f4ba48791e2de32f5fbf553441c2672864bb33',
-      blockchain: 'ethereum',
-      network: 'sepolia',
-      id: '0x1'
-    })
-  })
-
-  it('test land (mainnet) upper case', async () => {
-    expect(await parseUrn('urn:decentraland:ETHEREUM:LAND:0x1')).toMatchObject({
-      contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
-      blockchain: 'ethereum',
-      network: 'mainnet',
-      id: '0x1'
-    })
-  })
-
-  it('portable experiences', async () => {
-    expect(await parseUrn('urn:decentraland:off-chain:static-portable-experiences:quest-1')).toMatchObject({
-      id: 'quest-1',
-      registry: 'static-portable-experiences',
-      type: 'off-chain'
+  describe('off-chain registries', () => {
+    it('portable experiences', async () => {
+      expect(await parseUrn('urn:decentraland:off-chain:static-portable-experiences:quest-1')).toMatchObject({
+        id: 'quest-1',
+        registry: 'static-portable-experiences',
+        type: 'off-chain'
+      })
     })
   })
 
@@ -219,7 +236,7 @@ describe('Basic use cases', function () {
   })
   testValidUrnToInclude(
     'urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:123456789',
-    {}
+    { id: '123456789' }
   )
   testValidUrnToInclude(
     'urn:decentraland:ethereum:collections-v2:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:0x000011111111111abcdef9087654321',
@@ -335,16 +352,15 @@ describe('Basic use cases', function () {
     type: 'blockchain-collection-third-party-name'
   })
 
-  // TODO: Add this when matic has the contract for TPW too
-  // testValidUrnToInclude("urn:decentraland:matic:collections-thirdparty:aThirdParty:summerCollection:hat", {
-  //   contractAddress: "0xC6349360CF0143Bf54FDC376060532C044883b8C",
-  //   collectionId: "summerCollection",
-  //   itemId: "hat",
-  //   blockchain: "ethereum",
-  //   thirdPartyName: "aThirdParty",
-  //   network: "matic",
-  //   type: "blockchain-collection-third-party"
-  // })
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+    collectionId: 'summerCollection',
+    itemId: 'hat',
+    blockchain: 'ethereum',
+    thirdPartyName: 'aThirdParty',
+    network: 'amoy',
+    type: 'blockchain-collection-third-party'
+  })
 
   it('legacy address (base-avatars)', async () => {
     expect(await parseUrn('dcl://base-avatars/eyes_03')).toMatchObject({
@@ -436,5 +452,71 @@ describe('Basic use cases', function () {
     type: 'off-chain',
     id: 'f_sweater',
     registry: 'base-avatars'
+  })
+
+  describe('test linked wearables', () => {
+    const testCases: DecentralandAssetIdentifier[] = [
+      {
+        namespace: 'decentraland',
+        uri: new URL('urn:decentraland:matic:collections-linked-wearables:aThirdParty'),
+        blockchain: 'ethereum',
+        network: 'matic',
+        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
+        type: 'blockchain-collection-linked-wearables-name',
+        thirdPartyName: 'aThirdParty'
+      } as BlockchainCollectionLinkedWearablesName,
+      {
+        namespace: 'decentraland',
+        uri: new URL(
+          'urn:decentraland:matic:collections-linked-wearables:aThirdParty:mainnet:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d'
+        ),
+        blockchain: 'ethereum',
+        network: 'matic',
+        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
+        type: 'blockchain-collection-linked-wearables-collection',
+        thirdPartyName: 'aThirdParty',
+        contractAddressChain: 'mainnet',
+        collectionId: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d'
+      } as BlockchainCollectionLinkedWearablesCollection,
+      {
+        namespace: 'decentraland',
+        uri: new URL(
+          'urn:decentraland:matic:collections-linked-wearables:aThirdParty:mainnet:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:some_asset_id'
+        ),
+        blockchain: 'ethereum',
+        network: 'matic',
+        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
+        type: 'blockchain-collection-linked-wearables-asset',
+        thirdPartyName: 'aThirdParty',
+        contractAddressChain: 'mainnet',
+        collectionId: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        id: 'some_asset_id'
+      } as BlockchainCollectionLinkedWearableAsset,
+      {
+        namespace: 'decentraland',
+        uri: new URL(
+          'urn:decentraland:matic:collections-linked-wearables:aThirdParty:mainnet:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:some_asset_id:123456789'
+        ),
+        blockchain: 'ethereum',
+        network: 'matic',
+        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
+        type: 'blockchain-collection-linked-wearables-item',
+        thirdPartyName: 'aThirdParty',
+        contractAddressChain: 'mainnet',
+        collectionId: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        id: 'some_asset_id',
+        tokenId: '123456789'
+      } as BlockchainCollectionLinkedWearablesItem
+    ]
+
+    const cases: [string, DecentralandAssetIdentifier][] = testCases.map((asset: DecentralandAssetIdentifier) => [
+      asset.uri.href,
+      asset
+    ])
+
+    test.each(cases)(`rendering %s`, async (urn: string, data: DecentralandAssetIdentifier) => {
+      expect(RFC2141.parse(urn)).toBeTruthy()
+      expect(await parseUrn(urn)).toMatchObject(data)
+    })
   })
 })

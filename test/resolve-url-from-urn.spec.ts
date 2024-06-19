@@ -1,7 +1,7 @@
 import { RFC2141 } from 'urn-lib'
-import { ResolversOptions, resolveUrlFromUrn } from '../src'
+import { parseUrn, ResolversOptions, resolveUrlFromUrn } from '../src'
 
-describe('Content url generation', function () {
+describe('Tests for resolveUrlFromUrn function', function () {
   describe('without passing resolver options', () => {
     const cases: [string, string | null][] = [
       ['decentraland:off-chain:something:something-else', null],
@@ -78,6 +78,10 @@ describe('Content url generation', function () {
       [
         'urn:decentraland:ethereum:collections-v1:0x32b7495895264ac9d0b12d32afd435453458b1c6:cw_bell_attendant_hat',
         'https://wearable-api.decentraland.org/v2/collections/community_contest/wearables/cw_bell_attendant_hat'
+      ],
+      [
+        'dcl://halloween_2019/bride_of_frankie_earring',
+        'https://wearable-api.decentraland.org/v2/collections/halloween_2019/wearables/bride_of_frankie_earring'
       ]
     ]
 

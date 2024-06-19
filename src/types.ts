@@ -1,7 +1,6 @@
 /**
  * @public
  */
-
 export type BaseBlockchainAsset = {
   namespace: 'decentraland'
   uri: URL
@@ -168,6 +167,59 @@ export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
 }
 
 /**
+ * @alpha
+ */
+export type BlockchainCollectionLinkedWearablesName = BaseBlockchainAsset & {
+  namespace: 'decentraland'
+  type: 'blockchain-collection-linked-wearables-name'
+
+  /**
+   * Third party name (as defined in the TPR smart contract)
+   */
+  thirdPartyName: string
+}
+
+/**
+ * @alpha
+ */
+export type BlockchainCollectionLinkedWearablesCollection = Omit<BlockchainCollectionLinkedWearablesName, 'type'> & {
+  namespace: 'decentraland'
+  type: 'blockchain-collection-linked-wearables-collection'
+
+  /**
+   * The blockchain where the contract is deployed
+   */
+  contractAddressChain: string
+  /**
+   * Contract address of the collection
+   */
+  collectionId: string
+}
+
+/**
+ * @alpha
+ */
+export type BlockchainCollectionLinkedWearableAsset = Omit<BlockchainCollectionLinkedWearablesCollection, 'type'> & {
+  namespace: 'decentraland'
+  type: 'blockchain-collection-linked-wearables-asset'
+
+  thirdPartyName: string
+  collectionId: string
+  contractAddressChain: string
+  id: string
+}
+
+/**
+ * @alpha
+ */
+export type BlockchainCollectionLinkedWearablesItem = Omit<BlockchainCollectionLinkedWearableAsset, 'type'> & {
+  namespace: 'decentraland'
+  type: 'blockchain-collection-linked-wearables-item'
+
+  tokenId: string
+}
+
+/**
  * @public
  */
 export type OffChainAsset = {
@@ -218,3 +270,7 @@ export type DecentralandAssetIdentifier =
   | BlockchainCollectionThirdPartyName
   | BlockchainCollectionThirdPartyCollection
   | BlockchainCollectionThirdParty
+  | BlockchainCollectionLinkedWearablesName
+  | BlockchainCollectionLinkedWearablesCollection
+  | BlockchainCollectionLinkedWearableAsset
+  | BlockchainCollectionLinkedWearablesItem
