@@ -280,30 +280,31 @@ describe('Basic use cases', function () {
     id: 'maddona-modern-life'
   })
 
-  testValidUrnToInclude('urn:decentraland:mumbai:collections-thirdparty:aThirdParty:summerCollection:hat', {
-    contractAddress: '0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2',
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     collectionId: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
     thirdPartyName: 'aThirdParty',
-    network: 'mumbai',
+    network: 'amoy',
     type: 'blockchain-collection-third-party'
   })
 
-  testValidUrnToInclude('urn:decentraland:mumbai:collections-thirdparty:aThirdParty:winterCollection', {
-    contractAddress: '0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2',
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:winterCollection', {
+    namespace: 'decentraland',
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     collectionId: 'winterCollection',
     blockchain: 'ethereum',
     thirdPartyName: 'aThirdParty',
-    network: 'mumbai',
+    network: 'amoy',
     type: 'blockchain-collection-third-party-collection'
   })
 
-  testValidUrnToInclude('urn:decentraland:mumbai:collections-thirdparty:aThirdParty', {
-    contractAddress: '0x3CFe76fbf8E2868075c10161667ab3Fea19cA8D2',
+  testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty', {
+    contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     blockchain: 'ethereum',
     thirdPartyName: 'aThirdParty',
-    network: 'mumbai',
+    network: 'amoy',
     type: 'blockchain-collection-third-party-name'
   })
 
