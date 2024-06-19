@@ -69,13 +69,13 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // resolve linked wearable provider names
   'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}': resolveLinkedWearableProviderName,
   // resolve linked wearable collections
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId}':
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}':
     resolveLinkedWearableCollection,
   // resolve linked wearable assets
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId}:{itemId}':
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}':
     resolveLinkedWearableCollectionAsset,
   // resolve linked wearable items
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId}:{itemId}:{tokenId([0-9]+)}':
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}:{tokenId([0-9]+)}':
     resolveLinkedWearableCollectionItem,
 
   // resolve 721 assets
