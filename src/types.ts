@@ -202,7 +202,7 @@ export type BlockchainCollectionLinkedWearablesCollection = Omit<
 /**
  * @alpha
  */
-export type BlockchainCollectionLinkedWearableAsset = Omit<BlockchainCollectionLinkedWearablesCollection, 'type'> & {
+export type BlockchainCollectionLinkedWearablesAsset = Omit<BlockchainCollectionLinkedWearablesCollection, 'type'> & {
   namespace: 'decentraland'
   type: 'blockchain-collection-linked-wearables-asset'
 
@@ -212,7 +212,7 @@ export type BlockchainCollectionLinkedWearableAsset = Omit<BlockchainCollectionL
 /**
  * @alpha
  */
-export type BlockchainCollectionLinkedWearablesItem = Omit<BlockchainCollectionLinkedWearableAsset, 'type'> & {
+export type BlockchainCollectionLinkedWearablesItem = Omit<BlockchainCollectionLinkedWearablesAsset, 'type'> & {
   namespace: 'decentraland'
   type: 'blockchain-collection-linked-wearables-item'
 
@@ -272,5 +272,5 @@ export type DecentralandAssetIdentifier =
   | BlockchainCollectionThirdParty
   | BlockchainCollectionLinkedWearablesProvider
   | BlockchainCollectionLinkedWearablesCollection
-  | BlockchainCollectionLinkedWearableAsset
+  | BlockchainCollectionLinkedWearablesAsset
   | BlockchainCollectionLinkedWearablesItem

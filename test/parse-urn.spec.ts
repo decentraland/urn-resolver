@@ -1,6 +1,6 @@
 import { RFC2141 } from 'urn-lib'
 import {
-  BlockchainCollectionLinkedWearableAsset,
+  BlockchainCollectionLinkedWearablesAsset,
   BlockchainCollectionLinkedWearablesCollection,
   BlockchainCollectionLinkedWearablesItem,
   BlockchainCollectionLinkedWearablesProvider,
@@ -477,7 +477,7 @@ describe('Tests for parseUrn function', function () {
         linkedWearableContractAddressChain: 'mainnet',
         linkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
         id: 'some_asset_id'
-      } as BlockchainCollectionLinkedWearableAsset,
+      } as BlockchainCollectionLinkedWearablesAsset,
       {
         namespace: 'decentraland',
         uri: new URL(

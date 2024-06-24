@@ -17,7 +17,7 @@ import {
   BlockchainCollectionV2Item,
   BlockchainCollectionLinkedWearablesProvider,
   BlockchainCollectionLinkedWearablesCollection,
-  BlockchainCollectionLinkedWearableAsset,
+  BlockchainCollectionLinkedWearablesAsset,
   BlockchainCollectionLinkedWearablesItem
 } from './types'
 
@@ -584,8 +584,8 @@ export async function resolveLinkedWearableCollection(
 export async function resolveLinkedWearableAsset(
   uri: URL,
   groups: Record<'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId', string>
-): Promise<BlockchainCollectionLinkedWearableAsset | undefined> {
-  let result: BlockchainCollectionLinkedWearableAsset | undefined = undefined
+): Promise<BlockchainCollectionLinkedWearablesAsset | undefined> {
+  let result: BlockchainCollectionLinkedWearablesAsset | undefined = undefined
   if (!isValidNetwork(groups.network)) return
 
   const contract = await getContract(groups.network, 'TPR')
