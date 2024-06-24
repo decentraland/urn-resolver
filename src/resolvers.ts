@@ -67,16 +67,16 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}': resolveThirdPartyCollection,
 
   // resolve linked wearable provider names
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}': resolveLinkedWearableProviderName,
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}': resolveLinkedWearableProvider,
   // resolve linked wearable collections
   'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}':
     resolveLinkedWearableCollection,
   // resolve linked wearable assets
   'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}':
-    resolveLinkedWearableCollectionAsset,
+    resolveLinkedWearableAsset,
   // resolve linked wearable items
   'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}:{tokenId([0-9]+)}':
-    resolveLinkedWearableCollectionItem,
+    resolveLinkedWearableItem,
 
   // resolve 721 assets
   'decentraland:{network}:erc721:{contract(0x[a-fA-F0-9]+)}:{tokenId}': resolveErc721Asset
@@ -531,7 +531,7 @@ export async function resolveThirdPartyCollectionOnlyCollection(
   return result
 }
 
-export async function resolveLinkedWearableProviderName(
+export async function resolveLinkedWearableProvider(
   uri: URL,
   groups: Record<'network' | 'linkedWearableProvider', string>
 ): Promise<BlockchainCollectionLinkedWearablesProvider | undefined> {
@@ -581,7 +581,7 @@ export async function resolveLinkedWearableCollection(
   return result
 }
 
-export async function resolveLinkedWearableCollectionAsset(
+export async function resolveLinkedWearableAsset(
   uri: URL,
   groups: Record<'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId', string>
 ): Promise<BlockchainCollectionLinkedWearableAsset | undefined> {
@@ -608,7 +608,7 @@ export async function resolveLinkedWearableCollectionAsset(
   return result
 }
 
-export async function resolveLinkedWearableCollectionItem(
+export async function resolveLinkedWearableItem(
   uri: URL,
   groups: Record<
     'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId' | 'tokenId',
