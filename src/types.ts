@@ -169,9 +169,9 @@ export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
 /**
  * @alpha
  */
-export type BlockchainCollectionLinkedWearablesName = BaseBlockchainAsset & {
+export type BlockchainCollectionLinkedWearablesProvider = BaseBlockchainAsset & {
   namespace: 'decentraland'
-  type: 'blockchain-collection-linked-wearables-name'
+  type: 'blockchain-collection-linked-wearables-provider'
 
   /**
    * Third Linked Wearable Provider (as defined in the TPR smart contract: thirdPartyName)
@@ -182,7 +182,10 @@ export type BlockchainCollectionLinkedWearablesName = BaseBlockchainAsset & {
 /**
  * @alpha
  */
-export type BlockchainCollectionLinkedWearablesCollection = Omit<BlockchainCollectionLinkedWearablesName, 'type'> & {
+export type BlockchainCollectionLinkedWearablesCollection = Omit<
+  BlockchainCollectionLinkedWearablesProvider,
+  'type'
+> & {
   namespace: 'decentraland'
   type: 'blockchain-collection-linked-wearables-collection'
 
@@ -267,7 +270,7 @@ export type DecentralandAssetIdentifier =
   | BlockchainCollectionThirdPartyName
   | BlockchainCollectionThirdPartyCollection
   | BlockchainCollectionThirdParty
-  | BlockchainCollectionLinkedWearablesName
+  | BlockchainCollectionLinkedWearablesProvider
   | BlockchainCollectionLinkedWearablesCollection
   | BlockchainCollectionLinkedWearableAsset
   | BlockchainCollectionLinkedWearablesItem

@@ -15,7 +15,7 @@ import {
   EntityV3Asset,
   BlockchainCollectionV1Item,
   BlockchainCollectionV2Item,
-  BlockchainCollectionLinkedWearablesName,
+  BlockchainCollectionLinkedWearablesProvider,
   BlockchainCollectionLinkedWearablesCollection,
   BlockchainCollectionLinkedWearableAsset,
   BlockchainCollectionLinkedWearablesItem
@@ -534,8 +534,8 @@ export async function resolveThirdPartyCollectionOnlyCollection(
 export async function resolveLinkedWearableProviderName(
   uri: URL,
   groups: Record<'network' | 'linkedWearableProvider', string>
-): Promise<BlockchainCollectionLinkedWearablesName | undefined> {
-  let result: BlockchainCollectionLinkedWearablesName | undefined = undefined
+): Promise<BlockchainCollectionLinkedWearablesProvider | undefined> {
+  let result: BlockchainCollectionLinkedWearablesProvider | undefined = undefined
   if (!isValidNetwork(groups.network)) return
 
   const contract = await getContract(groups.network, 'TPR')
@@ -545,7 +545,7 @@ export async function resolveLinkedWearableProviderName(
       namespace: 'decentraland',
       uri,
       blockchain: 'ethereum',
-      type: 'blockchain-collection-linked-wearables-name',
+      type: 'blockchain-collection-linked-wearables-provider',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
       linkedWearableProvider: groups.linkedWearableProvider,
       contractAddress: contract

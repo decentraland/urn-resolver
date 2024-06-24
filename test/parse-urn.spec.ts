@@ -3,7 +3,7 @@ import {
   BlockchainCollectionLinkedWearableAsset,
   BlockchainCollectionLinkedWearablesCollection,
   BlockchainCollectionLinkedWearablesItem,
-  BlockchainCollectionLinkedWearablesName,
+  BlockchainCollectionLinkedWearablesProvider,
   DecentralandAssetIdentifier,
   parseUrn
 } from '../src'
@@ -448,9 +448,9 @@ describe('Tests for parseUrn function', function () {
         blockchain: 'ethereum',
         network: 'matic',
         contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
-        type: 'blockchain-collection-linked-wearables-name',
+        type: 'blockchain-collection-linked-wearables-provider',
         linkedWearableProvider: 'aThirdParty'
-      } as BlockchainCollectionLinkedWearablesName,
+      } as BlockchainCollectionLinkedWearablesProvider,
       {
         namespace: 'decentraland',
         uri: new URL(
