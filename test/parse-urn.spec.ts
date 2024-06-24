@@ -285,10 +285,10 @@ describe('Tests for parseUrn function', function () {
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    linkedWearableContractAddress: 'summerCollection',
+    collectionId: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party'
   })
@@ -296,9 +296,9 @@ describe('Tests for parseUrn function', function () {
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:winterCollection', {
     namespace: 'decentraland',
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    linkedWearableContractAddress: 'winterCollection',
+    collectionId: 'winterCollection',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-collection'
   })
@@ -306,26 +306,26 @@ describe('Tests for parseUrn function', function () {
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-name'
   })
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    linkedWearableContractAddress: 'summerCollection',
+    collectionId: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party'
   })
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:winterCollection', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    linkedWearableContractAddress: 'winterCollection',
+    collectionId: 'winterCollection',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-collection'
   })
@@ -333,17 +333,17 @@ describe('Tests for parseUrn function', function () {
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-name'
   })
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    linkedWearableContractAddress: 'summerCollection',
+    collectionId: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
-    linkedWearableProvider: 'aThirdParty',
+    thirdPartyName: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party'
   })

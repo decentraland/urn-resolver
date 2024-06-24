@@ -140,8 +140,8 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-third-party'
 
-  linkedWearableProvider: string
-  linkedWearableContractAddress: string
+  thirdPartyName: string
+  collectionId: string
   itemId: string
 }
 
@@ -152,8 +152,8 @@ export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-third-party-collection'
 
-  linkedWearableProvider: string
-  linkedWearableContractAddress: string
+  thirdPartyName: string
+  collectionId: string
 }
 
 /**
@@ -163,7 +163,7 @@ export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-third-party-name'
 
-  linkedWearableProvider: string
+  thirdPartyName: string
 }
 
 /**

@@ -472,8 +472,8 @@ export async function resolveThirdPartyCollection(
       blockchain: 'ethereum',
       type: 'blockchain-collection-third-party',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      linkedWearableProvider: groups.thirdPartyName,
-      linkedWearableContractAddress: groups.collectionId,
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId,
       itemId: groups.itemId,
       contractAddress: contract
     }
@@ -498,7 +498,7 @@ export async function resolveThirdPartyCollectionName(
       blockchain: 'ethereum',
       type: 'blockchain-collection-third-party-name',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      linkedWearableProvider: groups.thirdPartyName,
+      thirdPartyName: groups.thirdPartyName,
       contractAddress: contract
     }
   }
@@ -522,8 +522,8 @@ export async function resolveThirdPartyCollectionOnlyCollection(
       blockchain: 'ethereum',
       type: 'blockchain-collection-third-party-collection',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      linkedWearableProvider: groups.thirdPartyName,
-      linkedWearableContractAddress: groups.collectionId,
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId,
       contractAddress: contract
     }
   }
