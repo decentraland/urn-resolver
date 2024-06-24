@@ -473,7 +473,7 @@ export async function resolveThirdPartyCollection(
       type: 'blockchain-collection-third-party',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
       linkedWearableProvider: groups.thirdPartyName,
-      LinkedWearableContractAddress: groups.collectionId,
+      linkedWearableContractAddress: groups.collectionId,
       itemId: groups.itemId,
       contractAddress: contract
     }
@@ -523,7 +523,7 @@ export async function resolveThirdPartyCollectionOnlyCollection(
       type: 'blockchain-collection-third-party-collection',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
       linkedWearableProvider: groups.thirdPartyName,
-      LinkedWearableContractAddress: groups.collectionId,
+      linkedWearableContractAddress: groups.collectionId,
       contractAddress: contract
     }
   }
@@ -574,7 +574,7 @@ export async function resolveLinkedWearableCollection(
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
       linkedWearableProvider: groups.linkedWearableProvider,
       linkedWearableContractAddressChain: groups.contractAddressChain,
-      LinkedWearableContractAddress: groups.collectionId
+      linkedWearableContractAddress: groups.collectionId
     }
   }
 
@@ -600,7 +600,7 @@ export async function resolveLinkedWearableCollectionAsset(
       contractAddress: contract,
       linkedWearableProvider: groups.linkedWearableProvider,
       linkedWearableContractAddressChain: groups.contractAddressChain,
-      LinkedWearableContractAddress: groups.collectionId,
+      linkedWearableContractAddress: groups.collectionId,
       id: groups.itemId
     }
   }
@@ -630,7 +630,7 @@ export async function resolveLinkedWearableCollectionItem(
       contractAddress: contract,
       linkedWearableProvider: groups.linkedWearableProvider,
       linkedWearableContractAddressChain: groups.contractAddressChain,
-      LinkedWearableContractAddress: groups.collectionId,
+      linkedWearableContractAddress: groups.collectionId,
       id: groups.itemId,
       tokenId: groups.tokenId
     }
