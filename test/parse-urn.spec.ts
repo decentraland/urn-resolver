@@ -4,13 +4,8 @@ import {
   BlockchainCollectionLinkedWearablesCollection,
   BlockchainCollectionLinkedWearablesItem,
   BlockchainCollectionLinkedWearablesName,
-  BlockchainCollectionThirdParty,
-  BlockchainCollectionThirdPartyCollection,
-  BlockchainCollectionThirdPartyName,
   DecentralandAssetIdentifier,
-  parseUrn,
-  ResolversOptions,
-  resolveUrlFromUrn
+  parseUrn
 } from '../src'
 import { resolveEthereumAsset } from '../src/resolvers'
 import expect from 'expect'
@@ -299,10 +294,10 @@ describe('Tests for parseUrn function', function () {
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    collectionId: 'summerCollection',
+    LinkedWearableContractAddress: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party'
   })
@@ -310,9 +305,9 @@ describe('Tests for parseUrn function', function () {
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:winterCollection', {
     namespace: 'decentraland',
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    collectionId: 'winterCollection',
+    LinkedWearableContractAddress: 'winterCollection',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-collection'
   })
@@ -320,26 +315,26 @@ describe('Tests for parseUrn function', function () {
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-name'
   })
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    collectionId: 'summerCollection',
+    LinkedWearableContractAddress: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party'
   })
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:winterCollection', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    collectionId: 'winterCollection',
+    LinkedWearableContractAddress: 'winterCollection',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-collection'
   })
@@ -347,17 +342,17 @@ describe('Tests for parseUrn function', function () {
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party-name'
   })
 
   testValidUrnToInclude('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat', {
     contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
-    collectionId: 'summerCollection',
+    LinkedWearableContractAddress: 'summerCollection',
     itemId: 'hat',
     blockchain: 'ethereum',
-    thirdPartyName: 'aThirdParty',
+    linkedWearableProvider: 'aThirdParty',
     network: 'amoy',
     type: 'blockchain-collection-third-party'
   })
@@ -463,7 +458,7 @@ describe('Tests for parseUrn function', function () {
         network: 'matic',
         contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
         type: 'blockchain-collection-linked-wearables-name',
-        thirdPartyName: 'aThirdParty'
+        linkedWearableProvider: 'aThirdParty'
       } as BlockchainCollectionLinkedWearablesName,
       {
         namespace: 'decentraland',
@@ -474,9 +469,9 @@ describe('Tests for parseUrn function', function () {
         network: 'matic',
         contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
         type: 'blockchain-collection-linked-wearables-collection',
-        thirdPartyName: 'aThirdParty',
-        contractAddressChain: 'mainnet',
-        collectionId: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d'
+        linkedWearableProvider: 'aThirdParty',
+        linkedWearableContractAddressChain: 'mainnet',
+        LinkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d'
       } as BlockchainCollectionLinkedWearablesCollection,
       {
         namespace: 'decentraland',
@@ -487,9 +482,9 @@ describe('Tests for parseUrn function', function () {
         network: 'matic',
         contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
         type: 'blockchain-collection-linked-wearables-asset',
-        thirdPartyName: 'aThirdParty',
-        contractAddressChain: 'mainnet',
-        collectionId: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        linkedWearableProvider: 'aThirdParty',
+        linkedWearableContractAddressChain: 'mainnet',
+        LinkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
         id: 'some_asset_id'
       } as BlockchainCollectionLinkedWearableAsset,
       {
@@ -501,9 +496,9 @@ describe('Tests for parseUrn function', function () {
         network: 'matic',
         contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
         type: 'blockchain-collection-linked-wearables-item',
-        thirdPartyName: 'aThirdParty',
-        contractAddressChain: 'mainnet',
-        collectionId: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        linkedWearableProvider: 'aThirdParty',
+        linkedWearableContractAddressChain: 'mainnet',
+        LinkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
         id: 'some_asset_id',
         tokenId: '123456789'
       } as BlockchainCollectionLinkedWearablesItem

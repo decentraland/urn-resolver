@@ -140,8 +140,8 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-third-party'
 
-  thirdPartyName: string
-  collectionId: string
+  linkedWearableProvider: string
+  LinkedWearableContractAddress: string
   itemId: string
 }
 
@@ -152,8 +152,8 @@ export type BlockchainCollectionThirdPartyCollection = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-third-party-collection'
 
-  thirdPartyName: string
-  collectionId: string
+  linkedWearableProvider: string
+  LinkedWearableContractAddress: string
 }
 
 /**
@@ -163,7 +163,7 @@ export type BlockchainCollectionThirdPartyName = BaseBlockchainAsset & {
   namespace: 'decentraland'
   type: 'blockchain-collection-third-party-name'
 
-  thirdPartyName: string
+  linkedWearableProvider: string
 }
 
 /**
@@ -174,9 +174,9 @@ export type BlockchainCollectionLinkedWearablesName = BaseBlockchainAsset & {
   type: 'blockchain-collection-linked-wearables-name'
 
   /**
-   * Third party name (as defined in the TPR smart contract)
+   * Third Linked Wearable Provider (as defined in the TPR smart contract: thirdPartyName)
    */
-  thirdPartyName: string
+  linkedWearableProvider: string
 }
 
 /**
@@ -189,11 +189,11 @@ export type BlockchainCollectionLinkedWearablesCollection = Omit<BlockchainColle
   /**
    * The blockchain where the contract is deployed
    */
-  contractAddressChain: string
+  linkedWearableContractAddressChain: string
   /**
    * Contract address of the collection
    */
-  collectionId: string
+  LinkedWearableContractAddress: string
 }
 
 /**
@@ -203,9 +203,9 @@ export type BlockchainCollectionLinkedWearableAsset = Omit<BlockchainCollectionL
   namespace: 'decentraland'
   type: 'blockchain-collection-linked-wearables-asset'
 
-  thirdPartyName: string
-  collectionId: string
-  contractAddressChain: string
+  linkedWearableProvider: string
+  linkedWearableContractAddressChain: string
+  LinkedWearableContractAddress: string
   id: string
 }
 
