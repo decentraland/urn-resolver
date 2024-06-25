@@ -1,5 +1,5 @@
 import { RFC2141 } from 'urn-lib'
-import { parseUrn, ResolversOptions, resolveUrlFromUrn } from '../src'
+import { ResolversOptions, resolveUrlFromUrn } from '../src'
 
 describe('Tests for resolveUrlFromUrn function', function () {
   describe('without passing resolver options', () => {
