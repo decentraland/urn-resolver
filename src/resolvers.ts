@@ -14,7 +14,11 @@ import {
   BlockchainCollectionThirdPartyName,
   EntityV3Asset,
   BlockchainCollectionV1Item,
-  BlockchainCollectionV2Item
+  BlockchainCollectionV2Item,
+  BlockchainCollectionLinkedWearablesProvider,
+  BlockchainCollectionLinkedWearablesCollection,
+  BlockchainCollectionLinkedWearablesAsset,
+  BlockchainCollectionLinkedWearablesItem
 } from './types'
 
 /**
@@ -53,6 +57,7 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   'decentraland:{network}:collections-v2:{contract(0x[a-fA-F0-9]+)}': resolveCollectionV2,
   // resolve LAND by position
   'decentraland:{network}:LAND:{position}': resolveLandAsset,
+
   // resolve third party names
   'decentraland:{network}:collections-thirdparty:{thirdPartyName}': resolveThirdPartyCollectionName,
   // resolve third party collections
@@ -60,6 +65,19 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
     resolveThirdPartyCollectionOnlyCollection,
   // resolve third party assets
   'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}': resolveThirdPartyCollection,
+
+  // resolve linked wearable provider names
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}': resolveLinkedWearableProvider,
+  // resolve linked wearable collections
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}':
+    resolveLinkedWearableCollection,
+  // resolve linked wearable assets
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}':
+    resolveLinkedWearableAsset,
+  // resolve linked wearable items
+  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}:{tokenId([0-9]+)}':
+    resolveLinkedWearableItem,
+
   // resolve 721 assets
   'decentraland:{network}:erc721:{contract(0x[a-fA-F0-9]+)}:{tokenId}': resolveErc721Asset
 }
@@ -507,6 +525,114 @@ export async function resolveThirdPartyCollectionOnlyCollection(
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
       contractAddress: contract
+    }
+  }
+
+  return result
+}
+
+export async function resolveLinkedWearableProvider(
+  uri: URL,
+  groups: Record<'network' | 'linkedWearableProvider', string>
+): Promise<BlockchainCollectionLinkedWearablesProvider | undefined> {
+  let result: BlockchainCollectionLinkedWearablesProvider | undefined = undefined
+  if (!isValidNetwork(groups.network)) return
+
+  const contract = await getContract(groups.network, 'TPR')
+
+  if (contract) {
+    result = {
+      namespace: 'decentraland',
+      uri,
+      blockchain: 'ethereum',
+      type: 'blockchain-collection-linked-wearables-provider',
+      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
+      linkedWearableProvider: groups.linkedWearableProvider,
+      contractAddress: contract
+    }
+  }
+
+  return result
+}
+
+export async function resolveLinkedWearableCollection(
+  uri: URL,
+  groups: Record<'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId', string>
+): Promise<BlockchainCollectionLinkedWearablesCollection | undefined> {
+  let result: BlockchainCollectionLinkedWearablesCollection | undefined = undefined
+  if (!isValidNetwork(groups.network)) return
+
+  const contract = await getContract(groups.network, 'TPR')
+
+  if (contract) {
+    result = {
+      namespace: 'decentraland',
+      uri,
+      blockchain: 'ethereum',
+      type: 'blockchain-collection-linked-wearables-collection',
+      contractAddress: contract,
+      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
+      linkedWearableProvider: groups.linkedWearableProvider,
+      linkedWearableContractAddressChain: groups.contractAddressChain,
+      linkedWearableContractAddress: groups.collectionId
+    }
+  }
+
+  return result
+}
+
+export async function resolveLinkedWearableAsset(
+  uri: URL,
+  groups: Record<'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId', string>
+): Promise<BlockchainCollectionLinkedWearablesAsset | undefined> {
+  let result: BlockchainCollectionLinkedWearablesAsset | undefined = undefined
+  if (!isValidNetwork(groups.network)) return
+
+  const contract = await getContract(groups.network, 'TPR')
+
+  if (contract) {
+    result = {
+      namespace: 'decentraland',
+      uri,
+      blockchain: 'ethereum',
+      type: 'blockchain-collection-linked-wearables-asset',
+      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
+      contractAddress: contract,
+      linkedWearableProvider: groups.linkedWearableProvider,
+      linkedWearableContractAddressChain: groups.contractAddressChain,
+      linkedWearableContractAddress: groups.collectionId,
+      id: groups.itemId
+    }
+  }
+
+  return result
+}
+
+export async function resolveLinkedWearableItem(
+  uri: URL,
+  groups: Record<
+    'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId' | 'tokenId',
+    string
+  >
+): Promise<BlockchainCollectionLinkedWearablesItem | undefined> {
+  let result: BlockchainCollectionLinkedWearablesItem | undefined = undefined
+  if (!isValidNetwork(groups.network)) return
+
+  const contract = await getContract(groups.network, 'TPR')
+
+  if (contract) {
+    result = {
+      namespace: 'decentraland',
+      uri,
+      blockchain: 'ethereum',
+      type: 'blockchain-collection-linked-wearables-item',
+      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
+      contractAddress: contract,
+      linkedWearableProvider: groups.linkedWearableProvider,
+      linkedWearableContractAddressChain: groups.contractAddressChain,
+      linkedWearableContractAddress: groups.collectionId,
+      id: groups.itemId,
+      tokenId: groups.tokenId
     }
   }
 

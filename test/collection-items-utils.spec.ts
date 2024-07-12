@@ -8,7 +8,7 @@ describe('isExtendedUrn should', () => {
 
   it('return true when passing a Collection V2 Item URN', async () => {
     const parsedUrn = await parseUrn(
-      'urn:decentraland:mumbai:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0:1'
+      'urn:decentraland:amoy:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0:1'
     )
     expect(isExtendedUrn(parsedUrn)).toBe(true)
   })
@@ -20,7 +20,7 @@ describe('isExtendedUrn should', () => {
 
   it('return false when passing a Collection V2 Asset URN', async () => {
     const parsedUrn = await parseUrn(
-      'urn:decentraland:mumbai:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0'
+      'urn:decentraland:amoy:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0'
     )
     expect(isExtendedUrn(parsedUrn)).toBe(false)
   })
@@ -52,7 +52,7 @@ describe('getTokenIdAndAssetUrn should', () => {
   })
 
   it('correctly return the urn from the token id when splitting an Collection V2 Item URN', () => {
-    const expectedUrn = 'urn:decentraland:mumbai:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0'
+    const expectedUrn = 'urn:decentraland:amoy:collections-v2:0x02101c138653a0af06a45b729d9c5d6ba27b8f4a:0'
     const expectedTokenId = '1'
     const { assetUrn, tokenId } = getTokenIdAndAssetUrn(`${expectedUrn}:${expectedTokenId}`)
 
