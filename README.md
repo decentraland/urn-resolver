@@ -58,11 +58,12 @@ You will need to install `jq`. If you are using MacOS you can install it by runn
 The lib is being [built with node 18.x](.github/workflows/build-and-publish.yml).
 
 ```bash
-make build
+yarn
+yarn build
 ```
 
 ## Test
 
 ```bash
-make test
+yarn test
 ```
