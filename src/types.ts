@@ -148,21 +148,21 @@ export type BlockchainCollectionThirdParty = BaseBlockchainAsset & {
 /**
  * @public
  */
-export type BlockchainCollectionThirdPartyItem = BlockchainCollectionThirdParty & {
+export type BlockchainCollectionThirdPartyItem = Omit<BlockchainCollectionThirdParty, 'type'> & {
   type: 'blockchain-collection-third-party-item'
 
   /**
-   * The blockchain where the contract is deployed
+   * The blockchain where the linked wearable contract is deployed
    */
   nftChain: string
 
   /**
-   * Contract address of the collection
+   * Contract address of the linked wearable collection
    */
   nftContractAddress: string
 
   /**
-   * Token ID
+   * Token ID of the item in the linked wearable collection
    */
   nftTokenId: string
 }

@@ -2,20 +2,20 @@ import { createParser, getCollection, getContract, isValidNetwork, RouteMap } fr
 import { LandUtils } from './land-utils'
 import {
   BlockchainAsset,
-  OffChainAsset,
+  BlockchainCollectionThirdParty,
+  BlockchainCollectionThirdPartyCollection,
+  BlockchainCollectionThirdPartyItem,
+  BlockchainCollectionThirdPartyName,
+  BlockchainCollectionV1,
   BlockchainCollectionV1Asset,
+  BlockchainCollectionV1Item,
+  BlockchainCollectionV2,
   BlockchainCollectionV2Asset,
+  BlockchainCollectionV2Item,
   BlockchainLandAsset,
   DecentralandAssetIdentifier,
-  BlockchainCollectionV1,
-  BlockchainCollectionV2,
-  BlockchainCollectionThirdPartyName,
-  BlockchainCollectionThirdPartyCollection,
-  BlockchainCollectionThirdParty,
-  BlockchainCollectionThirdPartyItem,
   EntityV3Asset,
-  BlockchainCollectionV1Item,
-  BlockchainCollectionV2Item
+  OffChainAsset
 } from './types'
 
 /**
@@ -524,14 +524,14 @@ export async function resolveThirdPartyItem(
     string
   >
 ): Promise<BlockchainCollectionThirdPartyItem | undefined> {
-  let result: BlockchainCollectionThirdPartyItem | undefined = undefined
+  const result: BlockchainCollectionThirdPartyItem | undefined = undefined
   if (!isValidNetwork(groups.network)) {
     return undefined
   }
   const contract = await getContract(groups.network, 'TPR')
 
   if (contract) {
-    result = {
+    return {
       namespace: 'decentraland',
       uri,
       blockchain: 'ethereum',
