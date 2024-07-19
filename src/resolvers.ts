@@ -2,23 +2,20 @@ import { createParser, getCollection, getContract, isValidNetwork, RouteMap } fr
 import { LandUtils } from './land-utils'
 import {
   BlockchainAsset,
-  OffChainAsset,
-  BlockchainCollectionV1Asset,
-  BlockchainCollectionV2Asset,
-  BlockchainLandAsset,
-  DecentralandAssetIdentifier,
-  BlockchainCollectionV1,
-  BlockchainCollectionV2,
   BlockchainCollectionThirdParty,
   BlockchainCollectionThirdPartyCollection,
+  BlockchainCollectionThirdPartyItem,
   BlockchainCollectionThirdPartyName,
-  EntityV3Asset,
+  BlockchainCollectionV1,
+  BlockchainCollectionV1Asset,
   BlockchainCollectionV1Item,
+  BlockchainCollectionV2,
+  BlockchainCollectionV2Asset,
   BlockchainCollectionV2Item,
-  BlockchainCollectionLinkedWearablesProvider,
-  BlockchainCollectionLinkedWearablesCollection,
-  BlockchainCollectionLinkedWearablesAsset,
-  BlockchainCollectionLinkedWearablesItem
+  BlockchainLandAsset,
+  DecentralandAssetIdentifier,
+  EntityV3Asset,
+  OffChainAsset
 } from './types'
 
 /**
@@ -58,25 +55,15 @@ export const resolvers: RouteMap<DecentralandAssetIdentifier> = {
   // resolve LAND by position
   'decentraland:{network}:LAND:{position}': resolveLandAsset,
 
-  // resolve third party names
-  'decentraland:{network}:collections-thirdparty:{thirdPartyName}': resolveThirdPartyCollectionName,
+  // resolve third party provider
+  'decentraland:{network}:collections-thirdparty:{thirdPartyName}': resolveThirdPartyProvider,
   // resolve third party collections
-  'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}':
-    resolveThirdPartyCollectionOnlyCollection,
+  'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}': resolveThirdPartyCollection,
   // resolve third party assets
-  'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}': resolveThirdPartyCollection,
-
-  // resolve linked wearable provider names
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}': resolveLinkedWearableProvider,
-  // resolve linked wearable collections
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}':
-    resolveLinkedWearableCollection,
-  // resolve linked wearable assets
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}':
-    resolveLinkedWearableAsset,
-  // resolve linked wearable items
-  'decentraland:{network}:collections-linked-wearables:{linkedWearableProvider}:{contractAddressChain}:{collectionId(0x[a-fA-F0-9]+)}:{itemId}:{tokenId([0-9]+)}':
-    resolveLinkedWearableItem,
+  'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}': resolveThirdPartyAsset,
+  // resolve third party items
+  'decentraland:{network}:collections-thirdparty:{thirdPartyName}:{collectionId}:{itemId}:{nftChain}:{nftContractAddress(0x[a-fA-F0-9]+)}:{nftTokenId([0-9]+)}':
+    resolveThirdPartyItem,
 
   // resolve 721 assets
   'decentraland:{network}:erc721:{contract(0x[a-fA-F0-9]+)}:{tokenId}': resolveErc721Asset
@@ -455,34 +442,7 @@ export async function resolveCollectionV2(
 
   return result
 }
-
-export async function resolveThirdPartyCollection(
-  uri: URL,
-  groups: Record<'network' | 'thirdPartyName' | 'collectionId' | 'itemId', string>
-): Promise<BlockchainCollectionThirdParty | undefined> {
-  let result: BlockchainCollectionThirdParty | undefined = undefined
-  if (!isValidNetwork(groups.network)) return
-
-  const contract = await getContract(groups.network, 'TPR')
-
-  if (contract) {
-    result = {
-      namespace: 'decentraland',
-      uri,
-      blockchain: 'ethereum',
-      type: 'blockchain-collection-third-party',
-      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      thirdPartyName: groups.thirdPartyName,
-      collectionId: groups.collectionId,
-      itemId: groups.itemId,
-      contractAddress: contract
-    }
-  }
-
-  return result
-}
-
-export async function resolveThirdPartyCollectionName(
+export async function resolveThirdPartyProvider(
   uri: URL,
   groups: Record<'network' | 'thirdPartyName', string>
 ): Promise<BlockchainCollectionThirdPartyName | undefined> {
@@ -498,15 +458,15 @@ export async function resolveThirdPartyCollectionName(
       blockchain: 'ethereum',
       type: 'blockchain-collection-third-party-name',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      thirdPartyName: groups.thirdPartyName,
-      contractAddress: contract
+      contractAddress: contract,
+      thirdPartyName: groups.thirdPartyName
     }
   }
 
   return result
 }
 
-export async function resolveThirdPartyCollectionOnlyCollection(
+export async function resolveThirdPartyCollection(
   uri: URL,
   groups: Record<'network' | 'thirdPartyName' | 'collectionId', string>
 ): Promise<BlockchainCollectionThirdPartyCollection | undefined> {
@@ -522,102 +482,52 @@ export async function resolveThirdPartyCollectionOnlyCollection(
       blockchain: 'ethereum',
       type: 'blockchain-collection-third-party-collection',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
+      contractAddress: contract,
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId
+    }
+  }
+
+  return result
+}
+
+export async function resolveThirdPartyAsset(
+  uri: URL,
+  groups: Record<'network' | 'thirdPartyName' | 'collectionId' | 'itemId', string>
+): Promise<BlockchainCollectionThirdParty | undefined> {
+  let result: BlockchainCollectionThirdParty | undefined = undefined
+  if (!isValidNetwork(groups.network)) return
+
+  const contract = await getContract(groups.network, 'TPR')
+
+  if (contract) {
+    result = {
+      namespace: 'decentraland',
+      uri,
+      blockchain: 'ethereum',
+      type: 'blockchain-collection-third-party',
+      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
+      contractAddress: contract,
       thirdPartyName: groups.thirdPartyName,
       collectionId: groups.collectionId,
-      contractAddress: contract
+      itemId: groups.itemId
     }
   }
 
   return result
 }
 
-export async function resolveLinkedWearableProvider(
-  uri: URL,
-  groups: Record<'network' | 'linkedWearableProvider', string>
-): Promise<BlockchainCollectionLinkedWearablesProvider | undefined> {
-  let result: BlockchainCollectionLinkedWearablesProvider | undefined = undefined
-  if (!isValidNetwork(groups.network)) return
-
-  const contract = await getContract(groups.network, 'TPR')
-
-  if (contract) {
-    result = {
-      namespace: 'decentraland',
-      uri,
-      blockchain: 'ethereum',
-      type: 'blockchain-collection-linked-wearables-provider',
-      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      linkedWearableProvider: groups.linkedWearableProvider,
-      contractAddress: contract
-    }
-  }
-
-  return result
-}
-
-export async function resolveLinkedWearableCollection(
-  uri: URL,
-  groups: Record<'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId', string>
-): Promise<BlockchainCollectionLinkedWearablesCollection | undefined> {
-  let result: BlockchainCollectionLinkedWearablesCollection | undefined = undefined
-  if (!isValidNetwork(groups.network)) return
-
-  const contract = await getContract(groups.network, 'TPR')
-
-  if (contract) {
-    result = {
-      namespace: 'decentraland',
-      uri,
-      blockchain: 'ethereum',
-      type: 'blockchain-collection-linked-wearables-collection',
-      contractAddress: contract,
-      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      linkedWearableProvider: groups.linkedWearableProvider,
-      linkedWearableContractAddressChain: groups.contractAddressChain,
-      linkedWearableContractAddress: groups.collectionId
-    }
-  }
-
-  return result
-}
-
-export async function resolveLinkedWearableAsset(
-  uri: URL,
-  groups: Record<'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId', string>
-): Promise<BlockchainCollectionLinkedWearablesAsset | undefined> {
-  let result: BlockchainCollectionLinkedWearablesAsset | undefined = undefined
-  if (!isValidNetwork(groups.network)) return
-
-  const contract = await getContract(groups.network, 'TPR')
-
-  if (contract) {
-    result = {
-      namespace: 'decentraland',
-      uri,
-      blockchain: 'ethereum',
-      type: 'blockchain-collection-linked-wearables-asset',
-      network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
-      contractAddress: contract,
-      linkedWearableProvider: groups.linkedWearableProvider,
-      linkedWearableContractAddressChain: groups.contractAddressChain,
-      linkedWearableContractAddress: groups.collectionId,
-      id: groups.itemId
-    }
-  }
-
-  return result
-}
-
-export async function resolveLinkedWearableItem(
+export async function resolveThirdPartyItem(
   uri: URL,
   groups: Record<
-    'network' | 'linkedWearableProvider' | 'contractAddressChain' | 'collectionId' | 'itemId' | 'tokenId',
+    'network' | 'thirdPartyName' | 'collectionId' | 'itemId' | 'nftChain' | 'nftContractAddress' | 'nftTokenId',
     string
   >
-): Promise<BlockchainCollectionLinkedWearablesItem | undefined> {
-  let result: BlockchainCollectionLinkedWearablesItem | undefined = undefined
-  if (!isValidNetwork(groups.network)) return
-
+): Promise<BlockchainCollectionThirdPartyItem | undefined> {
+  let result: BlockchainCollectionThirdPartyItem | undefined = undefined
+  if (!isValidNetwork(groups.network)) {
+    return undefined
+  }
   const contract = await getContract(groups.network, 'TPR')
 
   if (contract) {
@@ -625,14 +535,16 @@ export async function resolveLinkedWearableItem(
       namespace: 'decentraland',
       uri,
       blockchain: 'ethereum',
-      type: 'blockchain-collection-linked-wearables-item',
+      type: 'blockchain-collection-third-party-item',
       network: groups.network === 'ethereum' ? 'mainnet' : groups.network.toLowerCase(),
       contractAddress: contract,
-      linkedWearableProvider: groups.linkedWearableProvider,
-      linkedWearableContractAddressChain: groups.contractAddressChain,
-      linkedWearableContractAddress: groups.collectionId,
-      id: groups.itemId,
-      tokenId: groups.tokenId
+
+      thirdPartyName: groups.thirdPartyName,
+      collectionId: groups.collectionId,
+      itemId: groups.itemId,
+      nftChain: groups.nftChain,
+      nftContractAddress: groups.nftContractAddress,
+      nftTokenId: groups.nftTokenId
     }
   }
 

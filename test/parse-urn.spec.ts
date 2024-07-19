@@ -1,9 +1,9 @@
 import { RFC2141 } from 'urn-lib'
 import {
-  BlockchainCollectionLinkedWearablesAsset,
-  BlockchainCollectionLinkedWearablesCollection,
-  BlockchainCollectionLinkedWearablesItem,
-  BlockchainCollectionLinkedWearablesProvider,
+  BlockchainCollectionThirdParty,
+  BlockchainCollectionThirdPartyCollection,
+  BlockchainCollectionThirdPartyItem,
+  BlockchainCollectionThirdPartyName,
   DecentralandAssetIdentifier,
   parseUrn
 } from '../src'
@@ -444,55 +444,50 @@ describe('Tests for parseUrn function', function () {
     const testCases: DecentralandAssetIdentifier[] = [
       {
         namespace: 'decentraland',
-        uri: new URL('urn:decentraland:matic:collections-linked-wearables:aThirdParty'),
+        uri: new URL('urn:decentraland:amoy:collections-thirdparty:aThirdParty'),
         blockchain: 'ethereum',
-        network: 'matic',
-        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
-        type: 'blockchain-collection-linked-wearables-provider',
-        linkedWearableProvider: 'aThirdParty'
-      } as BlockchainCollectionLinkedWearablesProvider,
+        network: 'amoy',
+        contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+        type: 'blockchain-collection-third-party-name',
+        thirdPartyName: 'aThirdParty'
+      } as BlockchainCollectionThirdPartyName,
+      {
+        namespace: 'decentraland',
+        uri: new URL('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection'),
+        blockchain: 'ethereum',
+        network: 'amoy',
+        contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+        type: 'blockchain-collection-third-party-collection',
+        thirdPartyName: 'aThirdParty',
+        collectionId: 'summerCollection'
+      } as BlockchainCollectionThirdPartyCollection,
+      {
+        namespace: 'decentraland',
+        uri: new URL('urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat'),
+        blockchain: 'ethereum',
+        network: 'amoy',
+        contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+        type: 'blockchain-collection-third-party',
+        thirdPartyName: 'aThirdParty',
+        collectionId: 'summerCollection',
+        itemId: 'hat'
+      } as BlockchainCollectionThirdParty,
       {
         namespace: 'decentraland',
         uri: new URL(
-          'urn:decentraland:matic:collections-linked-wearables:aThirdParty:mainnet:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d'
+          'urn:decentraland:amoy:collections-thirdparty:aThirdParty:summerCollection:hat:sepolia:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:123456789'
         ),
         blockchain: 'ethereum',
-        network: 'matic',
-        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
-        type: 'blockchain-collection-linked-wearables-collection',
-        linkedWearableProvider: 'aThirdParty',
-        linkedWearableContractAddressChain: 'mainnet',
-        linkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d'
-      } as BlockchainCollectionLinkedWearablesCollection,
-      {
-        namespace: 'decentraland',
-        uri: new URL(
-          'urn:decentraland:matic:collections-linked-wearables:aThirdParty:mainnet:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:some_asset_id'
-        ),
-        blockchain: 'ethereum',
-        network: 'matic',
-        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
-        type: 'blockchain-collection-linked-wearables-asset',
-        linkedWearableProvider: 'aThirdParty',
-        linkedWearableContractAddressChain: 'mainnet',
-        linkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
-        id: 'some_asset_id'
-      } as BlockchainCollectionLinkedWearablesAsset,
-      {
-        namespace: 'decentraland',
-        uri: new URL(
-          'urn:decentraland:matic:collections-linked-wearables:aThirdParty:mainnet:0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d:some_asset_id:123456789'
-        ),
-        blockchain: 'ethereum',
-        network: 'matic',
-        contractAddress: '0x1f8063CC04398Be214a7d8dD25B6b6e2b870d99e',
-        type: 'blockchain-collection-linked-wearables-item',
-        linkedWearableProvider: 'aThirdParty',
-        linkedWearableContractAddressChain: 'mainnet',
-        linkedWearableContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
-        id: 'some_asset_id',
-        tokenId: '123456789'
-      } as BlockchainCollectionLinkedWearablesItem
+        network: 'amoy',
+        contractAddress: '0x41e07f9d48586df0ac59a09a940ffdf4af306a13',
+        type: 'blockchain-collection-third-party-item',
+        thirdPartyName: 'aThirdParty',
+        collectionId: 'summerCollection',
+        itemId: 'hat',
+        nftChain: 'sepolia',
+        nftContractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
+        nftTokenId: '123456789'
+      } as BlockchainCollectionThirdPartyItem
     ]
 
     const cases: [string, DecentralandAssetIdentifier][] = testCases.map((asset: DecentralandAssetIdentifier) => [
