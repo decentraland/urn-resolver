@@ -524,14 +524,14 @@ export async function resolveThirdPartyItem(
     string
   >
 ): Promise<BlockchainCollectionThirdPartyItem | undefined> {
-  const result: BlockchainCollectionThirdPartyItem | undefined = undefined
+  let result: BlockchainCollectionThirdPartyItem | undefined = undefined
   if (!isValidNetwork(groups.network)) {
     return undefined
   }
   const contract = await getContract(groups.network, 'TPR')
 
   if (contract) {
-    return {
+    result = {
       namespace: 'decentraland',
       uri,
       blockchain: 'ethereum',
