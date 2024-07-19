@@ -10,22 +10,23 @@ npm i @dcl/urn-resolver
 import { parseUrn } from '@dcl/urn-resolver'
 
 const parsed = await parseUrn("urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111")
-=> {
-  uri: URL {
-    href: 'urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111',
-    protocol: 'urn:',
-    pathname: 'decentraland:sepolia:LAND:-10,-13',
-    search: '?atBlock=151231111',
-    searchParams: URLSearchParams { 'atBlock' => '151231111' },
-  },
-  blockchain: 'ethereum',
-  type: 'blockchain-asset',
-  network: 'sepolia',
-  contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
-  id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
-  x: -10,
-  y: -13
-}
+// returns
+// {
+//   uri: URL {
+//     href: 'urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111',
+//     protocol: 'urn:',
+//     pathname: 'decentraland:sepolia:LAND:-10,-13',
+//     search: '?atBlock=151231111',
+//     searchParams: URLSearchParams { 'atBlock' => '151231111' },
+//   },
+//   blockchain: 'ethereum',
+//   type: 'blockchain-asset',
+//   network: 'sepolia',
+//   contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
+//   id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
+//   x: -10,
+//   y: -13
+// }
 ```
 
 # Registered routes
@@ -54,7 +55,7 @@ It is an union type defined in the file [src/types.ts](src/types.ts), in that fi
 
 You will need to install `jq`. If you are using MacOS you can install it by running: `brew install jq`.
 
-The lib is being [built with node 18.x](.github/workflows/ci.yml).
+The lib is being [built with node 18.x](.github/workflows/build-and-publish.yml).
 
 ```bash
 make build
