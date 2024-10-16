@@ -1,32 +1,38 @@
 # `@dcl/urn-resolver`
 
-Resolves Asset URN for the `urn:decentraland` namespace following the definition of https://github.com/common-metaverse/urn-namespaces
+The @dcl/urn-resolver library resolves asset URNs within the `urn:decentraland` namespace, following the definitions outlined in the (common-metaverse/urn-namespaces)[https://github.com/common-metaverse/urn-namespaces] repository. It supports both on-chain and off-chain assets, such as LAND, wearables, and collections.
+
+# Installation 
+
+Install the package using `npm`: 
 
 ```bash
 npm i @dcl/urn-resolver
 ```
 
+Example for how to parse a URN using the library: 
 ```typescript
 import { parseUrn } from '@dcl/urn-resolver'
 
 const parsed = await parseUrn("urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111")
-// returns
-// {
-//   uri: URL {
-//     href: 'urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111',
-//     protocol: 'urn:',
-//     pathname: 'decentraland:sepolia:LAND:-10,-13',
-//     search: '?atBlock=151231111',
-//     searchParams: URLSearchParams { 'atBlock' => '151231111' },
-//   },
-//   blockchain: 'ethereum',
-//   type: 'blockchain-asset',
-//   network: 'sepolia',
-//   contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
-//   id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
-//   x: -10,
-//   y: -13
-// }
+/*
+{
+  uri: URL {
+    href: 'urn:decentraland:sepolia:LAND:-10,-13?atBlock=151231111',
+    protocol: 'urn:',
+    pathname: 'decentraland:sepolia:LAND:-10,-13',
+    search: '?atBlock=151231111',
+    searchParams: URLSearchParams { 'atBlock' => '151231111' }
+  },
+  blockchain: 'ethereum',
+  type: 'blockchain-asset',
+  network: 'sepolia',
+  contractAddress: '0x7a73483784ab79257bb11b96fd62a2c3ae4fb75b',
+  id: '0xfffffffffffffffffffffffffffffff6fffffffffffffffffffffffffffffff3',
+  x: -10,
+  y: -13
+}
+*/
 ```
 
 # Registered routes
@@ -50,6 +56,8 @@ const parsed = await parseUrn("urn:decentraland:sepolia:LAND:-10,-13?atBlock=151
 It is an union type defined in the file [src/types.ts](src/types.ts), in that file you can find all the possible return types for URN resolution in this package.
 
 # Contribute
+
+We welcome contributions! Follow the steps below to set up the project for development. 
 
 ## Install
 
