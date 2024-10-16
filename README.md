@@ -1,6 +1,8 @@
 # `@dcl/urn-resolver`
 
-The @dcl/urn-resolver library resolves asset URNs within the `urn:decentraland` namespace, following the definitions outlined in the (common-metaverse/urn-namespaces)[https://github.com/common-metaverse/urn-namespaces] repository. It supports both on-chain and off-chain assets, such as LAND, wearables, and collections.
+[![Coverage Status](https://coveralls.io/repos/github/decentraland/urn-resolver/badge.svg?branch=main)](https://coveralls.io/github/decentraland/urn-resolver?branch=main) 
+
+The @dcl/urn-resolver library resolves asset URNs within the `urn:decentraland` namespace, following the definitions outlined in the [common-metaverse/urn-namespaces](https://github.com/common-metaverse/urn-namespaces) repository. It supports both on-chain and off-chain assets, such as LAND, wearables, and collections.
 
 # Installation 
 
