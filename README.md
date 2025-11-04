@@ -78,7 +78,7 @@ yarn build
 yarn test
 ```
 
-## 🤖 AI Agent Context
+## AI Agent Context
 
 **Service Purpose:** Resolves and parses Decentraland asset URNs (Uniform Resource Names) within the `urn:decentraland` namespace. Provides type-safe parsing of various asset identifiers (LAND, wearables, collections, third-party assets) to structured data for ownership validation and asset resolution.
 
