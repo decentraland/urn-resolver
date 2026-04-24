@@ -1,5 +1,11 @@
 # `@dcl/urn-resolver`
 
+> [!WARNING]
+> **This repository is deprecated.** `@dcl/urn-resolver` has moved to the [`decentraland/core-libs`](https://github.com/decentraland/core-libs) monorepo and is now developed and published from [`libs/urn-resolver`](https://github.com/decentraland/core-libs/tree/main/libs/urn-resolver).
+>
+> - **Consumers:** no action required. The npm package name is unchanged (`@dcl/urn-resolver`); future releases will be published from `core-libs`.
+> - **Contributors:** please open issues and pull requests against [`decentraland/core-libs`](https://github.com/decentraland/core-libs). This repository will stop receiving updates.
+
 [![Coverage Status](https://coveralls.io/repos/github/decentraland/urn-resolver/badge.svg?branch=main)](https://coveralls.io/github/decentraland/urn-resolver?branch=main)
 
 A TypeScript library that resolves and parses Decentraland asset URNs (Uniform Resource Names) within the `urn:decentraland` namespace, following the definitions outlined in the [common-metaverse/urn-namespaces](https://github.com/common-metaverse/urn-namespaces) repository. It supports both on-chain and off-chain assets, such as LAND, wearables, and collections.
